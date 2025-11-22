@@ -26,11 +26,11 @@ function groupByColumn(items: SourceItemProps[]) {
     column: string
     sources: SourceItemProps[]
   }[]).sort((m, n) => {
-    if (m.column === "科技") return -1
-    if (n.column === "科技") return 1
+    if (m.column === "Tech") return -1
+    if (n.column === "Tech") return 1
 
-    if (m.column === "未分类") return 1
-    if (n.column === "未分类") return -1
+    if (m.column === "Uncategorized") return 1
+    if (n.column === "Uncategorized") return -1
 
     return m.column < n.column ? -1 : 1
   })
@@ -45,7 +45,7 @@ export function SearchBar() {
         .map(([k, source]) => ({
           id: k,
           title: source.title,
-          column: source.column ? columns[source.column].zh : "未分类",
+          column: source.column ? columns[source.column].zh : "Uncategorized",
           name: source.name,
           pinyin: pinyin?.[k as keyof typeof pinyin] ?? "",
         })))
@@ -83,12 +83,12 @@ export function SearchBar() {
       <Command.Input
         ref={inputRef}
         autoFocus
-        placeholder="搜索你想要的"
+        placeholder="Search what you want"
       />
       <div className="md:flex pt-2">
         <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px">
           <Command.List>
-            <Command.Empty> 没有找到，可以前往 Github 提 issue </Command.Empty>
+            <Command.Empty> Not found, you can submit an issue on Github </Command.Empty>
             {
               sourceItems.map(({ column, sources }) => (
                 <Command.Group heading={column} key={column}>
