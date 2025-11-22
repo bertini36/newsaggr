@@ -7,21 +7,11 @@
     "interval": 600000
   },
   "github": {
-    "redirect": "github-trending-today",
     "name": "Github",
     "column": "tech",
     "home": "https://github.com/",
     "color": "gray",
-    "interval": 600000,
-    "title": "Today"
-  },
-  "github-trending-today": {
-    "name": "Github",
-    "column": "tech",
-    "home": "https://github.com/",
-    "color": "gray",
-    "interval": 600000,
-    "title": "Today"
+    "interval": 600000
   },
   "wired": {
     "name": "Wired",
