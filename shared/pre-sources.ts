@@ -17,7 +17,6 @@ export const originSources = {
     name: "Hacker News",
     color: "orange",
     column: "tech",
-    type: "hottest",
     home: "https://news.ycombinator.com/",
   },
   github: {
@@ -28,7 +27,6 @@ export const originSources = {
     sub: {
       "trending-today": {
         title: "Today",
-        type: "hottest",
       },
     },
   },
@@ -37,14 +35,12 @@ export const originSources = {
     color: "neutral",
     home: "https://www.wired.com/",
     column: "tech",
-    type: "hottest",
   },
   groundnews: {
     name: "Ground News",
     color: "groundnews",
     home: "https://ground.news/daily-briefing",
     column: "world",
-    type: "hottest",
   },
 } as const satisfies Record<string, OriginSource>
 
@@ -54,7 +50,6 @@ export function genSources() {
   Object.entries(originSources).forEach(([id, source]: [any, OriginSource]) => {
     const parent = {
       name: source.name,
-      type: source.type,
       disable: source.disable,
       desc: source.desc,
       column: source.column,

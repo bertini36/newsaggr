@@ -1,7 +1,6 @@
 {
   "hackernews": {
     "name": "Hacker News",
-    "type": "hottest",
     "column": "tech",
     "home": "https://news.ycombinator.com/",
     "color": "orange",
@@ -10,7 +9,6 @@
   "github": {
     "redirect": "github-trending-today",
     "name": "Github",
-    "type": "hottest",
     "column": "tech",
     "home": "https://github.com/",
     "color": "gray",
@@ -19,7 +17,6 @@
   },
   "github-trending-today": {
     "name": "Github",
-    "type": "hottest",
     "column": "tech",
     "home": "https://github.com/",
     "color": "gray",
@@ -28,7 +25,6 @@
   },
   "wired": {
     "name": "Wired",
-    "type": "hottest",
     "column": "tech",
     "home": "https://www.wired.com/",
     "color": "neutral",
@@ -36,7 +32,6 @@
   },
   "groundnews": {
     "name": "Ground News",
-    "type": "hottest",
     "column": "world",
     "home": "https://ground.news/daily-briefing",
     "color": "groundnews",
