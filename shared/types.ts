@@ -2,10 +2,10 @@ import type { colors } from "unocss/preset-mini"
 import type { columns, fixedColumnIds } from "./metadata"
 import type { originSources } from "./pre-sources"
 
-export type Color = "primary" | Exclude<keyof typeof colors, "current" | "inherit" | "transparent" | "black" | "white">
+export type Color = "primary" | "groundnews" | Exclude<keyof typeof colors, "current" | "inherit" | "transparent" | "black" | "white">
 
 type ConstSources = typeof originSources
-type MainSourceID = keyof(ConstSources)
+type MainSourceID = keyof (ConstSources)
 
 export type SourceID = {
   [Key in MainSourceID]: ConstSources[Key] extends { disable?: true } ? never :

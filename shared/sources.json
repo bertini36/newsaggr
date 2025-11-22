@@ -41,5 +41,13 @@
     "home": "https://www.wired.com/",
     "color": "neutral",
     "interval": 600000
+  },
+  "groundnews": {
+    "name": "Ground News",
+    "type": "hottest",
+    "column": "world",
+    "home": "https://ground.news/daily-briefing",
+    "color": "groundnews",
+    "interval": 600000
   }
 }

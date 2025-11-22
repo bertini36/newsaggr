@@ -46,6 +46,13 @@ export const originSources = {
     column: "tech",
     type: "hottest",
   },
+  groundnews: {
+    name: "Ground News",
+    color: "groundnews",
+    home: "https://ground.news/daily-briefing",
+    column: "world",
+    type: "hottest",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

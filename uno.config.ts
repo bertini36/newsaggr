@@ -44,6 +44,11 @@ export default defineConfig({
   extendTheme: (theme) => {
     // @ts-expect-error >_<
     theme.colors.primary = theme.colors.red
+    // @ts-expect-error >_<
+    theme.colors.groundnews = {
+      400: "#1D1F20",
+      500: "#1D1F20",
+    }
     return theme
   },
 })
