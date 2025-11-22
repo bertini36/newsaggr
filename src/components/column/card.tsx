@@ -109,7 +109,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
       <div className={$("flex justify-between mx-2 mt-0 mb-2 items-center")}>
         <div className="flex gap-2 items-center">
           <a
-            className={$("w-8 h-8 rounded-full bg-cover")}
+            className={$("w-8 h-8 rounded-full bg-cover cursor-pointer")}
             target="_blank"
             href={sources[id].home}
             title={sources[id].desc}
