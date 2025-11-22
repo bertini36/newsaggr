@@ -119,12 +119,14 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           />
           <span className="flex flex-col">
             <span className="flex items-center gap-2">
-              <span
-                className="text-xl font-bold"
+              <a
+                className="text-xl font-bold hover:underline cursor-pointer"
                 title={sources[id].desc}
+                target="_blank"
+                href={sources[id].home}
               >
                 {sources[id].name}
-              </span>
+              </a>
               {sources[id]?.title && <span className={$("text-sm", `color-${sources[id].color} bg-base op-80 bg-op-50! px-1 rounded`)}>{sources[id].title}</span>}
             </span>
             <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
