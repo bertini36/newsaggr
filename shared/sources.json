@@ -33,5 +33,13 @@
     "color": "gray",
     "interval": 600000,
     "title": "Today"
+  },
+  "wired": {
+    "name": "Wired",
+    "type": "hottest",
+    "column": "tech",
+    "home": "https://www.wired.com/",
+    "color": "neutral",
+    "interval": 600000
   }
 }

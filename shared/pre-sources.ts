@@ -39,6 +39,13 @@ export const originSources = {
       },
     },
   },
+  wired: {
+    name: "Wired",
+    color: "neutral",
+    home: "https://www.wired.com/",
+    column: "tech",
+    type: "hottest",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {
