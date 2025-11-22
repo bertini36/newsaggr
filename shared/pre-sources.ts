@@ -24,11 +24,6 @@ export const originSources = {
     color: "gray",
     home: "https://github.com/",
     column: "tech",
-    sub: {
-      "trending-today": {
-        title: "Today",
-      },
-    },
   },
   wired: {
     name: "Wired",
