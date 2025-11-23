@@ -58,7 +58,7 @@ function Item({ info }: { info: ToastItem }) {
   return (
     <li
       className={$(
-        "bg-white rounded-lg shadow-xl relative border border-black",
+        "bg-white rounded-lg shadow-xl relative border border-neutral-200",
       )}
       onMouseEnter={() => setHoverd(true)}
       onMouseLeave={() => setHoverd(false)}
@@ -74,7 +74,7 @@ function Item({ info }: { info: ToastItem }) {
             : <span className="i-ph:info text-black text-lg" />
         }
         <div className="flex justify-between w-full items-center gap-4">
-          <span className="text-black font-medium">
+          <span className="text-black font-medium text-sm">
             {info.msg}
           </span>
           {info.action && (

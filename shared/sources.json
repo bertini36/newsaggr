@@ -3,28 +3,24 @@
     "name": "Hacker News",
     "column": "tech",
     "home": "https://news.ycombinator.com/",
-    "color": "orange",
     "interval": 600000
   },
   "github": {
     "name": "Github",
     "column": "tech",
     "home": "https://github.com/",
-    "color": "gray",
     "interval": 600000
   },
   "wired": {
     "name": "Wired",
     "column": "tech",
     "home": "https://www.wired.com/",
-    "color": "neutral",
     "interval": 600000
   },
   "groundnews": {
     "name": "Ground News",
     "column": "world",
     "home": "https://ground.news/daily-briefing",
-    "color": "groundnews",
     "interval": 600000
   }
 }
