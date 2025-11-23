@@ -10,8 +10,8 @@ function GoTop() {
   return (
     <button
       type="button"
-      title="Go To Top"
-      className={$("i-ph:arrow-fat-up-duotone", ok ? "op-50 btn" : "op-0")}
+      title="Go to top"
+      className={$("i-ph:arrow-fat-up text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", ok ? "op-50" : "op-0")}
       onClick={goToTop}
     />
   )
@@ -19,7 +19,7 @@ function GoTop() {
 
 function Github() {
   return (
-    <button type="button" title="Github" className="i-ph:github-logo-duotone btn" onClick={() => window.open(Homepage)} />
+    <button type="button" title="Github" className="i-ph:github-logo text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer" onClick={() => window.open(Homepage)} />
   )
 }
 
@@ -39,7 +39,7 @@ function Refresh() {
     <button
       type="button"
       title="Refresh"
-      className={$("i-ph:arrow-counter-clockwise-duotone btn", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
+      className={$("i-ph:arrow-counter-clockwise text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", isFetching && "animate-spin i-ph:circle-dashed")}
       onClick={refreshAll}
     />
   )

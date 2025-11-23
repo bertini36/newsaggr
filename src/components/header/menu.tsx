@@ -17,7 +17,7 @@ export function Menu() {
   const [shown, show] = useState(false)
   return (
     <span className="relative" onMouseEnter={() => show(true)} onMouseLeave={() => show(false)}>
-      <span className="flex items-center scale-90">
+      <span className="flex items-center">
         {
           enableLogin && loggedIn && userInfo.avatar
             ? (
@@ -32,7 +32,15 @@ export function Menu() {
                 >
                 </button>
               )
-            : <button type="button" className="btn i-si:more-muted-horiz-circle-duotone" />
+            : (
+                <button
+                  type="button"
+                  className={$(
+                    "i-ph:dots-three-circle text-2xl transition-colors cursor-pointer",
+                    shown ? "text-neutral-600" : "text-neutral-400 hover:text-neutral-600",
+                  )}
+                />
+              )
         }
       </span>
       {shown && (
@@ -41,7 +49,7 @@ export function Menu() {
             id="dropdown-menu"
             className={$([
               "w-200px",
-              "bg-primary backdrop-blur-5 bg-op-70! rounded-lg shadow-xl",
+              "bg-white border border-neutral-300 rounded-lg",
             ])}
             initial={{
               scale: 0.9,
@@ -50,23 +58,23 @@ export function Menu() {
               scale: 1,
             }}
           >
-            <ol className="bg-base bg-op-70! backdrop-blur-md p-2 rounded-lg color-base text-base">
+            <ol className="bg-transparent p-2 rounded-lg color-base text-base">
               {enableLogin && (loggedIn
                 ? (
                     <li onClick={logout}>
-                      <span className="i-ph:sign-out-duotone inline-block" />
+                      <span className="i-ph:sign-out inline-block" />
                       <span>Logout</span>
                     </li>
                   )
                 : (
                     <li onClick={login}>
-                      <span className="i-ph:sign-in-duotone inline-block" />
+                      <span className="i-ph:sign-in inline-block" />
                       <span>Login with Github</span>
                     </li>
                   ))}
               {/* <ThemeToggle /> */}
               <li onClick={() => window.open(Homepage)} className="cursor-pointer [&_*]:cursor-pointer transition-all">
-                <span className="i-ph:github-logo-duotone inline-block" />
+                <span className="i-ph:github-logo inline-block" />
                 <span>Star on Github </span>
               </li>
               <li className="flex gap-2 items-center">

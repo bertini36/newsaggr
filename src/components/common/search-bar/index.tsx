@@ -85,8 +85,8 @@ export function SearchBar() {
         autoFocus
         placeholder="Search what you want"
       />
-      <div className="md:flex pt-2">
-        <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px">
+      <div className="md:flex">
+        <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px border-r border-[#d4d4d4]">
           <Command.List>
             <Command.Empty> Not found, you can submit an issue on Github </Command.Empty>
             {
@@ -101,7 +101,7 @@ export function SearchBar() {
             }
           </Command.List>
         </OverlayScrollbar>
-        <div className="flex-1 pt-2 px-4 min-w-350px max-md:hidden">
+        <div className="flex-1 p-4 min-w-350px max-md:hidden">
           <CardWrapper id={value} />
         </div>
       </div>
@@ -117,12 +117,13 @@ function SourceItem({ item }: {
     <Command.Item
       keywords={[item.name, item.title ?? "", item.pinyin]}
       value={item.id}
-      className="flex justify-between items-center p-2"
+      className="flex justify-between items-center p-2 cursor-pointer [&_*]:cursor-pointer"
       onSelect={toggleFocus}
+      title={isFocused ? "Remove from focus" : "Add to Focus"}
     >
       <span className="flex gap-2 items-center">
         <span
-          className={$("w-4 h-4 rounded-md bg-cover")}
+          className={$("w-4 h-4 bg-cover")}
           style={{
             backgroundImage: `url(/icons/${item.id.split("-")[0]}.png)`,
           }}

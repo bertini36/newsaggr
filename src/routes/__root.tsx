@@ -43,10 +43,11 @@ function RootComponent() {
           className={$([
             "grid items-center py-4 px-5",
             "lg:(py-6)",
-            "sticky top-0 z-10 backdrop-blur-md",
+            "sticky top-0 z-10",
           ])}
           style={{
             gridTemplateColumns: "50px auto 50px",
+            backgroundColor: "#FBFBFB",
           }}
         >
           <Header />

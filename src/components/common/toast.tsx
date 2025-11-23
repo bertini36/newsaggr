@@ -29,15 +29,7 @@ export function Toast() {
   )
 }
 
-const colors = {
-  success: "green",
-  error: "red",
-  warning: "orange",
-  info: "blue",
-}
-
 function Item({ info }: { info: ToastItem }) {
-  const color = colors[info.type ?? "info"]
   const setToastItems = useSetAtom(toastAtom)
   const hidden = useCallback((dismiss = true) => {
     setToastItems(prev => prev.filter(k => k.id !== info.id))
@@ -49,7 +41,7 @@ function Item({ info }: { info: ToastItem }) {
 
   useMount(() => {
     timer.current = new Timer(() => {
-      hidden()
+      hidden(true)
     }, info.duration ?? 5000)
     return () => timer.current?.clear()
   })
@@ -66,29 +58,29 @@ function Item({ info }: { info: ToastItem }) {
   return (
     <li
       className={$(
-        "bg-base rounded-lg shadow-xl relative",
+        "bg-white rounded-lg shadow-xl relative border border-black",
       )}
       onMouseEnter={() => setHoverd(true)}
       onMouseLeave={() => setHoverd(false)}
     >
       <div className={$(
-        `bg-${color}-500 dark:bg-${color} bg-op-40! p2 backdrop-blur-5 rounded-lg w-full`,
+        "p-2 rounded-lg w-full",
         "flex items-center gap-2",
       )}
       >
         {
           hoverd
-            ? <button type="button" className={`i-ph:x-circle color-${color}-500 i-ph:info`} onClick={() => hidden(false)} />
-            : <span className={`i-ph:info color-${color}-500 `} />
+            ? <button type="button" className="i-ph:x-circle text-black text-lg cursor-pointer" onClick={() => hidden(false)} />
+            : <span className="i-ph:info text-black text-lg" />
         }
-        <div className="flex justify-between w-full">
-          <span className="op-90 dark:op-100">
+        <div className="flex justify-between w-full items-center gap-4">
+          <span className="text-black font-medium">
             {info.msg}
           </span>
           {info.action && (
             <button
               type="button"
-              className={`text-sm color-${color}-500 bg-base op-80 bg-op-50! px-1 rounded min-w-10 hover:bg-op-70!`}
+              className="text-sm text-white bg-black px-3 py-1 rounded hover:opacity-80 transition-opacity whitespace-nowrap cursor-pointer"
               onClick={info.action.onClick}
             >
               {info.action.label}

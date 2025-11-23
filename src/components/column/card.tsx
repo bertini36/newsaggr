@@ -3,7 +3,6 @@ import { useQuery } from "@tanstack/react-query"
 import { AnimatePresence, motion, useInView } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
-import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import { safeParseString } from "~/utils"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,11 +32,10 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-500px rounded-2xl p-4 cursor-default",
-        // "backdrop-blur-5",
+        "flex flex-col h-500px p-4 cursor-default border border-black rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
         "transition-opacity-300",
         isDragging && "op-50",
-        `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-40!`,
+        // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
       style={{
         transformOrigin: "50% 50%",
@@ -106,7 +104,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
   return (
     <>
-      <div className={$("flex justify-between mx-2 mt-0 mb-2 items-center")}>
+      <div className={$("flex justify-between mx-2 mt-0 mb-0 items-center border-b border-neutral-300 pb-2")}>
         <div className="flex gap-2 items-center">
           <a
             className={$("w-8 h-8 rounded-full bg-cover cursor-pointer")}
@@ -120,7 +118,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           <span className="flex flex-col">
             <span className="flex items-center gap-2">
               <a
-                className="text-xl font-bold hover:underline cursor-pointer"
+                className="text-2xl font-bold hover:underline cursor-pointer font-serif"
                 title={sources[id].desc}
                 target="_blank"
                 href={sources[id].home}
@@ -132,42 +130,38 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
             <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg", `color-${sources[id].color}`)}>
+        <div className={$("flex gap-2 text-lg text-neutral-500")}>
           <button
             type="button"
-            className={$("btn i-ph:arrow-counter-clockwise-duotone", isFetching && "animate-spin i-ph:circle-dashed-duotone")}
+            className={$("btn hover:text-neutral-700 transition-colors i-ph:arrow-counter-clockwise", isFetching && "animate-spin i-ph:circle-dashed")}
             onClick={() => refresh(id)}
           />
           <button
             type="button"
-            className={$("btn", isFocused ? "i-ph:star-fill" : "i-ph:star-duotone")}
+            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-primary op-40" : "i-ph:star hover:text-neutral-700")}
             onClick={toggleFocus}
+            title={isFocused ? "Remove from focus" : "Add to Focus"}
           />
           {/* firefox cannot drag a button */}
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className={$("btn", "i-ph:dots-six-vertical-duotone", "cursor-grab")}
+              className={$("btn hover:text-neutral-700 transition-colors", "i-ph:dots-six-vertical", "cursor-grab")}
             />
           )}
         </div>
       </div>
 
-      <OverlayScrollbar
+      <div
         className={$([
-          "h-full p-2 overflow-y-auto rounded-2xl bg-base bg-op-70!",
+          "h-full px-2 pb-2 overflow-y-auto bg-transparent",
           isFetching && `animate-pulse`,
-          `sprinkle-${sources[id].color}`,
         ])}
-        options={{
-          overflow: { x: "hidden" },
-        }}
-        defer
       >
         <div className={$("transition-opacity-500", isFetching && "op-20")}>
           {!!data?.items?.length && (sources[id].type === "hottest" ? <NewsListHot items={data.items} /> : <NewsListTimeLine items={data.items} />)}
         </div>
-      </OverlayScrollbar>
+      </div>
     </>
   )
 }
@@ -230,7 +224,7 @@ function NewsUpdatedTime({ date }: { date: string | number }) {
 function NewsListHot({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="flex flex-col gap-2">
+    <ol className="flex flex-col gap-2 pt-2">
       {items?.map((item, i) => (
         <a
           href={width < 768 ? item.mobileUrl || item.url : item.url}
@@ -247,7 +241,7 @@ function NewsListHot({ items }: { items: NewsItem[] }) {
           </span>
           {!!item.extra?.diff && <DiffNumber diff={item.extra.diff} />}
           <span className="self-start line-height-none">
-            <span className="mr-2 text-base">
+            <span className="mr-2 text-[16.5px]">
               {item.title}
             </span>
             <span className="text-xs text-neutral-400/80 truncate align-middle">
@@ -263,7 +257,7 @@ function NewsListHot({ items }: { items: NewsItem[] }) {
 function NewsListTimeLine({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
   return (
-    <ol className="border-s border-neutral-400/50 flex flex-col ml-1">
+    <ol className="border-s border-neutral-400/50 flex flex-col pt-2">
       {items?.map(item => (
         <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col">
           <span className="flex items-center gap-1 text-neutral-400/50 ml--1px">
@@ -278,7 +272,7 @@ function NewsListTimeLine({ items }: { items: NewsItem[] }) {
           <a
             className={$(
               "ml-2 px-1 hover:bg-neutral-400/10 rounded-md visited:(text-neutral-400/80)",
-              "cursor-pointer [&_*]:cursor-pointer transition-all",
+              "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px]",
             )}
             href={width < 768 ? item.mobileUrl || item.url : item.url}
             title={item.extra?.hover}

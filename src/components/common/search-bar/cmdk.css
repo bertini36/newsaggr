@@ -3,7 +3,7 @@
 }
 
 [cmdk-item] {
-    --at-apply: p-1 mb-1 rounded-md;
+    --at-apply: p-1 mb-1 flex items-center gap-2 cursor-pointer transition-colors;
 }
 
 [cmdk-item]:hover {
@@ -14,8 +14,8 @@
     --at-apply: bg-neutral-400/20;
 }
 
-[cmdk-input]{
-    --at-apply: w-full p-3 outline-none bg-transparent placeholder:color-neutral-500/60 border-color-neutral/10 border-b;
+[cmdk-input] {
+    --at-apply: w-full p-4 outline-none bg-transparent placeholder:text-neutral-500/60 border-b border-neutral-300 font-serif text-lg;
 }
 
 [cmdk-list] {
@@ -23,13 +23,13 @@
 }
 
 [cmdk-group-heading] {
-    --at-apply: text-sm font-bold op-70 ml-1 my-2;
+    --at-apply: text-xl font-serif font-bold op-70 ml-1 my-2;
 }
 
 [cmdk-dialog] {
-    --at-apply: bg-base sprinkle-primary bg-op-97 backdrop-blur-5 shadow pb-4 rounded-2xl shadow-2xl relative outline-none;
+    --at-apply: bg-[#FBFBFB] border border-[#d4d4d4] shadow-xl relative outline-none;
     position: fixed;
-    width: 80vw ;
+    width: 80vw;
     max-width: 675px;
     z-index: 999;
     left: 50%;
@@ -44,11 +44,11 @@
     animation: dialogIn 0.3s forwards
 }
 
-[cmdk-dialog][data-state=closed]{
+[cmdk-dialog][data-state=closed] {
     animation: dialogOut 0.2s forwards
 }
 
-@keyframes dialogIn{
+@keyframes dialogIn {
     0% {
         opacity: 0;
     }
@@ -74,5 +74,5 @@
 }
 
 [cmdk-overlay] {
-    --at-apply: fixed inset-0 bg-black bg-op-50;
+    --at-apply: fixed inset-0 bg-white/50 backdrop-blur-sm;
 }
