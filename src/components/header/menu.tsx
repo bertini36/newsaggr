@@ -61,19 +61,19 @@ export function Menu() {
             <ol className="bg-transparent p-2 rounded-lg color-base text-base">
               {enableLogin && (loggedIn
                 ? (
-                    <li onClick={logout}>
+                    <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors">
                       <span className="i-ph:sign-out inline-block" />
                       <span>Logout</span>
                     </li>
                   )
                 : (
-                    <li onClick={login}>
+                    <li onClick={login} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors">
                       <span className="i-ph:sign-in inline-block" />
                       <span>Login with Github</span>
                     </li>
                   ))}
               {/* <ThemeToggle /> */}
-              <li onClick={() => window.open(Homepage)} className="cursor-pointer [&_*]:cursor-pointer transition-all">
+              <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors [&_*]:cursor-pointer">
                 <span className="i-ph:github-logo inline-block" />
                 <span>Star on Github </span>
               </li>

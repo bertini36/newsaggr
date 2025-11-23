@@ -93,7 +93,7 @@ export function SearchBar() {
               sourceItems.map(({ column, sources }) => (
                 <Command.Group heading={column} key={column}>
                   {
-                    sources.map(item => <SourceItem item={item} key={item.id} />)
+                    sources.map(item => <SourceItem item={item} key={item.id} onHover={setValue} />)
                   }
                 </Command.Group>
               ),
@@ -109,8 +109,9 @@ export function SearchBar() {
   )
 }
 
-function SourceItem({ item }: {
+function SourceItem({ item, onHover }: {
   item: SourceItemProps
+  onHover: (id: SourceID) => void
 }) {
   const { isFocused, toggleFocus } = useFocusWith(item.id)
   return (
@@ -119,6 +120,7 @@ function SourceItem({ item }: {
       value={item.id}
       className="flex justify-between items-center p-2 cursor-pointer [&_*]:cursor-pointer"
       onSelect={toggleFocus}
+      onMouseEnter={() => onHover(item.id)}
       title={isFocused ? "Remove from focus" : "Add to Focus"}
     >
       <span className="flex gap-2 items-center">
@@ -131,7 +133,7 @@ function SourceItem({ item }: {
         <span>{item.name}</span>
         <span className="text-xs text-neutral-400/80 self-end mb-3px">{item.title}</span>
       </span>
-      <span className={$(isFocused ? "i-ph-star-fill" : "i-ph-star-duotone", "bg-red-600")}></span>
+      <span className={$(isFocused ? "i-ph-star-fill bg-red-400" : "i-ph-star-duotone bg-neutral-400")}></span>
     </Command.Item>
   )
 }

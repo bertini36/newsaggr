@@ -32,7 +32,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-500px p-4 cursor-default border border-black rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
+        "flex flex-col h-500px p-4 cursor-default border border-neutral-200 rounded-lg shadow-[4px_4px_0px_0px_#e5e5e5]",
         "transition-opacity-300",
         // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
@@ -42,13 +42,14 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       }}
       {...props}
     >
-      {inView && <NewsCard id={id} setHandleRef={setHandleRef} />}
+      {inView && <NewsCard key={id} id={id} setHandleRef={setHandleRef} />}
     </div>
   )
 })
 
 function NewsCard({ id, setHandleRef }: NewsCardProps) {
   const { refresh } = useRefetch()
+  console.log("NewsCard render", { id })
   const { data, isFetching, isError } = useQuery({
     queryKey: ["source", id],
     queryFn: async ({ queryKey }) => {
@@ -91,7 +92,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
       cacheSources.set(id, response)
       return response
     },
-    placeholderData: prev => prev,
+
     staleTime: Infinity,
     refetchOnMount: false,
     refetchOnReconnect: false,
@@ -117,7 +118,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           <span className="flex flex-col">
             <span className="flex items-center gap-2">
               <a
-                className="text-2xl font-bold hover:underline cursor-pointer font-serif"
+                className="text-2xl font-bold cursor-pointer font-serif"
                 title={sources[id].desc}
                 target="_blank"
                 href={sources[id].home}
@@ -137,7 +138,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           />
           <button
             type="button"
-            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-600" : "i-ph:star hover:text-neutral-700")}
+            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-400 op-100 hover:op-100 hover:i-ph:star hover:bg-neutral-500" : "i-ph:star hover:text-neutral-700")}
             onClick={toggleFocus}
             title={isFocused ? "Remove from focus" : "Add to Focus"}
           />
