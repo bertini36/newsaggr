@@ -133,7 +133,7 @@ function SourceItem({ item, onHover }: {
         <span>{item.name}</span>
         <span className="text-xs text-neutral-400/80 self-end mb-3px">{item.title}</span>
       </span>
-      <span className={$(isFocused ? "i-ph-star-fill bg-red-400" : "i-ph-star-duotone bg-neutral-400")}></span>
+      <span className={$(isFocused ? "i-ph-star-fill bg-red-400" : "i-ph-star bg-neutral-400")}></span>
     </Command.Item>
   )
 }

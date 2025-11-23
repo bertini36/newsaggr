@@ -16,8 +16,8 @@ export function NavBar() {
         onClick={() => toggle(true)}
         className={$(
           "cursor-pointer transition-colors",
-          "px-3 py-1 tracking-wider font-semibold text-lg",
-          "text-neutral-700 hover:text-neutral-700",
+          "px-3 py-1 tracking-wider font-semibold text-xl uppercase",
+          "text-neutral-700 hover:text-neutral-700 hover:bg-neutral-100 rounded-md",
         )}
       >
         Sources
@@ -32,7 +32,8 @@ export function NavBar() {
             params={{ column: columnId }}
             className={$(
               "cursor-pointer transition-colors",
-              "px-3 py-1 tracking-wider text-lg",
+              "px-3 py-1 tracking-wider text-xl uppercase",
+              "hover:bg-neutral-100 rounded-md",
               currentId === columnId
                 ? `font-bold ${columnId === "focus" ? "text-red-400" : "text-neutral-700"}`
                 : `font-semibold ${columnId === "focus" ? "text-red-400" : "text-neutral-500 hover:text-neutral-700"} hover:underline underline-offset-2`,

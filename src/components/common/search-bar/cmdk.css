@@ -23,7 +23,7 @@
 }
 
 [cmdk-group-heading] {
-    --at-apply: text-xl font-serif font-bold op-70 ml-1 my-2;
+    --at-apply: text-xl font-serif font-bold ml-1 my-2;
 }
 
 [cmdk-dialog] {
