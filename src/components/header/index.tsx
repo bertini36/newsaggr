@@ -11,7 +11,7 @@ function GoTop() {
     <button
       type="button"
       title="Go to top"
-      className={$("i-ph:arrow-fat-up text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", ok ? "op-50" : "op-0")}
+      className={$("i-ph:arrow-fat-up text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", ok ? "op-100" : "op-0")}
       onClick={goToTop}
     />
   )
