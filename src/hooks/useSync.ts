@@ -48,10 +48,10 @@ export function useSync() {
         await uploadMetadata(primitiveMetadata)
       } catch (e: any) {
         if (e.statusCode !== 506) {
-          toaster("身份校验失败，无法同步，请重新登录", {
+          toaster("Authentication failed, cannot sync, please log in again", {
             type: "error",
             action: {
-              label: "登录",
+              label: "Login",
               onClick: login,
             },
           })
@@ -73,10 +73,10 @@ export function useSync() {
         }
       } catch (e: any) {
         if (e.statusCode !== 506) {
-          toaster("身份校验失败，无法同步，请重新登录", {
+          toaster("Authentication failed, cannot sync, please log in again", {
             type: "error",
             action: {
-              label: "登录",
+              label: "Login",
               onClick: login,
             },
           })
