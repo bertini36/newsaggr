@@ -175,7 +175,7 @@ function SortableCardWrapper({ id }: ItemsProps) {
 
   useEffect(() => {
     if (OverlayContainer) {
-      OverlayContainer!.className += $(`bg-base`, !isiOS() && "rounded-2xl")
+      OverlayContainer!.className += $(`bg-neutral-100`, !isiOS() && "rounded-2xl")
     }
   }, [OverlayContainer])
 
