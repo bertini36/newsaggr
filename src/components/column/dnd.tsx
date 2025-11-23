@@ -36,7 +36,7 @@ export function Dnd() {
         <motion.ol
           className={isMobile
             ? "flex px-2 gap-6 pb-4 scroll-smooth"
-            : "grid w-full gap-6"}
+            : "grid w-full gap-6 p-2"}
           ref={parent}
           style={isMobile
             ? {
@@ -133,7 +133,7 @@ function CardOverlay({ id }: { id: SourceID }) {
   return (
     <div className={$(
       "flex flex-col p-4 backdrop-blur-5",
-      `bg-${sources[id].color}-500 dark:bg-${sources[id].color} bg-op-40!`,
+      `bg-${sources[id].color}-500 dark:bg-${sources[id].color}`,
       !isiOS() && "rounded-2xl",
     )}
     >

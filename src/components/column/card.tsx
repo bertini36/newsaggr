@@ -34,7 +34,6 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       className={$(
         "flex flex-col h-500px p-4 cursor-default border border-black rounded-lg shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]",
         "transition-opacity-300",
-        isDragging && "op-50",
         // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
       style={{
@@ -104,7 +103,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
 
   return (
     <>
-      <div className={$("flex justify-between mx-2 mt-0 mb-0 items-center border-b border-neutral-300 pb-2")}>
+      <div className={$("flex justify-between mx-2 mt-0 mb-0 items-center pb-2")}>
         <div className="flex gap-2 items-center">
           <a
             className={$("w-8 h-8 rounded-full bg-cover cursor-pointer")}
@@ -130,7 +129,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
             <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg text-neutral-500")}>
+        <div className={$("flex gap-2 text-lg text-neutral-900")}>
           <button
             type="button"
             className={$("btn hover:text-neutral-700 transition-colors i-ph:arrow-counter-clockwise", isFetching && "animate-spin i-ph:circle-dashed")}
@@ -138,7 +137,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           />
           <button
             type="button"
-            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-primary op-40" : "i-ph:star hover:text-neutral-700")}
+            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-600" : "i-ph:star hover:text-neutral-700")}
             onClick={toggleFocus}
             title={isFocused ? "Remove from focus" : "Add to Focus"}
           />
