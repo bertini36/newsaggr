@@ -20,7 +20,7 @@ export function NavBar() {
           "text-neutral-500 hover:text-neutral-700",
         )}
       >
-        More
+        Sources
       </button>
 
       <span className="mx-1" style={{ color: "#d4d4d4" }}>|</span>
