@@ -133,7 +133,6 @@ function CardOverlay({ id }: { id: SourceID }) {
   return (
     <div className={$(
       "flex flex-col p-4 backdrop-blur-5",
-      `bg-${sources[id].color}-500 dark:bg-${sources[id].color}`,
       !isiOS() && "rounded-2xl",
     )}
     >
@@ -150,12 +149,12 @@ function CardOverlay({ id }: { id: SourceID }) {
               <span className="text-xl font-bold">
                 {sources[id].name}
               </span>
-              {sources[id]?.title && <span className={$("text-sm", `color-${sources[id].color} bg-base op-80 bg-op-50! px-1 rounded`)}>{sources[id].title}</span>}
+              {sources[id]?.title && <span className={$("text-sm", "bg-base op-80 bg-op-50! px-1 rounded")}>{sources[id].title}</span>}
             </span>
             <span className="text-xs op-70">Dragging</span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg", `color-${sources[id].color}`)}>
+        <div className={$("flex gap-2 text-lg")}>
           <button
             type="button"
             className={$("i-ph:dots-six-vertical-duotone", "cursor-grabbing")}

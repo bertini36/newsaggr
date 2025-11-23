@@ -1,6 +1,5 @@
 import { defineConfig, presetIcons, presetWind3, transformerDirectives, transformerVariantGroup } from "unocss"
 import { hex2rgba } from "@unocss/rule-utils"
-import { sources } from "./shared/sources"
 
 export default defineConfig({
   mergeSelectors: false,
@@ -35,12 +34,6 @@ export default defineConfig({
     "bg-base": "bg-zinc-200 dark:bg-dark-600",
     "btn": "op50 hover:op85 cursor-pointer transition-all",
   },
-  safelist: [
-    ...["orange", ...new Set(Object.values(sources).map(k => k.color))].map(k =>
-      `bg-${k} color-${k} border-${k} sprinkle-${k} shadow-${k}
-       bg-${k}-500 color-${k}-500
-       dark:bg-${k} dark:color-${k}`.trim().split(/\s+/)).flat(),
-  ],
   extendTheme: (theme) => {
     // @ts-expect-error >_<
     theme.colors.primary = theme.colors.red

@@ -15,25 +15,21 @@ const Time = {
 export const originSources = {
   hackernews: {
     name: "Hacker News",
-    color: "orange",
     column: "tech",
     home: "https://news.ycombinator.com/",
   },
   github: {
     name: "Github",
-    color: "gray",
     home: "https://github.com/",
     column: "tech",
   },
   wired: {
     name: "Wired",
-    color: "neutral",
     home: "https://www.wired.com/",
     column: "tech",
   },
   groundnews: {
     name: "Ground News",
-    color: "groundnews",
     home: "https://ground.news/daily-briefing",
     column: "world",
   },
@@ -49,7 +45,6 @@ export function genSources() {
       desc: source.desc,
       column: source.column,
       home: source.home,
-      color: source.color ?? "primary",
       interval: source.interval ?? Time.Default,
     }
     if (source.sub && Object.keys(source.sub).length) {

@@ -58,7 +58,6 @@ export interface Source {
    * 刷新的间隔时间
    */
   interval: number
-  color: Color
 
   /**
    * Subtitle 小标题
