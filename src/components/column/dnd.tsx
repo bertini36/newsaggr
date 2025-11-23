@@ -40,7 +40,7 @@ export function Dnd() {
           ref={parent}
           style={isMobile
             ? {
-              // 横向滚动布局
+              // Horizontal scrolling layout
               }
             : {
                 gridTemplateColumns: `repeat(auto-fill, minmax(${minWidth}px, 1fr))`,
@@ -115,7 +115,7 @@ function DndWrapper({ items, setItems, isSingleColumn, children }: PropsWithChil
     })
     setItems(update)
   }, [items, setItems, isSingleColumn])
-  // 避免动画干扰
+  // Avoid animation interference
   const { run } = useThrottleFn(onDropTargetChange, {
     leading: true,
     trailing: true,

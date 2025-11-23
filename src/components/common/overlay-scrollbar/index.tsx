@@ -18,7 +18,7 @@ const defaultScrollbarParams: UseOverlayScrollbarsParams = {
 
 export function OverlayScrollbar({ disabled, children, options, events, defer, className, ...props }: PropsWithChildren<Props>) {
   const ref = useRef<HTMLDivElement>(null)
-  const scrollbarParams = useMemo(() => defu<UseOverlayScrollbarsParams, Array<UseOverlayScrollbarsParams> >({
+  const scrollbarParams = useMemo(() => defu<UseOverlayScrollbarsParams, Array<UseOverlayScrollbarsParams>>({
     options,
     events,
     defer,
@@ -31,7 +31,7 @@ export function OverlayScrollbar({ disabled, children, options, events, defer, c
       initialize({
         target: ref.current!,
         cancel: {
-          // 如果浏览器原生滚动条是覆盖在元素上的，则取消初始化
+          // If the native scrollbar overlays the element, cancel initialization
           nativeScrollbarsOverlaid: true,
         },
       })
@@ -50,7 +50,7 @@ export function OverlayScrollbar({ disabled, children, options, events, defer, c
 
   return (
     <div ref={ref} {...props} className={$("overflow-auto scrollbar-hidden", className)}>
-      {/* 只能有一个 element */}
+      {/* Only one element allowed */}
       <div>{children}</div>
     </div>
   )

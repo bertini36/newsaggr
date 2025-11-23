@@ -27,7 +27,7 @@ async function downloadMetadata(): Promise<PrimitiveMetadata | undefined> {
       Authorization: `Bearer ${jwt}`,
     },
   }) as PrimitiveMetadata
-  // 不用同步 action 字段
+  // No need to sync action field
   if (data) {
     return {
       action: "sync",

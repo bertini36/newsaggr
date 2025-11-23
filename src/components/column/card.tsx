@@ -9,7 +9,7 @@ import { safeParseString } from "~/utils"
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: SourceID
   /**
-   * 是否显示透明度，拖动时原卡片的样式
+   * Whether to show opacity, style of original card during dragging
    */
   isDragging?: boolean
   setHandleRef?: (ref: HTMLElement | null) => void
