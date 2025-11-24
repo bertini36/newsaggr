@@ -13,11 +13,6 @@ overrides:
   db0: ^0.3.1
   vite: ^6
 
-patchedDependencies:
-  dayjs:
-    hash: ab3d460b598ef9569bd8b88d40864d7b0e942a6d8b2e646643076a5c0477cc4d
-    path: patches/dayjs.patch
-
 importers:
 
   .:
