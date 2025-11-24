@@ -28,7 +28,23 @@ export function Dnd() {
     return Math.min(width - 32, WIDTH)
   }, [width])
 
-  if (!items.length) return null
+  if (!items.length) {
+    return (
+      <div className="flex flex-col items-center justify-center p-8 mt-16">
+        <div className="flex flex-col items-center gap-4 max-w-md text-center">
+          <span className="i-ph:star text-6xl text-red-400" />
+          <h2 className="text-2xl font-bold text-neutral-700">No Sources in Focus</h2>
+          <p className="text-base text-neutral-600">
+            Click on
+            {" "}
+            <span className="font-semibold text-neutral-700">Sources</span>
+            {" "}
+            in the navbar to browse and add sources to your Focus page.
+          </p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <DndWrapper items={items} setItems={setItems} isSingleColumn={isMobile}>
