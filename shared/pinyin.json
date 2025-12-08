@@ -1,8 +1,12 @@
 {
+  "bbc": "BBC",
+  "cnn": "CNN",
+  "engadget": "Engadget",
   "github": "Github",
   "groundnews": "Ground News",
   "hackernews": "Hacker News",
   "nature": "Nature",
-  "nytimes": "New York Times",
+  "nytimes": "NY Times",
+  "techcrunch": "TechCrunch",
   "wired": "Wired"
 }

@@ -13,6 +13,21 @@ const Time = {
 }
 
 export const originSources = {
+  bbc: {
+    name: "BBC",
+    home: "https://www.bbc.com/",
+    column: "world",
+  },
+  cnn: {
+    name: "CNN",
+    home: "https://edition.cnn.com/",
+    column: "world",
+  },
+  engadget: {
+    name: "Engadget",
+    home: "https://www.engadget.com/",
+    column: "tech",
+  },
   github: {
     name: "Github",
     home: "https://github.com/",
@@ -34,9 +49,14 @@ export const originSources = {
     column: "science",
   },
   nytimes: {
-    name: "New York Times",
+    name: "NY Times",
     home: "https://www.nytimes.com/",
     column: "world",
+  },
+  techcrunch: {
+    name: "TechCrunch",
+    home: "https://techcrunch.com/",
+    column: "tech",
   },
   wired: {
     name: "Wired",

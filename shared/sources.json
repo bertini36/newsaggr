@@ -1,4 +1,22 @@
 {
+  "bbc": {
+    "name": "BBC",
+    "column": "world",
+    "home": "https://www.bbc.com/",
+    "interval": 600000
+  },
+  "cnn": {
+    "name": "CNN",
+    "column": "world",
+    "home": "https://edition.cnn.com/",
+    "interval": 600000
+  },
+  "engadget": {
+    "name": "Engadget",
+    "column": "tech",
+    "home": "https://www.engadget.com/",
+    "interval": 600000
+  },
   "github": {
     "name": "Github",
     "column": "tech",
@@ -24,9 +42,15 @@
     "interval": 600000
   },
   "nytimes": {
-    "name": "New York Times",
+    "name": "NY Times",
     "column": "world",
     "home": "https://www.nytimes.com/",
+    "interval": 600000
+  },
+  "techcrunch": {
+    "name": "TechCrunch",
+    "column": "tech",
+    "home": "https://techcrunch.com/",
     "interval": 600000
   },
   "wired": {
