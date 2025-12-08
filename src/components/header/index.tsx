@@ -49,8 +49,8 @@ export function Header() {
   return (
     <>
       <span className="flex justify-self-start">
-        <Link to="/" className="flex gap-2 items-center">
-          <div className="h-10 w-10 bg-cover" title="logo" style={{ backgroundImage: "url(/icon.svg)" }} />
+        <Link to="/" className="flex gap-0.5 items-center">
+          <div className="h-14 w-14 bg-cover" title="logo" style={{ backgroundImage: "url(/header-logo.svg)" }} />
           <span className="text-2xl font-brand line-height-none!">
             <p>News</p>
             <p className="mt--1">
