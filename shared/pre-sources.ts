@@ -33,6 +33,16 @@ export const originSources = {
     home: "https://ground.news/daily-briefing",
     column: "world",
   },
+  nytimes: {
+    name: "New York Times",
+    home: "https://www.nytimes.com/",
+    column: "world",
+  },
+  nature: {
+    name: "Nature",
+    home: "https://www.nature.com/news",
+    column: "science",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

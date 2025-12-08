@@ -22,5 +22,17 @@
     "column": "world",
     "home": "https://ground.news/daily-briefing",
     "interval": 600000
+  },
+  "nytimes": {
+    "name": "New York Times",
+    "column": "world",
+    "home": "https://www.nytimes.com/",
+    "interval": 600000
+  },
+  "nature": {
+    "name": "Nature",
+    "column": "science",
+    "home": "https://www.nature.com/news",
+    "interval": 600000
   }
 }

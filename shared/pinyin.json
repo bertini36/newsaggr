@@ -2,5 +2,7 @@
   "hackernews": "Hacker News",
   "github": "Github",
   "wired": "Wired",
-  "groundnews": "Ground News"
+  "groundnews": "Ground News",
+  "nytimes": "New York Times",
+  "nature": "Nature"
 }
