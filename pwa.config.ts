@@ -11,6 +11,7 @@ const pwaOption: Partial<VitePWAOptions> = {
     lang: "en",
     dir: "ltr",
     theme_color: "#F14D42",
+    background_color: "#FFFFFF",
     icons: [
       {
         src: "pwa-192x192.png",
