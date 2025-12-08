@@ -13,19 +13,9 @@ const Time = {
 }
 
 export const originSources = {
-  hackernews: {
-    name: "Hacker News",
-    column: "tech",
-    home: "https://news.ycombinator.com/",
-  },
   github: {
     name: "Github",
     home: "https://github.com/",
-    column: "tech",
-  },
-  wired: {
-    name: "Wired",
-    home: "https://www.wired.com/",
     column: "tech",
   },
   groundnews: {
@@ -33,15 +23,25 @@ export const originSources = {
     home: "https://ground.news/daily-briefing",
     column: "world",
   },
-  nytimes: {
-    name: "New York Times",
-    home: "https://www.nytimes.com/",
-    column: "world",
+  hackernews: {
+    name: "Hacker News",
+    column: "tech",
+    home: "https://news.ycombinator.com/",
   },
   nature: {
     name: "Nature",
     home: "https://www.nature.com/news",
     column: "science",
+  },
+  nytimes: {
+    name: "New York Times",
+    home: "https://www.nytimes.com/",
+    column: "world",
+  },
+  wired: {
+    name: "Wired",
+    home: "https://www.wired.com/",
+    column: "tech",
   },
 } as const satisfies Record<string, OriginSource>
 

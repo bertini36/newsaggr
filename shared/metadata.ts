@@ -3,20 +3,14 @@ import { typeSafeObjectEntries, typeSafeObjectFromEntries } from "./type.util"
 import type { ColumnID, HiddenColumnID, Metadata, SourceID } from "./types"
 
 export const columns = {
-  china: {
-    zh: "China",
-  },
-  world: {
-    zh: "World",
+  science: {
+    zh: "Science",
   },
   tech: {
     zh: "Tech",
   },
-  science: {
-    zh: "Science",
-  },
-  finance: {
-    zh: "Finance",
+  world: {
+    zh: "World",
   },
   focus: {
     zh: "Focus",

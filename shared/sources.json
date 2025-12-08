@@ -1,20 +1,8 @@
 {
-  "hackernews": {
-    "name": "Hacker News",
-    "column": "tech",
-    "home": "https://news.ycombinator.com/",
-    "interval": 600000
-  },
   "github": {
     "name": "Github",
     "column": "tech",
     "home": "https://github.com/",
-    "interval": 600000
-  },
-  "wired": {
-    "name": "Wired",
-    "column": "tech",
-    "home": "https://www.wired.com/",
     "interval": 600000
   },
   "groundnews": {
@@ -23,16 +11,28 @@
     "home": "https://ground.news/daily-briefing",
     "interval": 600000
   },
-  "nytimes": {
-    "name": "New York Times",
-    "column": "world",
-    "home": "https://www.nytimes.com/",
+  "hackernews": {
+    "name": "Hacker News",
+    "column": "tech",
+    "home": "https://news.ycombinator.com/",
     "interval": 600000
   },
   "nature": {
     "name": "Nature",
     "column": "science",
     "home": "https://www.nature.com/news",
+    "interval": 600000
+  },
+  "nytimes": {
+    "name": "New York Times",
+    "column": "world",
+    "home": "https://www.nytimes.com/",
+    "interval": 600000
+  },
+  "wired": {
+    "name": "Wired",
+    "column": "tech",
+    "home": "https://www.wired.com/",
     "interval": 600000
   }
 }

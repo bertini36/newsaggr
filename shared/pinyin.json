@@ -1,8 +1,8 @@
 {
-  "hackernews": "Hacker News",
   "github": "Github",
-  "wired": "Wired",
   "groundnews": "Ground News",
+  "hackernews": "Hacker News",
+  "nature": "Nature",
   "nytimes": "New York Times",
-  "nature": "Nature"
+  "wired": "Wired"
 }
