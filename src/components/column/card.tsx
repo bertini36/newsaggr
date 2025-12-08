@@ -199,9 +199,15 @@ function NewsUpdatedTime({ date }: { date: string | number }) {
 
 function NewsListTimeLine({ items }: { items: NewsItem[] }) {
   const { width } = useWindowSize()
+
+  // Deduplicate items by title, keeping only the first occurrence
+  const uniqueItems = items?.filter((item, index, array) => {
+    return array.findIndex(i => i.title === item.title) === index
+  }) || []
+
   return (
     <ol className="border-s border-neutral-400/50 flex flex-col pt-2">
-      {items?.map(item => (
+      {uniqueItems.map(item => (
         <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col">
           <span className="flex items-center gap-1 text-neutral-400/50 ml--1px">
             <span className="">-</span>
