@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://21833718.newsnow-6km.pages.dev/sitemap.xml
+Sitemap: https://newsaggr.online/sitemap.xml
