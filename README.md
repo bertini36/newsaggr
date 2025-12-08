@@ -19,11 +19,11 @@ English | [简体中文](README.zh-CN.md) | [日本語](README.ja-JP.md)
 ```json
 {
   "mcpServers": {
-    "newsnow": {
+    "newsaggr": {
       "command": "npx",
       "args": [
         "-y",
-        "newsnow-mcp-server"
+        "newsaggr-mcp-server"
       ],
       "env": {
         "BASE_URL": "https://newsnow.busiyi.world"

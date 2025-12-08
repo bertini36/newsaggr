@@ -37,8 +37,7 @@ export default defineEventHandler(async (event) => {
     headers: {
       "Accept": "application/vnd.github+json",
       "Authorization": `token ${response.access_token}`,
-      // 必须有 user-agent，在 cloudflare worker 会报错
-      "User-Agent": "NewsNow App",
+      "User-Agent": "NewsAggr App",
     },
   })
 

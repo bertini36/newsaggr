@@ -1,10 +1,10 @@
-# Contributing to NewsNow
+# Contributing to NewsAggr
 
-Thank you for considering contributing to NewsNow! This document provides guidelines and instructions for contributing to the project.
+Thank you for considering contributing to NewsAggr! This document provides guidelines and instructions for contributing to the project.
 
 ## Adding a New Source
 
-NewsNow is built to be easily extensible with new sources. Here's a step-by-step guide on how to add a new source:
+NewsAggr is built to be easily extensible with new sources. Here's a step-by-step guide on how to add a new source:
 
 ### 1. Create a Feature Branch
 
@@ -29,18 +29,6 @@ Add your new source to the source configuration in `/shared/pre-sources.ts`:
   name: "哔哩哔哩",
   color: "blue",
   home: "https://www.bilibili.com",
-  sub: {
-    "hot-search": {
-      title: "热搜",
-      column: "china",
-      type: "hottest"
-    },
-    "hot-video": {  // Add your new sub-source here
-      title: "热门视频",
-      column: "china",
-      type: "hottest"
-    }
-  }
 };
 ```
 
