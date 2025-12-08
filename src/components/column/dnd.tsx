@@ -79,7 +79,7 @@ export function Dnd() {
           {items.map((id, index) => (
             <motion.li
               key={id}
-              className={$(isMobile && "flex-shrink-0", isMobile && index === items.length - 1 && "mr-2")}
+              className={$(isMobile && "flex-shrink-0", isMobile && index === 0 && "ml-2", isMobile && index === items.length - 1 && "mr-2")}
               style={isMobile ? { width: `${width - 16 > WIDTH ? WIDTH : width - 16}px` } : undefined}
               transition={{
                 type: "tween",
