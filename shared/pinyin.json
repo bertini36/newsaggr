@@ -2,11 +2,16 @@
   "bbc": "BBC",
   "cnn": "CNN",
   "engadget": "Engadget",
+  "forbes": "Forbes",
   "github": "Github",
   "groundnews": "Ground News",
   "hackernews": "Hacker News",
   "nature": "Nature",
   "nytimes": "NY Times",
+  "sciencedaily": "ScienceDaily",
   "techcrunch": "TechCrunch",
-  "wired": "Wired"
+  "wired": "Wired",
+  "wsj": "WSJ",
+  "yahoo_finance": "Yahoo Finance",
+  "yc_blog": "YC Blog"
 }

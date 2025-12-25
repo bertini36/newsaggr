@@ -28,6 +28,11 @@ export const originSources = {
     home: "https://www.engadget.com/",
     column: "tech",
   },
+  forbes: {
+    name: "Forbes",
+    home: "https://www.forbes.com/",
+    column: "entrepreneurship",
+  },
   github: {
     name: "Github",
     home: "https://github.com/",
@@ -53,6 +58,11 @@ export const originSources = {
     home: "https://www.nytimes.com/",
     column: "world",
   },
+  sciencedaily: {
+    name: "ScienceDaily",
+    home: "https://www.sciencedaily.com/",
+    column: "science",
+  },
   techcrunch: {
     name: "TechCrunch",
     home: "https://techcrunch.com/",
@@ -62,6 +72,21 @@ export const originSources = {
     name: "Wired",
     home: "https://www.wired.com/",
     column: "tech",
+  },
+  wsj: {
+    name: "WSJ",
+    home: "https://www.wsj.com/",
+    column: "finance",
+  },
+  yahoo_finance: {
+    name: "Yahoo Finance",
+    home: "https://finance.yahoo.com/",
+    column: "finance",
+  },
+  yc_blog: {
+    name: "YC Blog",
+    home: "https://www.ycombinator.com/blog",
+    column: "entrepreneurship",
   },
 } as const satisfies Record<string, OriginSource>
 

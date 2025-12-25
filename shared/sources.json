@@ -17,6 +17,12 @@
     "home": "https://www.engadget.com/",
     "interval": 600000
   },
+  "forbes": {
+    "name": "Forbes",
+    "column": "entrepreneurship",
+    "home": "https://www.forbes.com/",
+    "interval": 600000
+  },
   "github": {
     "name": "Github",
     "column": "tech",
@@ -47,6 +53,12 @@
     "home": "https://www.nytimes.com/",
     "interval": 600000
   },
+  "sciencedaily": {
+    "name": "ScienceDaily",
+    "column": "science",
+    "home": "https://www.sciencedaily.com/",
+    "interval": 600000
+  },
   "techcrunch": {
     "name": "TechCrunch",
     "column": "tech",
@@ -57,6 +69,24 @@
     "name": "Wired",
     "column": "tech",
     "home": "https://www.wired.com/",
+    "interval": 600000
+  },
+  "wsj": {
+    "name": "WSJ",
+    "column": "finance",
+    "home": "https://www.wsj.com/",
+    "interval": 600000
+  },
+  "yahoo_finance": {
+    "name": "Yahoo Finance",
+    "column": "finance",
+    "home": "https://finance.yahoo.com/",
+    "interval": 600000
+  },
+  "yc_blog": {
+    "name": "YC Blog",
+    "column": "entrepreneurship",
+    "home": "https://www.ycombinator.com/blog",
     "interval": 600000
   }
 }

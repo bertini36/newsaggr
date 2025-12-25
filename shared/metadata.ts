@@ -9,6 +9,12 @@ export const columns = {
   tech: {
     zh: "Tech",
   },
+  finance: {
+    zh: "Finance",
+  },
+  entrepreneurship: {
+    zh: "Enterpr.",
+  },
   world: {
     zh: "World",
   },
