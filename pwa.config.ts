@@ -13,6 +13,7 @@ const pwaOption: Partial<VitePWAOptions> = {
     theme_color: "#F14D42",
     background_color: "#FFFFFF",
     icons: [
+      // Light mode icons (default)
       {
         src: "pwa-192x192.png",
         sizes: "192x192",
@@ -31,6 +32,25 @@ const pwaOption: Partial<VitePWAOptions> = {
       },
       {
         src: "pwa-512x512.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "maskable",
+      },
+      // Dark mode icons
+      {
+        src: "pwa-192x192-dark.png",
+        sizes: "192x192",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "pwa-512x512-dark.png",
+        sizes: "512x512",
+        type: "image/png",
+        purpose: "any",
+      },
+      {
+        src: "pwa-512x512-dark.png",
         sizes: "512x512",
         type: "image/png",
         purpose: "maskable",
