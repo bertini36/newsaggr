@@ -62,10 +62,15 @@ export default defineSource(async () => {
     return []
   }
 
-  return articles.map((item: any) => ({
+  // Sort by timestamp (newest first) and map to NewsItem format
+  const sortedArticles = articles.sort((a: any, b: any) => {
+    return new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+  })
+
+  return sortedArticles.map((item: any) => ({
+    id: item.articleUrl || item.url,
     url: item.articleUrl || item.url,
     title: item.headline,
-    date: new Date(item.timestamp),
-    description: item.summary || item.headline,
+    pubDate: item.timestamp,
   }))
 })

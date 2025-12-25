@@ -23,16 +23,21 @@ export default defineSource(async () => {
     const item = $(element)
     const url = item.find("link").text()
     const title = item.find("title").text()
-    const pubDate = item.find("pubDate").text()
+    const pubDateStr = item.find("pubDate").text()
 
     if (url && title) {
       news.push({
+        id: url,
         url,
         title,
-        date: new Date(pubDate),
-        description: title,
+        pubDate: pubDateStr,
       })
     }
+  })
+
+  // Sort by pubDate (newest first)
+  news.sort((a, b) => {
+    return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
   })
 
   return news

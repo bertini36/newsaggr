@@ -41,5 +41,13 @@ export default defineSource(async () => {
     throw new Error("Cannot fetch CNN data from web scraping")
   }
 
+  // Sort by pubDate (newest first), items without dates go to the end
+  news.sort((a, b) => {
+    if (!a.pubDate && !b.pubDate) return 0
+    if (!a.pubDate) return 1
+    if (!b.pubDate) return -1
+    return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+  })
+
   return news
 })
