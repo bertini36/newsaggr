@@ -51,7 +51,7 @@ export function Dnd() {
       <OverlayScrollbar defer className="overflow-x-auto">
         <motion.ol
           className={isMobile
-            ? "flex px-2 gap-6 pb-4 scroll-smooth"
+            ? "flex px-4 gap-6 pb-4 scroll-smooth after:content-[''] after:w-1 after:flex-shrink-0"
             : "grid w-full gap-6 p-2"}
           ref={parent}
           style={isMobile
@@ -76,10 +76,10 @@ export function Dnd() {
             },
           }}
         >
-          {items.map((id, index) => (
+          {items.map(id => (
             <motion.li
               key={id}
-              className={$(isMobile && "flex-shrink-0", isMobile && index === 0 && "ml-4", isMobile && index === items.length - 1 && "mr-4")}
+              className={$(isMobile && "flex-shrink-0")}
               style={isMobile ? { width: `${width - 32 > WIDTH ? WIDTH : width - 32}px` } : undefined}
               transition={{
                 type: "tween",
