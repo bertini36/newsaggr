@@ -1,20 +1,45 @@
+import * as cheerio from "cheerio"
 import type { NewsItem } from "@shared/types"
-import { rss2json } from "../utils/rss2json"
+import { myFetch } from "../utils/fetch"
 
 export default defineSource(async () => {
-  const rssUrl = "http://rss.cnn.com/rss/edition_world.rss"
-  const data = await rss2json(rssUrl)
+  const url = "https://edition.cnn.com/"
+  const html = await myFetch(url, { responseType: "text" })
+  const $ = cheerio.load(html)
 
-  if (!data?.items.length) {
-    throw new Error("Cannot fetch CNN RSS data")
+  const news: NewsItem[] = []
+  const seenUrls = new Set<string>()
+
+  $(".container__item").each((_, element) => {
+    const headline = $(element).find(".container__headline-text").text().trim()
+    const relativeLink = $(element).find("a.container__link").attr("href")
+
+    if (headline && relativeLink) {
+      const fullUrl = relativeLink.startsWith("http") ? relativeLink : `https://edition.cnn.com${relativeLink}`
+
+      if (!seenUrls.has(fullUrl)) {
+        seenUrls.add(fullUrl)
+
+        // Try to parse date from URL: /2024/12/25/world/...
+        const dateMatch = fullUrl.match(/\/(\d{4})\/(\d{2})\/(\d{2})\//)
+        let pubDate: string | undefined
+        if (dateMatch) {
+          pubDate = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
+        }
+
+        news.push({
+          title: headline,
+          url: fullUrl,
+          id: fullUrl,
+          pubDate,
+        })
+      }
+    }
+  })
+
+  if (news.length === 0) {
+    throw new Error("Cannot fetch CNN data from web scraping")
   }
-
-  const news: NewsItem[] = data.items.map(item => ({
-    title: item.title,
-    url: item.link,
-    id: item.link,
-    pubDate: item.created,
-  }))
 
   return news
 })
