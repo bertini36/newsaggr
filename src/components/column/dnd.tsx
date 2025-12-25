@@ -191,7 +191,7 @@ function SortableCardWrapper({ id }: ItemsProps) {
 
   useEffect(() => {
     if (OverlayContainer) {
-      OverlayContainer!.className += $(`bg-neutral-100`, !isiOS() && "rounded-2xl")
+      OverlayContainer!.className += $(`bg-neutral-100 dark:bg-github-card`, !isiOS() && "rounded-2xl")
     }
   }, [OverlayContainer])
 

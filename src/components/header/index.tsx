@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router"
 import { useIsFetching } from "@tanstack/react-query"
 import type { SourceID } from "@shared/types"
 import { NavBar } from "../navbar"
+import { DarkModeToggle } from "../common/dark-mode-toggle"
 import { Menu } from "./menu"
 import { currentSourcesAtom, goToTopAtom } from "~/atoms"
 
@@ -11,7 +12,7 @@ function GoTop() {
     <button
       type="button"
       title="Go to top"
-      className={$("i-ph:arrow-fat-up text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", ok ? "op-100" : "op-0")}
+      className={$("i-ph:arrow-fat-up text-neutral-400 hover:text-neutral-600 dark:hover:text-white transition-colors cursor-pointer", ok ? "op-100" : "op-0")}
       onClick={goToTop}
     />
   )
@@ -33,7 +34,7 @@ function Refresh() {
     <button
       type="button"
       title="Refresh"
-      className={$("i-ph:arrow-counter-clockwise text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer", isFetching && "animate-spin i-ph:circle-dashed")}
+      className={$("i-ph:arrow-counter-clockwise text-neutral-400 hover:text-neutral-600 dark:hover:text-white transition-colors cursor-pointer", isFetching && "animate-spin i-ph:circle-dashed")}
       onClick={refreshAll}
     />
   )
@@ -65,6 +66,7 @@ export function Header() {
       <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
         <GoTop />
         <Refresh />
+        <DarkModeToggle />
         <Menu />
       </span>
     </>

@@ -11,6 +11,8 @@ import { Footer } from "~/components/footer"
 import { Toast } from "~/components/common/toast"
 import { SearchBar } from "~/components/common/search-bar"
 
+import { darkModeAtom } from "~/atoms/theme"
+
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient
 }>()({
@@ -29,6 +31,27 @@ function RootComponent() {
   useOnReload()
   useSync()
   usePWA()
+
+  const [isDark, setDarkMode] = useAtom(darkModeAtom)
+
+  useEffect(() => {
+    const root = document.documentElement
+    if (isDark) {
+      root.classList.add("dark")
+    } else {
+      root.classList.remove("dark")
+    }
+  }, [isDark])
+
+  useEffect(() => {
+    const saved = localStorage.getItem("darkMode")
+    if (saved === null) {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        setDarkMode(true)
+      }
+    }
+  }, [setDarkMode])
+
   return (
     <>
       <GlobalOverlayScrollbar
@@ -37,6 +60,7 @@ function RootComponent() {
           "h-full overflow-x-auto",
           "md:(px-10)",
           "lg:(px-24)",
+          "bg-zinc-50 dark:bg-github-main transition-colors duration-300",
         ])}
       >
         <header
@@ -44,10 +68,10 @@ function RootComponent() {
             "grid items-center py-4 px-5",
             "lg:(py-6)",
             "sticky top-0 z-10",
+            "bg-[#FBFBFB] dark:bg-github-main transition-colors duration-300",
           ])}
           style={{
             gridTemplateColumns: "1fr auto 1fr",
-            backgroundColor: "#FBFBFB",
           }}
         >
           <Header />
@@ -57,6 +81,7 @@ function RootComponent() {
           "min-h-[calc(100vh-180px)]",
           "md:(min-h-[calc(100vh-175px)])",
           "lg:(min-h-[calc(100vh-194px)])",
+          "transition-colors duration-300",
         ])}
         >
           <Outlet />

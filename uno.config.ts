@@ -31,8 +31,8 @@ export default defineConfig({
     ],
   ],
   shortcuts: {
-    "color-base": "color-neutral-800 dark:color-neutral-300",
-    "bg-base": "bg-zinc-200 dark:bg-dark-600",
+    "color-base": "color-neutral-800 dark:color-github-text",
+    "bg-base": "bg-zinc-200 dark:bg-github-main",
     "btn": "op50 hover:op85 cursor-pointer transition-all",
   },
   safelist: [
@@ -48,6 +48,14 @@ export default defineConfig({
     theme.colors.groundnews = {
       400: "#4A5568",
       500: "#4A5568",
+    }
+    // @ts-expect-error >_<
+    theme.colors.github = {
+      main: "#0d1117",
+      card: "#161b22",
+      border: "#30363d",
+      text: "#c9d1d9",
+      muted: "#8b949e",
     }
     return theme
   },

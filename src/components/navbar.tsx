@@ -17,7 +17,7 @@ export function NavBar() {
         className={$(
           "cursor-pointer transition-colors",
           "px-3 py-1 tracking-wider font-semibold text-xl uppercase",
-          "text-neutral-700 hover:text-neutral-700 hover:bg-neutral-100 rounded-md",
+          "text-neutral-700 hover:text-neutral-700 hover:bg-neutral-100 rounded-md dark:text-white dark:hover:text-white dark:hover:bg-white/10",
         )}
       >
         Sources
@@ -33,10 +33,10 @@ export function NavBar() {
             className={$(
               "cursor-pointer transition-colors",
               "px-3 py-1 tracking-wider text-xl uppercase",
-              "hover:bg-neutral-100 rounded-md",
+              "hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md",
               currentId === columnId
-                ? `font-bold ${columnId === "focus" ? "text-red-500" : "text-neutral-700"}`
-                : `font-semibold ${columnId === "focus" ? "text-red-500" : "text-neutral-500 hover:text-neutral-700"} hover:underline underline-offset-2`,
+                ? `font-bold ${columnId === "focus" ? "text-red-500" : "text-neutral-700 dark:text-white"}`
+                : `font-semibold ${columnId === "focus" ? "text-red-500" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"} hover:underline underline-offset-2`,
             )}
           >
             {metadata[columnId].name}

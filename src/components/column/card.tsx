@@ -32,7 +32,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-500px p-4 cursor-default border border-neutral-200 rounded-lg shadow-[4px_4px_0px_0px_#e5e5e5]",
+        "flex flex-col h-500px p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg shadow-[4px_4px_0px_0px_#e5e5e5] dark:shadow-none dark:bg-github-card",
         "transition-opacity-300",
         // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
@@ -130,15 +130,15 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
             <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
           </span>
         </div>
-        <div className={$("flex gap-2 text-lg text-neutral-900")}>
+        <div className={$("flex gap-2 text-lg text-neutral-900 dark:text-neutral-400")}>
           <button
             type="button"
-            className={$("btn hover:text-neutral-700 transition-colors i-ph:arrow-counter-clockwise", isFetching && "animate-spin i-ph:circle-dashed")}
+            className={$("btn hover:text-neutral-700 dark:hover:text-white transition-colors i-ph:arrow-counter-clockwise", isFetching && "animate-spin i-ph:circle-dashed")}
             onClick={() => refresh(id)}
           />
           <button
             type="button"
-            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-400 op-100 hover:op-100 hover:i-ph:star hover:bg-neutral-500" : "i-ph:star hover:text-neutral-700")}
+            className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-400 op-100 hover:op-100 hover:i-ph:star hover:bg-neutral-500" : "i-ph:star hover:text-neutral-700 dark:hover:text-white")}
             onClick={toggleFocus}
             title={isFocused ? "Remove from focus" : "Add to Focus"}
           />
@@ -146,7 +146,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className={$("btn hover:text-neutral-700 transition-colors", "i-ph:dots-six-vertical", "cursor-grab")}
+              className={$("btn hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-white transition-colors", "i-ph:dots-six-vertical", "cursor-grab")}
             />
           )}
         </div>
@@ -220,7 +220,7 @@ function NewsListTimeLine({ items }: { items: NewsItem[] }) {
           </span>
           <a
             className={$(
-              "ml-2 px-1 hover:bg-neutral-400/10 rounded-md visited:(text-neutral-400/80)",
+              "ml-2 px-1 hover:bg-neutral-400/10 dark:hover:bg-white/5 rounded-md visited:(text-neutral-400/80)",
               "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px]",
             )}
             href={width < 768 ? item.mobileUrl || item.url : item.url}

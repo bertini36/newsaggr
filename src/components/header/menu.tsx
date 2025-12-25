@@ -37,7 +37,7 @@ export function Menu() {
                   type="button"
                   className={$(
                     "i-ph:dots-three-circle text-2xl transition-colors cursor-pointer",
-                    shown ? "text-neutral-600" : "text-neutral-400 hover:text-neutral-600",
+                    shown ? "text-neutral-600 dark:text-white" : "text-neutral-400 hover:text-neutral-600 dark:hover:text-white",
                   )}
                 />
               )
@@ -49,7 +49,8 @@ export function Menu() {
             id="dropdown-menu"
             className={$([
               "w-200px",
-              "bg-white border border-neutral-300 rounded-lg",
+              "bg-white dark:bg-github-card border border-neutral-300 dark:border-github-border rounded-lg shadow-lg dark:shadow-none",
+              "text-neutral-800 dark:text-white",
             ])}
             initial={{
               scale: 0.9,
@@ -58,22 +59,22 @@ export function Menu() {
               scale: 1,
             }}
           >
-            <ol className="bg-transparent p-2 rounded-lg color-base text-base">
+            <ol className="bg-transparent p-2 rounded-lg text-base">
               {enableLogin && (loggedIn
                 ? (
-                    <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors">
+                    <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
                       <span className="i-ph:sign-out inline-block" />
                       <span>Logout</span>
                     </li>
                   )
                 : (
-                    <li onClick={login} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors">
+                    <li onClick={login} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
                       <span className="i-ph:sign-in inline-block" />
                       <span>Login with Github</span>
                     </li>
                   ))}
               {/* <ThemeToggle /> */}
-              <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 rounded-md transition-colors [&_*]:cursor-pointer">
+              <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors [&_*]:cursor-pointer text-neutral-800 dark:text-white">
                 <span className="i-ph:github-logo inline-block" />
                 <span>Star on Github </span>
               </li>

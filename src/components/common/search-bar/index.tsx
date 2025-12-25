@@ -86,7 +86,7 @@ export function SearchBar() {
         placeholder="Search what you want"
       />
       <div className="md:flex">
-        <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px border-r border-[#d4d4d4]">
+        <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px border-r border-[#d4d4d4] dark:border-github-border">
           <Command.List>
             <Command.Empty> Not found, you can submit an issue on Github </Command.Empty>
             {

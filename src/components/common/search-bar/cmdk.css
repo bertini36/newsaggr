@@ -15,7 +15,7 @@
 }
 
 [cmdk-input] {
-    --at-apply: w-full p-4 outline-none bg-transparent placeholder:text-neutral-500/60 border-b border-neutral-300 font-serif text-lg;
+    --at-apply: w-full p-4 outline-none bg-transparent placeholder:text-neutral-500/60 border-b border-neutral-300 font-serif text-lg dark:border-github-border dark:text-white dark:placeholder:text-neutral-500;
 }
 
 [cmdk-list] {
@@ -27,7 +27,7 @@
 }
 
 [cmdk-dialog] {
-    --at-apply: bg-[#FBFBFB] border border-[#d4d4d4] shadow-xl relative outline-none;
+    --at-apply: bg-[#FBFBFB] border border-[#d4d4d4] shadow-xl relative outline-none dark:bg-github-card dark:border-github-border dark:shadow-none;
     position: fixed;
     width: 80vw;
     max-width: 675px;
@@ -74,5 +74,6 @@
 }
 
 [cmdk-overlay] {
-    --at-apply: fixed inset-0 bg-white/50 backdrop-blur-sm;
+    --at-apply: fixed inset-0 bg-white/50 backdrop-blur-sm dark:bg-black/60;
+    z-index: 998;
 }
