@@ -20,7 +20,8 @@
     "release": "bumpp",
     "prepare": "simple-git-hooks",
     "log": "wrangler pages deployment tail --project-name newsaggr",
-    "test": "vitest -c vitest.config.ts"
+    "test": "vitest -c vitest.config.ts",
+    "test:sources": "vitest run -c vitest.config.ts test/sources.test.ts"
   },
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.5.0",
