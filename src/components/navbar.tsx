@@ -1,10 +1,4 @@
-import React from "react"
-import { fixedColumnIds, metadata } from "@shared/metadata"
-import { Link } from "@tanstack/react-router"
-import { currentColumnIDAtom } from "~/atoms"
-
 export function NavBar() {
-  const currentId = useAtomValue(currentColumnIDAtom)
   const { toggle } = useSearchBar()
   return (
     <nav className={$(
@@ -23,29 +17,6 @@ export function NavBar() {
         Sources
       </button>
 
-      <span className="mx-1" style={{ color: "#d4d4d4" }}>|</span>
-
-      {fixedColumnIds.map((columnId, index) => (
-        <React.Fragment key={columnId}>
-          <Link
-            to="/c/$column"
-            params={{ column: columnId }}
-            className={$(
-              "cursor-pointer transition-colors",
-              "px-3 py-1 tracking-wider text-xl uppercase",
-              "hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md",
-              currentId === columnId
-                ? `font-bold ${columnId === "focus" ? "text-red-500" : "text-neutral-700 dark:text-white"}`
-                : `font-semibold ${columnId === "focus" ? "text-red-500" : "text-neutral-500 hover:text-neutral-700 dark:text-neutral-400 dark:hover:text-neutral-200"} hover:underline underline-offset-2`,
-            )}
-          >
-            {metadata[columnId].name}
-          </Link>
-          {index < fixedColumnIds.length - 1 && (
-            <span className="mx-1" style={{ color: "#d4d4d4" }}>|</span>
-          )}
-        </React.Fragment>
-      ))}
     </nav>
   )
 }
