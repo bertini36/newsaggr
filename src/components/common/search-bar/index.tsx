@@ -25,15 +25,7 @@ function groupByColumn(items: SourceItemProps[]) {
   }, [] as {
     column: string
     sources: SourceItemProps[]
-  }[]).sort((m, n) => {
-    if (m.column === "Tech") return -1
-    if (n.column === "Tech") return 1
-
-    if (m.column === "Uncategorized") return 1
-    if (n.column === "Uncategorized") return -1
-
-    return m.column < n.column ? -1 : 1
-  })
+  }[]).sort((m, n) => m.column.localeCompare(n.column))
 }
 
 export function SearchBar() {
