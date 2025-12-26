@@ -2,29 +2,35 @@ import * as cheerio from "cheerio"
 import type { NewsItem } from "@shared/types"
 
 export default defineSource(async () => {
-  const baseURL = "https://www.wired.com"
-  const html: any = await myFetch(baseURL)
-  const $ = cheerio.load(html)
+  const rssURL = "https://www.wired.com/feed/rss"
+  const xml: any = await myFetch(rssURL)
+  const $ = cheerio.load(xml, { xmlMode: true })
   const news: NewsItem[] = []
 
-  // Target links with class containing 'HeadlineLink'
-  $("a[class*='HeadlineLink']").each((_, el) => {
-    const link = $(el)
-    const href = link.attr("href")
-    const title = link.text()
+  $("item").each((_, el) => {
+    const item = $(el)
+    const title = item.find("title").text()
+    const link = item.find("link").text()
+    const pubDateStr = item.find("pubDate").text()
 
-    if (href && title) {
-      const url = href.startsWith("http") ? href : `${baseURL}${href}`
+    if (title && link) {
+      const pubDate = pubDateStr ? new Date(pubDateStr).toISOString() : undefined
 
-      // Avoid duplicates if any
-      if (!news.some(n => n.url === url)) {
-        news.push({
-          url,
-          title: title.trim(),
-          id: url,
-        })
-      }
+      news.push({
+        id: link,
+        title: title.trim(),
+        url: link,
+        pubDate,
+      })
     }
+  })
+
+  // Sort by pubDate (newest first)
+  news.sort((a, b) => {
+    if (!a.pubDate && !b.pubDate) return 0
+    if (!a.pubDate) return 1
+    if (!b.pubDate) return -1
+    return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
   })
 
   return news

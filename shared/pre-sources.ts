@@ -74,7 +74,7 @@ export const originSources = {
     column: "tech",
   },
   wsj: {
-    name: "WSJ",
+    name: "Wall Street Journal",
     home: "https://www.wsj.com/",
     column: "finance",
   },
