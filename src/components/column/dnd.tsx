@@ -14,6 +14,7 @@ import { useSortable } from "../common/dnd/useSortable"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import type { ItemsProps } from "./card"
 import { CardWrapper } from "./card"
+import { useSearchBar } from "~/hooks/useSearch"
 import { currentSourcesAtom } from "~/atoms"
 
 const AnimationDuration = 200
@@ -28,19 +29,31 @@ export function Dnd() {
     return Math.min(width - 32, WIDTH)
   }, [width])
 
+  const { toggle } = useSearchBar()
+
   if (!items.length) {
     return (
       <div className="flex flex-col items-center justify-center p-8 mt-16">
         <div className="flex flex-col items-center gap-4 max-w-md text-center">
           <span className="i-ph:star text-6xl text-red-400" />
-          <h2 className="text-2xl font-bold text-neutral-700">No Sources in Focus</h2>
-          <p className="text-base text-neutral-600">
-            Click on
-            {" "}
-            <span className="font-semibold text-neutral-700">Sources</span>
-            {" "}
-            in the navbar to browse and add sources to your Focus page.
-          </p>
+          <h2 className="text-2xl font-bold text-neutral-700 dark:text-white">No Sources Selected</h2>
+          <div className="text-base text-neutral-600 dark:text-neutral-400 flex flex-col gap-2">
+            <p>
+              Your news feed is currently empty.
+            </p>
+            <p className="flex items-center justify-center gap-1 flex-wrap">
+              <span
+                className="flex items-center gap-1 font-semibold text-primary-600 dark:text-primary cursor-pointer hover:underline"
+                onClick={() => toggle(true)}
+              >
+                <span className="i-ph:list-plus" />
+                Add sources
+              </span>
+              to get started, or click the
+              <span className="i-ph:dots-three-circle text-xl text-neutral-700 dark:text-neutral-300" />
+              menu in the navbar.
+            </p>
+          </div>
         </div>
       </div>
     )

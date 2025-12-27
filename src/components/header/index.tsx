@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router"
 import { useIsFetching } from "@tanstack/react-query"
 import type { SourceID } from "@shared/types"
-import { NavBar } from "../navbar"
 import { DarkModeToggle } from "../common/dark-mode-toggle"
 import { Menu } from "./menu"
 import { currentSourcesAtom, goToTopAtom } from "~/atoms"
@@ -59,9 +58,6 @@ export function Header() {
         </a>
       </span>
       <span className="justify-self-center">
-        <span className="hidden md:(inline-block)">
-          <NavBar />
-        </span>
       </span>
       <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
         <GoTop />

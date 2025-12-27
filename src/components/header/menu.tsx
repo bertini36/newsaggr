@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useSearchBar } from "~/hooks/useSearch"
 
 // function ThemeToggle() {
 //   const { isDark, toggleDark } = useDark()
@@ -14,6 +15,7 @@ import { motion } from "framer-motion"
 
 export function Menu() {
   const { loggedIn, login, logout, userInfo, enableLogin } = useLogin()
+  const { toggle } = useSearchBar()
   const [shown, show] = useState(false)
   return (
     <span className="relative" onMouseEnter={() => show(true)} onMouseLeave={() => show(false)}>
@@ -60,6 +62,16 @@ export function Menu() {
             }}
           >
             <ol className="bg-transparent p-2 rounded-lg text-base">
+              <li
+                onClick={() => {
+                  toggle(true)
+                  show(false)
+                }}
+                className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+              >
+                <span className="i-ph:list-plus inline-block" />
+                <span>Add sources</span>
+              </li>
               {enableLogin && (loggedIn
                 ? (
                     <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
