@@ -10,8 +10,8 @@ const pwaOption: Partial<VitePWAOptions> = {
     short_name: "NewsAggr",
     lang: "en",
     dir: "ltr",
-    theme_color: "#F14D42",
-    background_color: "#FFFFFF",
+    theme_color: "#0d1117",
+    background_color: "#0d1117",
     icons: [
       // Light mode icons (default)
       {
