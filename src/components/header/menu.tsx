@@ -14,7 +14,7 @@ import { useSearchBar } from "~/hooks/useSearch"
 // }
 
 export function Menu() {
-  const { loggedIn, login, logout, userInfo, enableLogin } = useLogin()
+  const { loggedIn, loginWithGoogle, loginWithGithub, logout, userInfo, enableLogin, providers } = useLogin()
   const { toggle } = useSearchBar()
   const [shown, show] = useState(false)
   return (
@@ -80,10 +80,20 @@ export function Menu() {
                     </li>
                   )
                 : (
-                    <li onClick={login} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
-                      <span className="i-ph:sign-in inline-block" />
-                      <span>Login with Github</span>
-                    </li>
+                    <>
+                      {providers.google && (
+                        <li onClick={loginWithGoogle} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
+                          <span className="i-ph:google-logo inline-block" />
+                          <span>Login with Google</span>
+                        </li>
+                      )}
+                      {providers.github && (
+                        <li onClick={loginWithGithub} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
+                          <span className="i-ph:github-logo inline-block" />
+                          <span>Login with Github</span>
+                        </li>
+                      )}
+                    </>
                   ))}
               {/* <ThemeToggle /> */}
               <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors [&_*]:cursor-pointer text-neutral-800 dark:text-white">

@@ -7,7 +7,10 @@ const jwtAtom = atomWithStorage("jwt", "")
 
 const enableLoginAtom = atomWithStorage<{
   enable: boolean
-  url?: string
+  providers?: {
+    google: boolean
+    github: boolean
+  }
 }>("login", {
   enable: true,
 })
@@ -28,9 +31,18 @@ export function useLogin() {
   const jwt = useAtomValue(jwtAtom)
   const enableLogin = useAtomValue(enableLoginAtom)
 
+  const loginWithGoogle = useCallback(() => {
+    window.location.href = "/api/login-google"
+  }, [])
+
+  const loginWithGithub = useCallback(() => {
+    window.location.href = "/api/login"
+  }, [])
+
+  // Backward compatibility: default to GitHub
   const login = useCallback(() => {
-    window.location.href = enableLogin.url || "/api/login"
-  }, [enableLogin])
+    window.location.href = "/api/login"
+  }, [])
 
   const logout = useCallback(() => {
     window.localStorage.clear()
@@ -41,7 +53,10 @@ export function useLogin() {
     loggedIn: !!jwt,
     userInfo,
     enableLogin: !!enableLogin.enable,
+    providers: enableLogin.providers || { google: false, github: false },
     logout,
     login,
+    loginWithGoogle,
+    loginWithGithub,
   }
 }
