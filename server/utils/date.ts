@@ -38,35 +38,35 @@ function words() {
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(1)) ? dayjs().weekday(1).subtract(1, "week") : dayjs().weekday(1),
-      regExp: /^(?:周|星期)一(.*)/,
+      regExp: /^(?:周|星期)一|mon(?:day)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(2)) ? dayjs().weekday(2).subtract(1, "week") : dayjs().weekday(2),
-      regExp: /^(?:周|星期)二(.*)/,
+      regExp: /^(?:周|星期)二|tue(?:sday)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(3)) ? dayjs().weekday(3).subtract(1, "week") : dayjs().weekday(3),
-      regExp: /^(?:周|星期)三(.*)/,
+      regExp: /^(?:周|星期)三|wed(?:nesday)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(4)) ? dayjs().weekday(4).subtract(1, "week") : dayjs().weekday(4),
-      regExp: /^(?:周|星期)四(.*)/,
+      regExp: /^(?:周|星期)四|thu(?:rsday)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(5)) ? dayjs().weekday(5).subtract(1, "week") : dayjs().weekday(5),
-      regExp: /^(?:周|星期)五(.*)/,
+      regExp: /^(?:周|星期)五|fri(?:day)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(6)) ? dayjs().weekday(6).subtract(1, "week") : dayjs().weekday(6),
-      regExp: /^(?:周|星期)六(.*)/,
+      regExp: /^(?:周|星期)六|sat(?:urday)?(.*)/,
     },
     {
       startAt: dayjs().isSameOrBefore(dayjs().weekday(7)) ? dayjs().weekday(7).subtract(1, "week") : dayjs().weekday(7),
-      regExp: /^(?:周|星期)[天日](.*)/,
+      regExp: /^(?:周|星期)[天日]|sun(?:day)?(.*)/,
     },
     {
       startAt: dayjs().add(1, "days"),
-      regExp: /^(?:明[天日]|y(?:ester)?day?)(.*)/,
+      regExp: /^(?:明[天日]|tomorrow)(.*)/,
     },
     {
       startAt: dayjs().add(2, "days"),
@@ -144,7 +144,7 @@ function toDurations(matches: string[]) {
 export const parseDate = (date: string | number, ...options: any) => dayjs(date, ...options).toDate()
 
 export function parseRelativeDate(date: string, timezone: string = "UTC") {
-  if (date === "刚刚") return new Date()
+  if (date === "刚刚" || date.toLowerCase() === "just now") return new Date()
   // 预处理日期字符串 date
 
   const theDate = toDate(date)
@@ -166,14 +166,14 @@ export function parseRelativeDate(date: string, timezone: string = "UTC") {
       const beforeMatches = /(.*)(?:前|ago)$/.exec(lastMatch)
       if (beforeMatches) {
         matches.push(beforeMatches[1])
-        // duration 这个插件有 bug，他会重新实现 subtract 这个方法，并且不会处理 weeks。用 ms 就可以调用默认的方法
+        // duration 这个插件有 bug，他会重新实现 subtract 这个方法，并且不会处理 weeks. 用 ms 就可以调用默认的方法
         return dayjs().subtract(dayjs.duration(toDurations(matches))).toDate()
       }
 
       // 若最后的时间单元含有 `后`、`以后`、`之后` 等标识字段，加上相应的时间长度
       // 如 `1分10秒后`
 
-      const afterMatches = /(?:^in(.*)|(.*)[后後])$/.exec(lastMatch)
+      const afterMatches = /(?:^in(.*)|(.*)(?:[后後]|later|after))$/.exec(lastMatch)
       if (afterMatches) {
         matches.push(afterMatches[1] ?? afterMatches[2])
         return dayjs()

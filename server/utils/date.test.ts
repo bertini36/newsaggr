@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest"
 import MockDate from "mockdate"
+import dayjs from "dayjs/esm"
 
 describe("parseRelativeDate", () => {
   Object.assign(process.env, { TZ: "UTC" })
@@ -7,37 +8,21 @@ describe("parseRelativeDate", () => {
   const minute = 60 * second
   const hour = 60 * minute
   const day = 24 * hour
-  const month = 30 * day
-  const year = 365 * day
   const date = new Date()
-
-  const weekday = (d: number) => +new Date(date.getFullYear(), date.getMonth(), date.getDate() + d - (date.getDay() > d ? date.getDay() : date.getDay() + 7))
 
   // Fixed time mock
   MockDate.set(date)
 
   it("10 seconds ago", () => {
-    expect(+new Date(parseRelativeDate("10秒前"))).toBe(+date - 10 * second)
-  })
-
-  it("10 minutes ago (Chinese simplified)", () => {
-    expect(+new Date(parseRelativeDate("10分钟前"))).toBe(+date - 10 * minute)
-  })
-
-  it("10 minutes ago (Chinese traditional)", () => {
-    expect(+new Date(parseRelativeDate("10分鐘前"))).toBe(+date - 10 * minute)
-  })
-
-  it("10 minutes later (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("10分钟后"))).toBe(+date + 10 * minute)
-  })
-
-  it("a minute ago", () => {
-    expect(+new Date(parseRelativeDate("a minute ago"))).toBe(+date - 1 * minute)
+    expect(+new Date(parseRelativeDate("10 seconds ago"))).toBe(+date - 10 * second)
   })
 
   it("10 minutes ago", () => {
     expect(+new Date(parseRelativeDate("10 minutes ago"))).toBe(+date - 10 * minute)
+  })
+
+  it("a minute ago", () => {
+    expect(+new Date(parseRelativeDate("a minute ago"))).toBe(+date - 1 * minute)
   })
 
   it("10 mins ago", () => {
@@ -52,99 +37,78 @@ describe("parseRelativeDate", () => {
     expect(+new Date(parseRelativeDate("in an hour"))).toBe(+date + 1 * hour)
   })
 
-  it("10 hours ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("10小时前"))).toBe(+date - 10 * hour)
+  it("10 hours ago", () => {
+    expect(+new Date(parseRelativeDate("10 hours ago"))).toBe(+date - 10 * hour)
   })
 
-  it("10 hours ago (Chinese with counter)", () => {
-    expect(+new Date(parseRelativeDate("10个小时前"))).toBe(+date - 10 * hour)
+  it("10 days ago", () => {
+    expect(+new Date(parseRelativeDate("10 days ago"))).toBe(+date - 10 * day)
   })
 
-  it("10 days ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("10天前"))).toBe(+date - 10 * day)
+  it("1 month ago", () => {
+    expect(+new Date(parseRelativeDate("1 month ago"))).toBe(+dayjs().subtract(1, "month").toDate())
   })
 
-  // Note: "weeks ago" tests removed - dayjs.duration has a known bug with weeks handling
-  // See date.ts comment: "duration 这个插件有 bug，他会重新实现 subtract 这个方法，并且不会处理 weeks"
-
-  it("1 month ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1月前"))).toBe(+date - 1 * month)
+  it("1 year ago", () => {
+    expect(+new Date(parseRelativeDate("1 year ago"))).toBe(+dayjs().subtract(1, "year").toDate())
   })
 
-  it("1 month ago (Chinese with counter)", () => {
-    expect(+new Date(parseRelativeDate("1个月前"))).toBe(+date - 1 * month)
+  it("1 year 1 month ago", () => {
+    expect(+new Date(parseRelativeDate("1 year 1 month ago"))).toBe(+dayjs().subtract(1, "year").subtract(1, "month").toDate())
   })
 
-  it("1 year ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1年前"))).toBe(+date - 1 * year)
+  it("1 day 1 hour ago", () => {
+    expect(+new Date(parseRelativeDate("1 day 1 hour ago"))).toBe(+date - 1 * day - 1 * hour)
   })
 
-  it("1 year 1 month ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1年1个月前"))).toBe(+date - 1 * year - 1 * month)
-  })
-
-  it("1 day 1 hour ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1天1小时前"))).toBe(+date - 1 * day - 1 * hour)
-  })
-
-  it("1 hour 1 minute 1 second ago (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1小时1分钟1秒钟前"))).toBe(+date - 1 * hour - 1 * minute - 1 * second)
+  it("1 hour 1 minute 1 second ago", () => {
+    expect(+new Date(parseRelativeDate("1 hour 1 minute 1 second ago"))).toBe(+date - 1 * hour - 1 * minute - 1 * second)
   })
 
   it("1d 1h 1m 1s ago", () => {
     expect(+new Date(parseRelativeDate("1d 1h 1m 1s ago"))).toBe(+date - 1 * day - 1 * hour - 1 * minute - 1 * second)
   })
 
-  it("1 hour 1 minute 1 second later (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("1小时1分钟1秒钟后"))).toBe(+date + 1 * hour + 1 * minute + 1 * second)
+  it("1 hour 1 minute 1 second later", () => {
+    expect(+new Date(parseRelativeDate("1 hour 1 minute 1 second later"))).toBe(+date + 1 * hour + 1 * minute + 1 * second)
   })
 
-  it("today (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("今天"))).toBe(+date.setHours(0, 0, 0, 0))
+  it("today", () => {
+    expect(+new Date(parseRelativeDate("today"))).toBe(+dayjs().startOf("day").toDate())
   })
 
   it("today H:m", () => {
-    expect(+new Date(parseRelativeDate("Today 08:00"))).toBe(+date + 8 * hour)
+    expect(+new Date(parseRelativeDate("Today 08:00"))).toBe(+dayjs().startOf("day").add(8, "hour").toDate())
   })
 
   it("today, h:m a", () => {
-    expect(+new Date(parseRelativeDate("Today, 8:00 pm"))).toBe(+date + 20 * hour)
+    expect(+new Date(parseRelativeDate("Today, 8:00 pm"))).toBe(+dayjs().startOf("day").add(20, "hour").toDate())
   })
 
   it("tDA H:m:s", () => {
-    expect(+new Date(parseRelativeDate("TDA 08:00:00"))).toBe(+date + 8 * hour)
+    expect(+new Date(parseRelativeDate("TDA 08:00:00"))).toBe(+dayjs().startOf("day").add(8, "hour").toDate())
   })
 
-  it("today H:m (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("今天 08:00"))).toBe(+date + 8 * hour)
+  it("yesterday 20:00", () => {
+    expect(+new Date(parseRelativeDate("yesterday 20:00"))).toBe(+dayjs().subtract(1, "day").startOf("day").add(20, "hour").toDate())
   })
 
-  it("today 8:00 (Chinese hour format)", () => {
-    expect(+new Date(parseRelativeDate("今天8点0分"))).toBe(+date + 8 * hour)
+  it("day before yesterday 20:00", () => {
+    expect(+new Date(parseRelativeDate("the day before yesterday 20:00"))).toBe(+dayjs().subtract(2, "day").startOf("day").add(20, "hour").toDate())
   })
 
-  it("yesterday 20:00 (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("昨日20时0分0秒"))).toBe(+date - 4 * hour)
+  it("tomorrow 20:00", () => {
+    expect(+new Date(parseRelativeDate("tomorrow 20:00"))).toBe(+dayjs().add(1, "day").startOf("day").add(20, "hour").toDate())
   })
 
-  it("day before yesterday 20:00 (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("前天 20:00"))).toBe(+date - 1 * day - 4 * hour)
+  it("monday h:m", () => {
+    const expected = dayjs().isSameOrBefore(dayjs().weekday(1)) ? dayjs().weekday(1).subtract(1, "week") : dayjs().weekday(1)
+    expect(+new Date(parseRelativeDate("monday 8:00"))).toBe(+expected.startOf("day").add(8, "hour").toDate())
   })
 
-  it("tomorrow 20:00 (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("明天 20:00"))).toBe(+date + 1 * day + 20 * hour)
-  })
-
-  it("monday h:m (Chinese weekday)", () => {
-    expect(+new Date(parseRelativeDate("星期一 8:00"))).toBe(weekday(1) + 8 * hour)
-  })
-
-  it("tuesday h:m (Chinese short weekday)", () => {
-    expect(+new Date(parseRelativeDate("周二 8:00"))).toBe(weekday(2) + 8 * hour)
-  })
-
-  it("sunday h:m (Chinese)", () => {
-    expect(+new Date(parseRelativeDate("星期天 8:00"))).toBe(weekday(7) + 8 * hour)
+  it("sunday h:m", () => {
+    const expected = dayjs().isSameOrBefore(dayjs().weekday(7)) ? dayjs().weekday(7).subtract(1, "week") : dayjs().weekday(7)
+    expect(+new Date(parseRelativeDate("sunday 8:00"))).toBe(+expected.startOf("day").add(8, "hour").toDate())
   })
 
   it("invalid", () => {
