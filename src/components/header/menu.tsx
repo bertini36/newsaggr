@@ -100,24 +100,6 @@ export function Menu() {
                 <span className="i-ph:github-logo inline-block" />
                 <span>Star on Github </span>
               </li>
-              <li className="flex gap-2 items-center">
-                <a
-                  href="https://github.com/bertini36/newsaggr"
-                >
-                  <img
-                    alt="GitHub stars badge"
-                    src="https://img.shields.io/github/stars/bertini36/newsaggr?logo=github&style=flat&labelColor=%235e3c40&color=%23614447"
-                  />
-                </a>
-                <a
-                  href="https://github.com/bertini36/newsaggr/fork"
-                >
-                  <img
-                    alt="GitHub forks badge"
-                    src="https://img.shields.io/github/forks/bertini36/newsaggr?logo=github&style=flat&labelColor=%235e3c40&color=%23614447"
-                  />
-                </a>
-              </li>
             </ol>
           </motion.div>
         </div>
