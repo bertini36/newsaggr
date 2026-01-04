@@ -1,24 +1,23 @@
 # NewsAggr 📰
 
-> **Elegant. Vibe Coded. Built with Antigravity.** 🚀
+> **Elegant News Aggregator** 🚀
 
 ![Preview](./screenshots/preview.png)
 
-## Motivation 🧠
+## About 🧠
 
-I built **NewsAggr** because I needed a unified, Zen-like space to consume the news that matters to me. But let's be real—I also just wanted to **vibe code** and build something cool. The result? A slick, modern news reader that feels as good to code as it does to use. ✨
+I built **NewsAggr** simply because I wanted a unified place to check the news I care about every day.
 
-## Big Thanks 🙌
-
-This project is built on the shoulders of giants. Massive shoutout to [ourongxing/newsnow](https://github.com/ourongxing/newsnow) for the amazing foundation. Please go star their repo! ⭐
+This project is heavily based on [ourongxing/newsnow](https://github.com/ourongxing/newsnow). I used it as a starting point and modified the styles to fit my personal taste and added the specific data sources I was interested in.
 
 ## Features ✨
 
 *   **Clean & Elegant UI** 🎨 - Designed for focus and readability.
-*   **Real-time Updates** ⚡ - Trending news delivered instantly.
+*   **Real-time Updates** ⚡ - News delivered instantly.
 *   **Smart Caching** 🤖 - Default 30-minute cache, with adaptive scraping intervals (min 2 mins) to respect source limits.
 *   **OAuth Integration** 🔒 - Log in seamlessly with **Google** or **GitHub** to sync your preferences.
-*   **D1 Database Ready** 💾 - Native support for Cloudflare D1.
+*   **Responsive Design** 📱 - Works on all devices and can be installed as a PWA.
+*   **Dark Mode** 🌙 - Support for dark mode.
 
 ## Quick Start (Local) 🛠️
 
