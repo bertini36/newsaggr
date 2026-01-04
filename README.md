@@ -61,9 +61,9 @@ Refer to `example.env.server`. For local development, rename it to `.env.server`
 
 ```env
 # Github Client ID
-G_CLIENT_ID=
+GITHUB_CLIENT_ID=
 # Github Client Secret
-G_CLIENT_SECRET=
+GITHUB_CLIENT_SECRET=
 # JWT Secret, usually the same as Client Secret
 JWT_SECRET=
 # Initialize database, must be set to true on first run, can be turned off afterward

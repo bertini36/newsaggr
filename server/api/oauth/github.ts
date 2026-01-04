@@ -17,8 +17,8 @@ export default defineEventHandler(async (event) => {
     {
       method: "POST",
       body: {
-        client_id: process.env.G_CLIENT_ID,
-        client_secret: process.env.G_CLIENT_SECRET,
+        client_id: process.env.GITHUB_CLIENT_ID,
+        client_secret: process.env.GITHUB_CLIENT_SECRET,
         code: getQuery(event).code,
       },
       headers: {

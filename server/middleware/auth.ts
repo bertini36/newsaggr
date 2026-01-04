@@ -4,7 +4,7 @@ import { jwtVerify } from "jose"
 export default defineEventHandler(async (event) => {
   const url = getRequestURL(event)
   if (!url.pathname.startsWith("/api")) return
-  const hasGithub = process.env.G_CLIENT_ID && process.env.G_CLIENT_SECRET
+  const hasGithub = process.env.GITHUB_CLIENT_ID && process.env.GITHUB_CLIENT_SECRET
   const hasGoogle = process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET
   const hasJWT = process.env.JWT_SECRET
 
