@@ -42,6 +42,10 @@ GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
 # JWT Secret, usually the same as Client Secret
 JWT_SECRET=
+# Google Client ID
+GOOGLE_CLIENT_ID=
+# Google Client Secret
+GOOGLE_CLIENT_SECRET=
 # Initialize database, must be set to true on first run, can be turned off afterward
 INIT_TABLE=true
 # Whether to enable cache
@@ -87,12 +91,8 @@ For detailed instructions on how to add new sources, see [CONTRIBUTING.md](CONTR
 
 ## Roadmap
 
-- Add **multi-language support** (English, Chinese, more to come).
-- Improve **personalization options** (category-based news, saved preferences).
-- Expand **data sources** to cover global news in multiple languages.
-
-**_release when ready_**
-![](https://testmnbbs.oss-cn-zhangjiakou.aliyuncs.com/pic/20250328172146_rec_.gif?x-oss-process=base_webp)
+- New data sources
+- Save links to revisit them
 
 ## Contributing
 
@@ -102,4 +102,4 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contrib
 
 ## License
 
-[MIT](./LICENSE) © ourongxing
+[MIT](./LICENSE) © bertini36

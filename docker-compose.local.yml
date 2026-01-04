@@ -9,6 +9,8 @@ services:
       - GITHUB_CLIENT_ID=
       - GITHUB_CLIENT_SECRET=
       - JWT_SECRET=
+      - GOOGLE_CLIENT_ID=
+      - GOOGLE_CLIENT_SECRET=
       - INIT_TABLE=true
       - ENABLE_CACHE=true
 
