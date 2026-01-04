@@ -1,105 +1,88 @@
-![](/public/og-image.png)
+# NewsAggr 📰
 
-**_NewsAggr - Elegant News Aggregator_**
+> **Elegant. Vibe Coded. Built with Antigravity.** 🚀
 
-## Features
+![Preview](./screenshots/preview.png)
 
-- Clean and elegant UI design for optimal reading experience
-- Real-time updates on trending news
-- Google and GitHub OAuth login with data synchronization
-- 30-minute default cache duration (logged-in users can force refresh)
-- Adaptive scraping interval (minimum 2 minutes) based on source update frequency to optimize resource usage and prevent IP bans
+## Motivation 🧠
 
-## Deployment
+I built **NewsAggr** because I needed a unified, Zen-like space to consume the news that matters to me. But let's be real—I also just wanted to **vibe code** and build something cool. The result? A slick, modern news reader that feels as good to code as it does to use. ✨
 
-### Basic Deployment
+## Big Thanks 🙌
 
-For deployments without login and caching:
+This project is built on the shoulders of giants. Massive shoutout to [ourongxing/newsnow](https://github.com/ourongxing/newsnow) for the amazing foundation. Please go star their repo! ⭐
 
-1. Fork this repository
-2. Import to platforms like Cloudflare Page or Vercel
+## Features ✨
 
-### Cloudflare Page Configuration
+*   **Clean & Elegant UI** 🎨 - Designed for focus and readability.
+*   **Real-time Updates** ⚡ - Trending news delivered instantly.
+*   **Smart Caching** 🤖 - Default 30-minute cache, with adaptive scraping intervals (min 2 mins) to respect source limits.
+*   **OAuth Integration** 🔒 - Log in seamlessly with **Google** or **GitHub** to sync your preferences.
+*   **D1 Database Ready** 💾 - Native support for Cloudflare D1.
 
-- Build command: `pnpm run build`
-- Output directory: `dist/output/public`
+## Quick Start (Local) 🛠️
 
-### GitHub OAuth Setup
+Want to run this locally? Easy. You just need **Node.js >= 20** and **pnpm**.
 
-1. [Create a GitHub App](https://github.com/settings/applications/new)
-2. No special permissions required
-3. Set callback URL to: `https://your-domain.com/api/oauth/github` (replace `your-domain` with your actual domain)
-4. Obtain Client ID and Client Secret
-
-### Environment Variables
-
-Refer to `example.env.server`. For local development, rename it to `.env.server` and configure:
-
-```env
-# Github Client ID
-GITHUB_CLIENT_ID=
-# Github Client Secret
-GITHUB_CLIENT_SECRET=
-# JWT Secret, usually the same as Client Secret
-JWT_SECRET=
-# Google Client ID
-GOOGLE_CLIENT_ID=
-# Google Client Secret
-GOOGLE_CLIENT_SECRET=
-# Initialize database, must be set to true on first run, can be turned off afterward
-INIT_TABLE=true
-# Whether to enable cache
-ENABLE_CACHE=true
-```
-
-### Database Support
-
-Supported database connectors: https://db0.unjs.io/connectors
-**Cloudflare D1 Database** is recommended.
-
-1. Create D1 database in Cloudflare Worker dashboard
-2. Configure database_id and database_name in wrangler.toml
-3. If wrangler.toml doesn't exist, rename example.wrangler.toml and modify configurations
-4. Changes will take effect on next deployment
-
-### Docker Deployment
-
-In project root directory:
-
-```sh
-docker compose up
-```
-
-You can also set Environment Variables in `docker-compose.yml`.
-
-## Development
-
-> [!Note]
-> Requires Node.js >= 20
-
-```sh
-corepack enable
+```bash
+# 1. Install dependencies
 pnpm i
+
+# 2. Start the dev server
 pnpm dev
+# 🚀 Running at http://localhost:5173
 ```
 
-### Adding Data Sources
+## Deployment (Production) 🚀
 
-Refer to `shared/sources` and `server/sources` directories. The project provides complete type definitions and a clean architecture.
+The recommended way to deploy is **Cloudflare Pages** with a **D1 Database**. It's fast, cheap (often free), and scales infinitely.
 
-For detailed instructions on how to add new sources, see [CONTRIBUTING.md](CONTRIBUTING.md).
+### 1. Cloudflare Pages + D1 Setup 🌩️
 
-## Roadmap
+1.  **Fork** this repo.
+2.  Create a **D1 Database** in your Cloudflare dashboard.
+3.  Update `wrangler.toml` (or rename `example.wrangler.toml`) with your DB details:
+    ```toml
+    [[d1_databases]]
+    binding = "NEWSAGGR_DB"
+    database_name = "your-db-name"
+    database_id = "your-db-id"
+    ```
 
-- New data sources
-- Save links to revisit them
+### 2. Configure Environment Variables 🔐
 
-## Contributing
+For production, you'll need to set these variables in your Cloudflare Pages project settings:
 
-Contributions are welcome! Feel free to submit pull requests or create issues for feature requests and bug reports.
+*   `GITHUB_CLIENT_ID` & `GITHUB_CLIENT_SECRET`: For GitHub login.
+*   `GOOGLE_CLIENT_ID` & `GOOGLE_CLIENT_SECRET`: For Google login.
+*   `JWT_SECRET`: Random string for signing tokens.
+*   `INIT_TABLE`: Set to `true` for the first deploy to create tables.
+*   `ENABLE_CACHE`: `true` (recommended).
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines on how to contribute, especially for adding new data sources.
+### 3. Automatic Deploys with GitHub Actions 🤖
 
-## License
+To enable auto-deploys on every commit, you need to add these **Secrets** to your GitHub Repository settings:
+
+*   `CLOUDFLARE_API_TOKEN`: Your Cloudflare API Token.
+*   `CLOUDFLARE_ACCOUNT_ID`: Your Cloudflare Account ID.
+
+Once set, the included `.github/workflows/test-and-deploy.yml` will handle the rest!
+
+## Adding Data Sources 🔌
+
+> Check out [CONTRIBUTING.md](CONTRIBUTING.md) for a deep dive on adding sources.
+
+## Roadmap 🗺️
+
+*   [ ] More data sources 📡
+*   [ ] "Read Later" bookmarks 🔖
+*   [ ] AI-powered summaries 🧠 (Maybe?)
+
+## Contributing 🤝
+
+Got a cool idea? Found a bug? Open a PR! We love contributions.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+## License 📄
 
 [MIT](./LICENSE) © bertini36
