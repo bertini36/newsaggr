@@ -108,7 +108,7 @@ export function genSources() {
           _.push([
             id,
             {
-              redirect: `${id}-${subId}`,
+              redirect: `${id}-${subId}` as SourceID,
               ...parent,
               ...subSource,
             },

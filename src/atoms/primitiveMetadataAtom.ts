@@ -42,10 +42,10 @@ export function preprocessMetadata(target: PrimitiveMetadata) {
       ...typeSafeObjectFromEntries(
         typeSafeObjectEntries(target.data)
           .filter(([id]) => initialMetadata[id])
-          .map(([id, s]) => {
-            if (id === "focus") return [id, s.filter(k => sources[k]).map(k => sources[k].redirect ?? k)]
-            const oldS = s.filter(k => initialMetadata[id].includes(k)).map(k => sources[k].redirect ?? k)
-            const newS = initialMetadata[id].filter(k => !oldS.includes(k))
+          .map(([id, s]: [FixedColumnID, SourceID[]]) => {
+            if (id === "focus") return [id, s.filter((k: SourceID) => sources[k]).map((k: SourceID) => sources[k].redirect ?? k)]
+            const oldS = s.filter((k: SourceID) => (initialMetadata[id] as SourceID[]).includes(k)).map((k: SourceID) => sources[k].redirect ?? k)
+            const newS = (initialMetadata[id] as SourceID[]).filter((k: SourceID) => !oldS.includes(k))
             return [id, [...oldS, ...newS]]
           }),
       ),

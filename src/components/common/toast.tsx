@@ -37,7 +37,7 @@ function Item({ info }: { info: ToastItem }) {
       info.onDismiss?.()
     }
   }, [info, setToastItems])
-  const timer = useRef<Timer>()
+  const timer = useRef<Timer | null>(null)
 
   useMount(() => {
     timer.current = new Timer(() => {
