@@ -21,7 +21,6 @@ export default defineSource(async () => {
 
   // Try today's archive first
   let url = getArchiveUrl(date)
-  console.log(`[WSJ] Fetching archive: ${url}`)
 
   try {
     let html = await myFetch(url, {
@@ -35,12 +34,10 @@ export default defineSource(async () => {
     let nextDataScript = $("#__NEXT_DATA__").html()
 
     if (!nextDataScript) {
-      console.log("[WSJ] No data found for today, checking yesterday...")
       // Fallback to yesterday
       const yesterday = new Date(date)
       yesterday.setDate(date.getDate() - 1)
       url = getArchiveUrl(yesterday)
-      console.log(`[WSJ] Fetching archive: ${url}`)
 
       html = await myFetch(url, {
         headers: {
