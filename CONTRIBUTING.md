@@ -1,196 +1,97 @@
-# Contributing to NewsAggr
+# Contributing to NewsAggr 🤝
 
-Thank you for considering contributing to NewsAggr! This document provides guidelines and instructions for contributing to the project.
+Yo! Want to help make **NewsAggr** even better? You're a legend! 🎸
 
-## Adding a New Source
+Whether you're fixing a bug 🐛, adding a cool new feature ✨, or just cleaning up some typos, we love to see it.
 
-NewsAggr is built to be easily extensible with new sources. Here's a step-by-step guide on how to add a new source:
+## Getting Started 🚀
 
-### 1. Create a Feature Branch
+First things first, make sure you have the basics:
 
-Always create a feature branch for your changes:
-
-```bash
-git checkout -b feature-name
-```
-
-For example, to add a Bilibili hot video source:
+*   **Node.js**: Version 20 or higher.
+*   **pnpm**: We use `pnpm` because it's fast and efficient.
 
 ```bash
-git checkout -b bilibili-hot-video
+# Install dependencies
+pnpm i
+
+# Fire up the dev server
+pnpm dev
 ```
 
-### 2. Register the Source in Configuration
+## Adding Data Sources (The Meat 🥩)
 
-Add your new source to the source configuration in `/shared/pre-sources.ts`:
+The most common way to contribute is adding new news sources. We've made it super easy.
+
+### 1. Register the Source 📝
+
+Go to `shared/pre-sources.ts`. This is the single source of truth for our config.
+
+Add your source to the `originSources` object:
 
 ```typescript
-({
-  bilibili: {
-    name: "Bilibili",
-    color: "blue",
-    home: "https://www.bilibili.com",
+export const originSources = {
+  // ... existing sources
+  cool_new_source: {
+    name: "Cool New Source",
+    home: "https://example.com",
+    column: "tech", // Options: "tech", "world", "science", "finance", "entrepreneurship"
   },
-})
-```
-
-For a completely new source, add a new top-level entry:
-
-```typescript
-({
-  newsource: {
-    name: "New Source",
-    color: "blue",
-    home: "https://www.example.com",
-    column: "tech", // Pick an appropriate column
-    type: "hottest", // Or "realtime" if it's a news feed
-  },
-})
-```
-
-### 3. Implement the Source Fetcher
-
-Create or modify a file in the `/server/sources/` directory. If your source is related to an existing one (like adding a new Bilibili sub-source), modify the existing file:
-
-```typescript
-// In /server/sources/bilibili.ts
-
-// Define interface for API response
-interface HotVideoRes {
-  code: number
-  message: string
-  ttl: number
-  data: {
-    list: {
-      aid: number
-      // ... other fields
-      bvid: string
-      title: string
-      pubdate: number
-      desc: string
-      pic: string
-      owner: {
-        mid: number
-        name: string
-        face: string
-      }
-      stat: {
-        view: number
-        like: number
-        reply: number
-        // ... other stats
-      }
-    }[]
-  }
 }
+```
 
-// Define source getter function
-const hotVideo = defineSource(async () => {
-  const url = "https://api.bilibili.com/x/web-interface/popular"
-  const res: HotVideoRes = await myFetch(url)
+### 2. Create the Fetcher 🕵️‍♂️
 
-  return res.data.list.map(video => ({
-    id: video.bvid,
-    title: video.title,
-    url: `https://www.bilibili.com/video/${video.bvid}`,
-    pubDate: video.pubdate * 1000,
-    extra: {
-      info: `${video.owner.name} · ${formatNumber(video.stat.view)} views · ${formatNumber(video.stat.like)} likes`,
-      hover: video.desc,
-      icon: proxyPicture(video.pic),
-    },
+Now, tell us how to get the data. Create a new file in `server/sources/<your_source_name>.ts`.
+
+You'll need to export a `defineSource` function. Here is a pattern to follow:
+
+```typescript
+import { type NewsItem } from "@shared/types"
+import { rss2json } from "../utils/rss2json"
+
+export default defineSource(async () => {
+  // 1. Fetch the data (RSS is easiest!)
+  const rssUrl = "https://example.com/feed.xml"
+  const data = await rss2json(rssUrl)
+
+  // 2. Transform into our NewsItem format
+  const news: NewsItem[] = data.items.map(item => ({
+    title: item.title,
+    url: item.link,
+    id: item.link,
+    pubDate: item.created, // or new Date(item.pubDate).getTime()
   }))
-})
 
-// Helper function for formatting numbers
-function formatNumber(num: number): string {
-  if (num >= 10000) {
-    return `${Math.floor(num / 10000)}w+`
-  }
-  return num.toString()
-}
-
-// Export the source
-export default defineSource({
-  "bilibili": hotSearch,
-  "bilibili-hot-search": hotSearch,
-  "bilibili-hot-video": hotVideo, // Add your new source here
+  // 3. Sort by date (newest first)
+  return news.sort((a, b) => b.pubDate - a.pubDate)
 })
 ```
 
-For completely new sources, create a new file in `/server/sources/` named after your source (e.g., `newsource.ts`).
+> **Pro Tip:** If you can't use RSS, you can use `myFetch` to scrape HTML or hit an API directly. Check `server/sources` for more complex examples!
 
-### 4. Regenerate Source Files
+### 3. Generate Config ⚙️
 
-After adding or modifying source files, run the following command to regenerate the necessary files:
-
-```bash
-npm run presource
-```
-
-This will update the `sources.json` file and any other necessary configuration.
-
-### 5. Test Your Changes
-
-Start the development server to test your changes:
+We use a script to bundle everything together. Run this magic command:
 
 ```bash
-npm run dev
+pnpm run presource
 ```
 
-Access the application in your browser and ensure that your new source is appearing and working correctly.
+This updates the internal configuration to include your new source.
 
-### 6. Commit Your Changes
+### 4. Test It Out 🧪
 
-Once everything is working, commit your changes:
+Run `pnpm dev` and check the UI. Your new source should be available in the settings or main feed!
 
-```bash
-git add .
-git commit -m "Add new source: source-name"
-```
+## Pull Requests 📥
 
-### 7. Create a Pull Request
+Ready to ship?
 
-Push your changes to your fork and create a pull request against the main repository:
+1.  **Fork** the repo.
+2.  **Branch** off `main` (`git checkout -b my-cool-feature`).
+3.  **Commit** your changes.
+4.  **Push** to your fork.
+5.  **Open a PR**!
 
-```bash
-git push origin feature-name
-```
-
-## Source Structure
-
-### NewsItem Structure
-
-Each source should return an array of objects that conform to the `NewsItem` interface:
-
-```typescript
-interface NewsItem {
-  id: string | number // Unique identifier for the item
-  title: string // Title of the news item
-  url: string // URL to the full content
-  mobileUrl?: string // Optional mobile-specific URL
-  pubDate?: number | string // Publication date
-  extra?: {
-    hover?: string // Text to display on hover
-    date?: number | string // Formatted date
-    info?: false | string // Additional information
-    diff?: number // Time difference
-    icon?:
-      | false
-      | string
-      | {
-        // Icon for the item
-        url: string
-        scale: number
-      }
-  }
-}
-```
-
-## Code Style
-
-Please follow the existing code style in the project. The project uses TypeScript and follows modern ES6+ conventions.
-
-## License
-
-By contributing to this project, you agree that your contributions will be licensed under the project's license.
+We'll review it ASAP. Happy coding! 💻

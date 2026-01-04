@@ -6,7 +6,7 @@
 
 ## About 🧠
 
-I built **NewsAggr** simply because I wanted a unified place to check the news I care about every day.
+I built **NewsAggr** out of a simple personal need: a unified, distraction-free hub to keep up with the daily news.
 
 This project is heavily based on [ourongxing/newsnow](https://github.com/ourongxing/newsnow). I used it as a starting point and modified the styles to fit my personal taste and added the specific data sources I was interested in.
 
