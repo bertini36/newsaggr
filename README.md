@@ -1,38 +1,14 @@
 ![](/public/og-image.png)
 
-English
-
-> [!NOTE]
-> This is a demo version currently supporting Chinese only. A full-featured version with better customization and English content support will be released later.
-
-**_Elegant reading of real-time and hottest news_**
+**_NewsAggr - Elegant News Aggregator_**
 
 ## Features
 
 - Clean and elegant UI design for optimal reading experience
 - Real-time updates on trending news
-- GitHub OAuth login with data synchronization
+- Google and GitHub OAuth login with data synchronization
 - 30-minute default cache duration (logged-in users can force refresh)
 - Adaptive scraping interval (minimum 2 minutes) based on source update frequency to optimize resource usage and prevent IP bans
-- support MCP server
-
-```json
-{
-  "mcpServers": {
-    "newsaggr": {
-      "command": "npx",
-      "args": [
-        "-y",
-        "newsaggr-mcp-server"
-      ],
-      "env": {
-        "BASE_URL": "https://newsaggr.online"
-      }
-    }
-  }
-}
-```
-You can change the `BASE_URL` to your own domain.
 
 ## Deployment
 
