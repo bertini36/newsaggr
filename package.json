@@ -108,7 +108,6 @@
       "@parcel/watcher",
       "@swc/core",
       "esbuild",
-      "better-sqlite3",
       "sharp",
       "simple-git-hooks",
       "unrs-resolver",
