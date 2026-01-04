@@ -88,7 +88,7 @@ Run `pnpm dev` and check the UI. Your new source should be available in the sett
 
 Ready to ship?
 
-1.  **Fork** the repo.
+1.  **Clone** the repo.
 2.  **Branch** off `main` (`git checkout -b my-cool-feature`).
 3.  **Commit** your changes.
 4.  **Push** to your fork.
