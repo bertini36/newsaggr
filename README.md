@@ -1,6 +1,6 @@
 ![](/public/og-image.png)
 
-English | [简体中文](README.zh-CN.md) | [日本語](README.ja-JP.md)
+English
 
 > [!NOTE]
 > This is a demo version currently supporting Chinese only. A full-featured version with better customization and English content support will be released later.

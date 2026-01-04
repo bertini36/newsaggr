@@ -53,7 +53,7 @@ export default defineEventHandler(async (event) => {
     .setProtectedHeader({ alg: "HS256" })
     .sign(new TextEncoder().encode(process.env.JWT_SECRET!))
 
-  // nitro 有 bug，在 cloudflare 里没法 set cookie
+  // nitro has a bug, cannot set cookie in cloudflare
   // seconds
   // const maxAge = 60 * 24 * 60 * 60
   // setCookie(event, "user_jwt", jwtToken, { maxAge })

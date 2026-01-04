@@ -40,7 +40,7 @@ export interface OriginSource extends Partial<Omit<Source, "name" | "redirect">>
   name: string
   sub?: Record<string, {
     /**
-     * Subtitle 小标题
+     * Subtitle
      */
     title: string
     // desc?: string
@@ -55,12 +55,12 @@ export interface OriginSource extends Partial<Omit<Source, "name" | "redirect">>
 export interface Source {
   name: string
   /**
-   * 刷新的间隔时间
+   * Refresh interval time
    */
   interval: number
 
   /**
-   * Subtitle 小标题
+   * Subtitle
    */
   title?: string
   desc?: string
