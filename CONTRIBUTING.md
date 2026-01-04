@@ -47,7 +47,7 @@ Now, tell us how to get the data. Create a new file in `server/sources/<your_sou
 You'll need to export a `defineSource` function. Here is a pattern to follow:
 
 ```typescript
-import { type NewsItem } from "@shared/types"
+import type { NewsItem } from "@shared/types"
 import { rss2json } from "../utils/rss2json"
 
 export default defineSource(async () => {
