@@ -33,6 +33,7 @@ export default defineEventHandler(async (event) => {
     avatar_url: string
     email: string
     notification_email: string
+    login: string
   } = await myFetch(`https://api.github.com/user`, {
     headers: {
       "Accept": "application/vnd.github+json",
@@ -42,7 +43,7 @@ export default defineEventHandler(async (event) => {
   })
 
   const userID = String(userInfo.id)
-  await userTable.addUser(userID, userInfo.notification_email || userInfo.email, "github")
+  await userTable.addUser(userID, userInfo.notification_email || userInfo.email, "github", userInfo.login)
 
   const jwtToken = await new SignJWT({
     id: userID,

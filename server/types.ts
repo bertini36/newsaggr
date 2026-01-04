@@ -45,6 +45,7 @@ export interface RSSHubItem {
 export interface UserInfo {
   id: string
   email: string
+  username?: string
   type: "github" | "google"
   data: string
   created: number

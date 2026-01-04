@@ -12,6 +12,7 @@ export class UserTable {
       CREATE TABLE IF NOT EXISTS user (
         id TEXT PRIMARY KEY,
         email TEXT,
+        username TEXT,
         data TEXT,
         type TEXT,
         created INTEGER,
@@ -19,28 +20,31 @@ export class UserTable {
       );
     `).run()
     await this.db.prepare(`
+      ALTER TABLE user ADD COLUMN username TEXT;
+    `).run().catch(() => { })
+    await this.db.prepare(`
       CREATE INDEX IF NOT EXISTS idx_user_id ON user(id);
     `).run()
     logger.success(`init user table`)
   }
 
-  async addUser(id: string, email: string, type: "github" | "google") {
+  async addUser(id: string, email: string, type: "github" | "google", username?: string) {
     const u = await this.getUser(id)
     const now = Date.now()
     if (!u) {
-      await this.db.prepare(`INSERT INTO user (id, email, data, type, created, updated) VALUES (?, ?, ?, ?, ?, ?)`)
-        .run(id, email, "", type, now, now)
+      await this.db.prepare(`INSERT INTO user (id, email, username, data, type, created, updated) VALUES (?, ?, ?, ?, ?, ?, ?)`)
+        .run(id, email, username || "", "", type, now, now)
       logger.success(`add user ${id}`)
-    } else if (u.email !== email || u.type !== type) {
-      await this.db.prepare(`UPDATE user SET email = ?, updated = ? WHERE id = ?`).run(email, now, id)
-      logger.success(`update user ${id} email`)
+    } else if (u.email !== email || u.type !== type || u.username !== username) {
+      await this.db.prepare(`UPDATE user SET email = ?, username = ?, updated = ? WHERE id = ?`).run(email, username || "", now, id)
+      logger.success(`update user ${id} info`)
     } else {
       logger.info(`user ${id} already exists`)
     }
   }
 
   async getUser(id: string) {
-    return (await this.db.prepare(`SELECT id, email, data, created, updated FROM user WHERE id = ?`).get(id)) as UserInfo
+    return (await this.db.prepare(`SELECT id, email, username, data, created, updated FROM user WHERE id = ?`).get(id)) as UserInfo
   }
 
   async setData(key: string, value: string, updatedTime = Date.now()) {

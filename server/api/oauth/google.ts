@@ -50,7 +50,7 @@ export default defineEventHandler(async (event) => {
     logger.error("No user ID found in Google response", userInfo)
     throw new Error("Failed to get user ID from Google")
   }
-  await userTable.addUser(userID, userInfo.email, "google")
+  await userTable.addUser(userID, userInfo.email, "google", "")
 
   const jwtToken = await new SignJWT({
     id: userID,
