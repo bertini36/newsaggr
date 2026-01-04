@@ -126,7 +126,14 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
               </a>
               {sources[id]?.title && <span className={$("text-sm", "bg-base op-80 bg-op-50! px-1 rounded")}>{sources[id].title}</span>}
             </span>
-            <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
+            <span className="flex items-center gap-2">
+              <span className="text-xs op-70"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
+              {sources[id].column && (
+                <span className="text-[10px] uppercase tracking-wider bg-neutral-100 dark:bg-white/10 px-1.5 py-0.5 rounded text-neutral-500 dark:text-neutral-400 font-medium">
+                  {metadata[sources[id].column!].name}
+                </span>
+              )}
+            </span>
           </span>
         </div>
         <div className={$("flex gap-2 text-lg text-neutral-900 dark:text-neutral-400")}>

@@ -13,7 +13,7 @@ export const columns = {
     zh: "Finance",
   },
   entrepreneurship: {
-    zh: "Enterpr.",
+    zh: "Entrepreneurship",
   },
   world: {
     zh: "World",
