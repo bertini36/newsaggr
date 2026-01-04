@@ -10,6 +10,10 @@ I built **NewsAggr** out of a simple personal need: a unified, distraction-free 
 
 This project is heavily based on [ourongxing/newsnow](https://github.com/ourongxing/newsnow). I used it as a starting point and modified the styles to fit my personal taste and added the specific data sources I was interested in.
 
+## Live Version 🌐
+
+Want to see it in action? You can find the production version here: [newsaggr.online](https://newsaggr.online/)
+
 ## Features ✨
 
 *   **Clean & Elegant UI** 🎨 - Designed for focus and readability.
