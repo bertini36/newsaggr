@@ -1,6 +1,7 @@
 const userAtom = atomWithStorage<{
   name?: string
   avatar?: string
+  type?: "github" | "google"
 }>("user", {})
 
 const jwtAtom = atomWithStorage("jwt", "")

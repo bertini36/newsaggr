@@ -34,6 +34,7 @@ export default defineEventHandler(async (event) => {
 
   // Fetch user information from Google
   const userInfo: {
+    id?: string
     sub: string
     email: string
     name: string
@@ -44,7 +45,11 @@ export default defineEventHandler(async (event) => {
     },
   })
 
-  const userID = userInfo.sub
+  const userID = userInfo.id || userInfo.sub
+  if (!userID) {
+    logger.error("No user ID found in Google response", userInfo)
+    throw new Error("Failed to get user ID from Google")
+  }
   await userTable.addUser(userID, userInfo.email, "google")
 
   const jwtToken = await new SignJWT({
@@ -61,6 +66,7 @@ export default defineEventHandler(async (event) => {
     user: JSON.stringify({
       avatar: userInfo.picture,
       name: userInfo.name,
+      type: "google",
     }),
   })
   return sendRedirect(event, `/?${params.toString()}`)

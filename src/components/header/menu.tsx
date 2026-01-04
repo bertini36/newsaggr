@@ -28,7 +28,7 @@ export function Menu() {
                   className="h-6 w-6 rounded-full bg-cover"
                   style={
                     {
-                      backgroundImage: `url(${userInfo.avatar}&s=24)`,
+                      backgroundImage: `url(${userInfo.type === "github" ? `${userInfo.avatar}&s=24` : userInfo.avatar})`,
                     }
                   }
                 >

@@ -65,6 +65,7 @@ export default defineEventHandler(async (event) => {
     user: JSON.stringify({
       avatar: userInfo.avatar_url,
       name: userInfo.name,
+      type: "github",
     }),
   })
   return sendRedirect(event, `/?${params.toString()}`)
