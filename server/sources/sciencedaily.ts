@@ -2,8 +2,8 @@ import * as cheerio from "cheerio"
 import type { NewsItem } from "@shared/types"
 
 // Parse date from ScienceDaily URL: /releases/YYYY/MM/DDHHMMSS.htm
-function parseDateFromUrl(url: string): string | undefined {
-  const match = url.match(/\/releases\/(\d{4})\/(\d{2})\/(\d{2})\d+\.htm/)
+export function parseDateFromUrl(url: string): string | undefined {
+  const match = url.match(/\/releases\/(\d{4})\/(\d{2})\/\d{4}(\d{2})\d+\.htm/)
   if (match) {
     return `${match[1]}-${match[2]}-${match[3]}`
   }
