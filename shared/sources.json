@@ -94,5 +94,11 @@
     "column": "spain",
     "home": "https://www.elmundo.es/espana.html",
     "interval": 600000
+  },
+  "elpais": {
+    "name": "El País",
+    "column": "spain",
+    "home": "https://elpais.com/espana/",
+    "interval": 600000
   }
 }
