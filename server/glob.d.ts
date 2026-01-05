@@ -3,6 +3,7 @@
 declare module 'glob:./sources/{*.ts,**/index.ts}' {
   export const bbc: typeof import('./sources/bbc')
   export const cnn: typeof import('./sources/cnn')
+  export const eldiario: typeof import('./sources/eldiario')
   export const elmundo: typeof import('./sources/elmundo')
   export const elpais: typeof import('./sources/elpais')
   export const engadget: typeof import('./sources/engadget')

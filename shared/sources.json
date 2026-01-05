@@ -100,5 +100,11 @@
     "column": "spain",
     "home": "https://elpais.com/espana/",
     "interval": 600000
+  },
+  "eldiario": {
+    "name": "El Diario",
+    "column": "spain",
+    "home": "https://www.eldiario.es/politica/",
+    "interval": 600000
   }
 }
