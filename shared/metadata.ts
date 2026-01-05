@@ -18,6 +18,9 @@ export const columns = {
   world: {
     zh: "World",
   },
+  spain: {
+    zh: "Spain",
+  },
   focus: {
     zh: "Focus",
   },

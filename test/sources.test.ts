@@ -17,6 +17,7 @@ import wiredSource from "../server/sources/wired"
 import wsjSource from "../server/sources/wsj"
 import yahooFinanceSource from "../server/sources/yahoo_finance"
 import ycBlogSource from "../server/sources/yc_blog"
+import elmundoSource from "../server/sources/elmundo"
 
 /**
  * Validates that a NewsItem has all required fields
@@ -65,6 +66,7 @@ describe("source Validation Tests", () => {
   testSource("WSJ", wsjSource as () => Promise<NewsItem[]>)
   testSource("Yahoo Finance", yahooFinanceSource as () => Promise<NewsItem[]>)
   testSource("YC Blog", ycBlogSource as () => Promise<NewsItem[]>)
+  testSource("El Mundo", elmundoSource as () => Promise<NewsItem[]>)
 
   // GitHub has sub-sources, test the trending endpoint
   it("gitHub - should return valid news items", async () => {

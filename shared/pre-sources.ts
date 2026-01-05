@@ -88,6 +88,11 @@ export const originSources = {
     home: "https://www.ycombinator.com/blog",
     column: "entrepreneurship",
   },
+  elmundo: {
+    name: "El Mundo",
+    home: "https://www.elmundo.es/espana.html",
+    column: "spain",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

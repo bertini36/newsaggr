@@ -88,5 +88,11 @@
     "column": "entrepreneurship",
     "home": "https://www.ycombinator.com/blog",
     "interval": 600000
+  },
+  "elmundo": {
+    "name": "El Mundo",
+    "column": "spain",
+    "home": "https://www.elmundo.es/espana.html",
+    "interval": 600000
   }
 }
