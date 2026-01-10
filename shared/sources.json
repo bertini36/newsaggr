@@ -112,5 +112,11 @@
     "column": "ai",
     "home": "https://www.artificialintelligence-news.com/",
     "interval": 600000
+  },
+  "arxiv_ai": {
+    "name": "Arxiv AI",
+    "column": "ai",
+    "home": "https://arxiv.org/list/cs.AI/recent",
+    "interval": 600000
   }
 }
