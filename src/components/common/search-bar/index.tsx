@@ -1,7 +1,6 @@
 import { Command } from "cmdk"
-import { useMount } from "react-use"
 import type { SourceID } from "@shared/types"
-import { useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import pinyin from "@shared/pinyin.json"
 import { OverlayScrollbar } from "../overlay-scrollbar"
 import { CardWrapper } from "~/components/column/card"
@@ -48,10 +47,9 @@ export function SearchBar() {
 
   const [value, setValue] = useState<SourceID>("github")
 
-  useMount(() => {
-    inputRef?.current?.focus()
+  useEffect(() => {
     const keydown = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+      if (e.key.toLowerCase() === "k" && (e.metaKey || e.ctrlKey)) {
         e.preventDefault()
         toggle()
       }
@@ -60,7 +58,7 @@ export function SearchBar() {
     return () => {
       document.removeEventListener("keydown", keydown)
     }
-  })
+  }, [toggle])
 
   return (
     <Command.Dialog
