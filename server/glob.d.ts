@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 declare module 'glob:./sources/{*.ts,**/index.ts}' {
-  export const ainews: typeof import('./sources/ainews')
   export const ainews_smol: typeof import('./sources/ainews_smol')
   export const arxiv_ai: typeof import('./sources/arxiv_ai')
   export const bbc: typeof import('./sources/bbc')

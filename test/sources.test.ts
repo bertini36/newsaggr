@@ -20,7 +20,6 @@ import ycBlogSource from "../server/sources/yc_blog"
 import elmundoSource from "../server/sources/elmundo"
 import elpaisSource from "../server/sources/elpais"
 import eldiarioSource from "../server/sources/eldiario"
-import ainewsSource from "../server/sources/ainews"
 import arxivAiSource from "../server/sources/arxiv_ai"
 import ainewsSmolSource from "../server/sources/ainews_smol"
 
@@ -74,7 +73,6 @@ describe("source Validation Tests", () => {
   testSource("El Mundo", elmundoSource as () => Promise<NewsItem[]>)
   testSource("El País", elpaisSource as () => Promise<NewsItem[]>)
   testSource("El Diario", eldiarioSource as () => Promise<NewsItem[]>)
-  testSource("AINews", ainewsSource as () => Promise<NewsItem[]>)
   testSource("Arxiv AI", arxivAiSource as () => Promise<NewsItem[]>)
   testSource("AINews by smol.ai", ainewsSmolSource as () => Promise<NewsItem[]>)
 
