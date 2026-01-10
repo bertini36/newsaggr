@@ -113,6 +113,11 @@ export const originSources = {
     home: "https://arxiv.org/list/cs.AI/recent",
     column: "ai",
   },
+  ainews_smol: {
+    name: "AINews by smol.ai",
+    home: "https://news.smol.ai/",
+    column: "ai",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

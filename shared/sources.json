@@ -118,5 +118,11 @@
     "column": "ai",
     "home": "https://arxiv.org/list/cs.AI/recent",
     "interval": 600000
+  },
+  "ainews_smol": {
+    "name": "AINews by smol.ai",
+    "column": "ai",
+    "home": "https://news.smol.ai/",
+    "interval": 600000
   }
 }
