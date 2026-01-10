@@ -42,7 +42,14 @@ export default defineSource(async () => {
     const url = linkElement.attr("href")
 
     const dateElement = $(element).find(".ue-c-cover-content__published-date")
-    const pubDate = dateElement.attr("data-publish")
+    let pubDate = dateElement.attr("data-publish")
+
+    if (!pubDate && url) {
+      const dateMatch = url.match(/\/(\d{4})\/(\d{2})\/(\d{2})\//)
+      if (dateMatch) {
+        pubDate = `${dateMatch[1]}-${dateMatch[2]}-${dateMatch[3]}`
+      }
+    }
 
     if (title && url) {
       if (!seenUrls.has(url)) {

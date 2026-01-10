@@ -54,3 +54,5 @@ export function isiOS() {
   ].includes(navigator.platform)
   || (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }
+
+export const DARK_MODE_INVERT_LOGOS = ["engadget", "nytimes"]

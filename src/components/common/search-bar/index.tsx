@@ -5,6 +5,7 @@ import { useMemo, useRef, useState } from "react"
 import pinyin from "@shared/pinyin.json"
 import { OverlayScrollbar } from "../overlay-scrollbar"
 import { CardWrapper } from "~/components/column/card"
+import { DARK_MODE_INVERT_LOGOS } from "~/utils"
 
 import "./cmdk.css"
 
@@ -117,7 +118,7 @@ function SourceItem({ item, onHover }: {
     >
       <span className="flex gap-2 items-center">
         <span
-          className={$("w-4 h-4 bg-cover")}
+          className={$("w-4 h-4 bg-cover", DARK_MODE_INVERT_LOGOS.includes(item.id.split("-")[0]) && "dark:invert")}
           style={{
             backgroundImage: `url(/icons/${item.id.split("-")[0]}.png)`,
           }}

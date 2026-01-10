@@ -16,6 +16,7 @@ import type { ItemsProps } from "./card"
 import { CardWrapper } from "./card"
 import { useSearchBar } from "~/hooks/useSearch"
 import { currentSourcesAtom } from "~/atoms"
+import { DARK_MODE_INVERT_LOGOS } from "~/utils"
 
 const AnimationDuration = 200
 const WIDTH = 350
@@ -168,7 +169,7 @@ function CardOverlay({ id }: { id: SourceID }) {
       <div className={$("flex justify-between mx-2 items-center")}>
         <div className="flex gap-2 items-center">
           <div
-            className={$("w-8 h-8 rounded-full bg-cover")}
+            className={$("w-8 h-8 rounded-full bg-cover", DARK_MODE_INVERT_LOGOS.includes(id.split("-")[0]) && "dark:invert")}
             style={{
               backgroundImage: `url(/icons/${id.split("-")[0]}.png)`,
             }}

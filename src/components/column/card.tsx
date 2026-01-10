@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
-import { safeParseString } from "~/utils"
+import { DARK_MODE_INVERT_LOGOS, safeParseString } from "~/utils"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: SourceID
@@ -106,7 +106,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
       <div className={$("flex justify-between mx-2 mt-0 mb-0 items-center pb-2")}>
         <div className="flex gap-2 items-center">
           <a
-            className={$("w-8 h-8 rounded-full bg-cover cursor-pointer")}
+            className={$("w-8 h-8 rounded-full bg-cover cursor-pointer", DARK_MODE_INVERT_LOGOS.includes(id.split("-")[0]) && "dark:invert")}
             target="_blank"
             href={sources[id].home}
             title={sources[id].desc}
