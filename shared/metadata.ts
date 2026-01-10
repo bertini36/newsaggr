@@ -24,6 +24,9 @@ export const columns = {
   focus: {
     zh: "Focus",
   },
+  ai: {
+    zh: "AI",
+  },
 } as const
 
 export const fixedColumnIds = ["focus"] as const satisfies Partial<ColumnID>[]

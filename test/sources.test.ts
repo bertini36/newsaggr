@@ -20,6 +20,7 @@ import ycBlogSource from "../server/sources/yc_blog"
 import elmundoSource from "../server/sources/elmundo"
 import elpaisSource from "../server/sources/elpais"
 import eldiarioSource from "../server/sources/eldiario"
+import ainewsSource from "../server/sources/ainews"
 
 /**
  * Validates that a NewsItem has all required fields
@@ -71,6 +72,7 @@ describe("source Validation Tests", () => {
   testSource("El Mundo", elmundoSource as () => Promise<NewsItem[]>)
   testSource("El País", elpaisSource as () => Promise<NewsItem[]>)
   testSource("El Diario", eldiarioSource as () => Promise<NewsItem[]>)
+  testSource("AINews", ainewsSource as () => Promise<NewsItem[]>)
 
   // GitHub has sub-sources, test the trending endpoint
   it("gitHub - should return valid news items", async () => {

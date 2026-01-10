@@ -106,5 +106,11 @@
     "column": "spain",
     "home": "https://www.eldiario.es/politica/",
     "interval": 600000
+  },
+  "ainews": {
+    "name": "AINews",
+    "column": "ai",
+    "home": "https://www.artificialintelligence-news.com/",
+    "interval": 600000
   }
 }

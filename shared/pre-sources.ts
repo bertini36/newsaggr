@@ -103,6 +103,11 @@ export const originSources = {
     home: "https://www.eldiario.es/politica/",
     column: "spain",
   },
+  ainews: {
+    name: "AINews",
+    home: "https://www.artificialintelligence-news.com/",
+    column: "ai",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {
