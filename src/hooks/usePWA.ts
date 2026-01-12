@@ -1,42 +1,28 @@
 import { useRegisterSW } from "virtual:pwa-register/react"
-import { useMount } from "react-use"
-import { useToast } from "./useToast"
+import { useEffect } from "react"
 
 export function usePWA() {
-  const toaster = useToast()
-  const { updateServiceWorker, needRefresh: [needRefresh] } = useRegisterSW()
+  useRegisterSW()
 
-  useMount(async () => {
-    const update = () => {
-      updateServiceWorker().then(() => localStorage.setItem("updated", "1"))
-    }
-    await delay(1000)
-    if (localStorage.getItem("updated")) {
-      localStorage.removeItem("updated")
-      toaster("Update successful, try it now!", {
-        action: {
-          label: "View Update",
-          onClick: () => {
-            window.open(`${Homepage}/releases/tag/v${Version}`)
-          },
-        },
-      })
-    } else if (needRefresh) {
-      if (!navigator) return
+  useEffect(() => {
+    let refreshing = false
 
-      if ("connection" in navigator && !navigator.onLine) return
-
-      const resp = await myFetch("/latest")
-
-      if (resp.v && resp.v !== Version) {
-        toaster("Update available, auto‑updating in 5 seconds", {
-          action: {
-            label: "Update Now",
-            onClick: update,
-          },
-          onDismiss: update,
-        })
+    // Listen for new service worker taking control
+    const onControllerChange = () => {
+      if (!refreshing) {
+        refreshing = true
+        window.location.reload()
       }
     }
-  })
+
+    if (navigator.serviceWorker) {
+      navigator.serviceWorker.addEventListener("controllerchange", onControllerChange)
+    }
+
+    return () => {
+      if (navigator.serviceWorker) {
+        navigator.serviceWorker.removeEventListener("controllerchange", onControllerChange)
+      }
+    }
+  }, [])
 }

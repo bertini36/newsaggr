@@ -57,8 +57,12 @@ const pwaOption: Partial<VitePWAOptions> = {
       },
     ],
   },
+  registerType: "autoUpdate",
   workbox: {
+    clientsClaim: true,
+    skipWaiting: true,
     navigateFallbackDenylist: [/^\/api/],
+    cleanupOutdatedCaches: true,
   },
   devOptions: {
     enabled: process.env.SW_DEV === "true",
