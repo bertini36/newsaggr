@@ -118,5 +118,11 @@
     "column": "ai",
     "home": "https://news.smol.ai/",
     "interval": 600000
+  },
+  "techcrunch_ai": {
+    "name": "TechCrunch AI",
+    "column": "ai",
+    "home": "https://techcrunch.com/category/artificial-intelligence/",
+    "interval": 600000
   }
 }

@@ -113,6 +113,11 @@ export const originSources = {
     home: "https://news.smol.ai/",
     column: "ai",
   },
+  techcrunch_ai: {
+    name: "TechCrunch AI",
+    home: "https://techcrunch.com/category/artificial-intelligence/",
+    column: "ai",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {
