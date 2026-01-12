@@ -130,5 +130,11 @@
     "column": "tech",
     "home": "https://tldr.tech/",
     "interval": 600000
+  },
+  "ultimahora": {
+    "name": "Ultima Hora",
+    "column": "mallorca",
+    "home": "https://www.ultimahora.es/noticias.html",
+    "interval": 600000
   }
 }

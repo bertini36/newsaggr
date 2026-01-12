@@ -24,6 +24,7 @@ import arxivAiSource from "../server/sources/arxiv_ai"
 import ainewsSmolSource from "../server/sources/ainews_smol"
 import techcrunchAiSource from "../server/sources/techcrunch_ai"
 import tldrSource from "../server/sources/tldr"
+import ultimahoraSource from "../server/sources/ultimahora"
 
 /**
  * Validates that a NewsItem has all required fields
@@ -79,6 +80,7 @@ describe("source Validation Tests", () => {
   testSource("AINews by smol.ai", ainewsSmolSource as () => Promise<NewsItem[]>)
   testSource("TechCrunch AI", techcrunchAiSource as () => Promise<NewsItem[]>)
   testSource("TLDR", tldrSource as () => Promise<NewsItem[]>)
+  testSource("Ultima Hora", ultimahoraSource as () => Promise<NewsItem[]>)
 
   // GitHub has sub-sources, test the trending endpoint
   it("gitHub - should return valid news items", async () => {

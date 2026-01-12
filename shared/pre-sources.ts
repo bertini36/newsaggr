@@ -123,6 +123,11 @@ export const originSources = {
     home: "https://tldr.tech/",
     column: "tech",
   },
+  ultimahora: {
+    name: "Ultima Hora",
+    home: "https://www.ultimahora.es/noticias.html",
+    column: "mallorca",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {
