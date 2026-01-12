@@ -118,6 +118,11 @@ export const originSources = {
     home: "https://techcrunch.com/category/artificial-intelligence/",
     column: "ai",
   },
+  tldr: {
+    name: "TLDR",
+    home: "https://tldr.tech/",
+    column: "tech",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

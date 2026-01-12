@@ -124,5 +124,11 @@
     "column": "ai",
     "home": "https://techcrunch.com/category/artificial-intelligence/",
     "interval": 600000
+  },
+  "tldr": {
+    "name": "TLDR",
+    "column": "tech",
+    "home": "https://tldr.tech/",
+    "interval": 600000
   }
 }
