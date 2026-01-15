@@ -136,5 +136,11 @@
     "column": "mallorca",
     "home": "https://www.ultimahora.es/noticias.html",
     "interval": 600000
+  },
+  "diariodemallorca": {
+    "name": "Diario Mallorca",
+    "column": "mallorca",
+    "home": "https://www.diariodemallorca.es/local/",
+    "interval": 600000
   }
 }

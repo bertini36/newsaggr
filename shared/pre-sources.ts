@@ -128,6 +128,11 @@ export const originSources = {
     home: "https://www.ultimahora.es/noticias.html",
     column: "mallorca",
   },
+  diariodemallorca: {
+    name: "Diario Mallorca",
+    home: "https://www.diariodemallorca.es/local/",
+    column: "mallorca",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

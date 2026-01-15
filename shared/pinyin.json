@@ -18,8 +18,9 @@
   "elpais": "El País",
   "eldiario": "El Diario",
   "arxiv_ai": "Arxiv AI",
-  "ainews_smol": "AINews by smol.ai",
-  "techcrunch_ai": "TechCrunch AI",
+  "ainews_smol": "smol.ai",
+  "techcrunch_ai": "TechCrunch",
   "tldr": "TLDR",
-  "ultimahora": "Ultima Hora"
+  "ultimahora": "Ultima Hora",
+  "diariodemallorca": "Diario Mallorca"
 }
