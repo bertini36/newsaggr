@@ -76,13 +76,73 @@ export default defineSource(async () => {
     }
   })
 
+  // Return unique items
+  const uniqueNews = news.filter((n, i, self) =>
+    i === self.findIndex(t => t.url === n.url),
+  )
+
+  // For items without date, fetch the article page to find it
+  // Limit concurrency to avoid overwhelming the server
+  const itemsWithoutDate = uniqueNews.filter(n => !n.pubDate)
+  if (itemsWithoutDate.length > 0) {
+    const fetchDate = async (item: NewsItem) => {
+      try {
+        const articleHtml: any = await myFetch(item.url)
+        const $art = cheerio.load(articleHtml)
+
+        // Try JSON-LD first
+        let foundDate: string | undefined
+        $art("script[type='application/ld+json']").each((_, el) => {
+          if (foundDate) return
+          try {
+            const ld = JSON.parse($art(el).text())
+            // Check for datePublished in mainEntity or top level
+            if (ld.datePublished) {
+              foundDate = ld.datePublished
+            } else if (ld.mainEntity && ld.mainEntity.datePublished) {
+              foundDate = ld.mainEntity.datePublished
+            }
+          } catch {
+            // ignore parse errors
+          }
+        })
+
+        // Fallback to meta tag
+        if (!foundDate) {
+          foundDate = $art("meta[itemprop='datePublished']").attr("content")
+        }
+
+        // Fallback to time tag
+        if (!foundDate) {
+          foundDate = $art("time").attr("datetime")
+        }
+
+        if (foundDate) {
+          const parsed = new Date(foundDate)
+          if (!Number.isNaN(parsed.getTime())) {
+            item.pubDate = parsed.toISOString()
+          }
+        }
+      } catch (e) {
+        console.error(`Failed to fetch date for ${item.url}`, e)
+      }
+    }
+
+    // Process in batches of 5 to be nice
+    const batchSize = 5
+    for (let i = 0; i < itemsWithoutDate.length; i += batchSize) {
+      const batch = itemsWithoutDate.slice(i, i + batchSize)
+      await Promise.all(batch.map(fetchDate))
+    }
+  }
+
   // Sort by pubDate (newest first)
-  news.sort((a, b) => {
+  uniqueNews.sort((a, b) => {
     if (!a.pubDate && !b.pubDate) return 0
     if (!a.pubDate) return 1
     if (!b.pubDate) return -1
     return new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
   })
 
-  return news
+  return uniqueNews
 })
