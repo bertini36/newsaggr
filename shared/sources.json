@@ -114,13 +114,13 @@
     "interval": 600000
   },
   "ainews_smol": {
-    "name": "AINews by smol.ai",
+    "name": "smol.ai",
     "column": "ai",
     "home": "https://news.smol.ai/",
     "interval": 600000
   },
   "techcrunch_ai": {
-    "name": "TechCrunch AI",
+    "name": "TechCrunch",
     "column": "ai",
     "home": "https://techcrunch.com/category/artificial-intelligence/",
     "interval": 600000

@@ -77,8 +77,8 @@ describe("source Validation Tests", () => {
   testSource("El País", elpaisSource as () => Promise<NewsItem[]>)
   testSource("El Diario", eldiarioSource as () => Promise<NewsItem[]>)
   testSource("Arxiv AI", arxivAiSource as () => Promise<NewsItem[]>)
-  testSource("AINews by smol.ai", ainewsSmolSource as () => Promise<NewsItem[]>)
-  testSource("TechCrunch AI", techcrunchAiSource as () => Promise<NewsItem[]>)
+  testSource("smol.ai", ainewsSmolSource as () => Promise<NewsItem[]>)
+  testSource("TechCrunch", techcrunchAiSource as () => Promise<NewsItem[]>)
   testSource("TLDR", tldrSource as () => Promise<NewsItem[]>)
   testSource("Ultima Hora", ultimahoraSource as () => Promise<NewsItem[]>)
 

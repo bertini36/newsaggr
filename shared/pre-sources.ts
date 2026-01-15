@@ -109,12 +109,12 @@ export const originSources = {
     column: "ai",
   },
   ainews_smol: {
-    name: "AINews by smol.ai",
+    name: "smol.ai",
     home: "https://news.smol.ai/",
     column: "ai",
   },
   techcrunch_ai: {
-    name: "TechCrunch AI",
+    name: "TechCrunch",
     home: "https://techcrunch.com/category/artificial-intelligence/",
     column: "ai",
   },
