@@ -34,6 +34,17 @@ export default defineSource(async () => {
         }
       }
 
+      // Fallback: extract date from URL if not found in HTML (common for featured items)
+      if (!pubDate && fullUrl) {
+        // URL pattern: .../2026/01/15/...
+        const urlMatch = fullUrl.match(/\/(\d{4})\/(\d{2})\/(\d{2})\//)
+        if (urlMatch) {
+          const [, year, month, day] = urlMatch
+          const date = new Date(Number.parseInt(year), Number.parseInt(month) - 1, Number.parseInt(day))
+          pubDate = date.toISOString()
+        }
+      }
+
       news.push({
         id: fullUrl,
         title,
