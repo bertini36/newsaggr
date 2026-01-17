@@ -165,7 +165,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
         ])}
       >
         <div className={$("transition-opacity-500", isFetching && "op-20")}>
-          {!!data?.items?.length && <NewsListTimeLine items={data.items} />}
+          {!!data?.items?.length && <NewsListTimeLine items={data.items} sourceId={id} />}
         </div>
       </div>
     </>
@@ -203,8 +203,10 @@ function NewsUpdatedTime({ date }: { date: string | number }) {
   return <>{relativeTime}</>
 }
 
-function NewsListTimeLine({ items }: { items: NewsItem[] }) {
+function NewsListTimeLine({ items, sourceId }: { items: NewsItem[], sourceId: SourceID }) {
   const { width } = useWindowSize()
+  const { isBookmarked, toggleBookmark } = useBookmarks()
+  const { loggedIn } = useLogin()
 
   // Deduplicate items by title, keeping only the first occurrence
   const uniqueItems = items?.filter((item, index, array) => {
@@ -224,18 +226,33 @@ function NewsListTimeLine({ items }: { items: NewsItem[] }) {
               <ExtraInfo item={item} />
             </span>
           </span>
-          <a
-            className={$(
-              "ml-2 px-1 hover:bg-neutral-400/10 dark:hover:bg-white/5 rounded-md visited:(text-neutral-400/80)",
-              "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px] leading-snug",
+          <div className="flex items-start gap-1 ml-2">
+            <a
+              className={$(
+                "flex-1 px-1 hover:bg-neutral-400/10 dark:hover:bg-white/5 rounded-md visited:(text-neutral-400/80)",
+                "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px] leading-snug",
+              )}
+              href={width < 768 ? item.mobileUrl || item.url : item.url}
+              title={item.extra?.hover}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {item.title}
+            </a>
+            {loggedIn && (
+              <button
+                type="button"
+                onClick={() => toggleBookmark(item, sourceId)}
+                className={$(
+                  "flex-shrink-0 text-sm transition-colors cursor-pointer mt-0.5",
+                  isBookmarked(item.id)
+                    ? "i-ph:bookmark-simple-fill text-amber-500"
+                    : "i-ph:bookmark-simple text-neutral-400 hover:text-neutral-600 dark:hover:text-white",
+                )}
+                title={isBookmarked(item.id) ? "Remove bookmark" : "Save for later"}
+              />
             )}
-            href={width < 768 ? item.mobileUrl || item.url : item.url}
-            title={item.extra?.hover}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {item.title}
-          </a>
+          </div>
         </li>
       ))}
     </ol>

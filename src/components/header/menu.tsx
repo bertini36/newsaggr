@@ -1,4 +1,5 @@
 import { motion } from "framer-motion"
+import { useNavigate } from "@tanstack/react-router"
 import { useSearchBar } from "~/hooks/useSearch"
 
 // function ThemeToggle() {
@@ -17,6 +18,7 @@ export function Menu() {
   const { loggedIn, loginWithGoogle, loginWithGithub, logout, userInfo, enableLogin, providers } = useLogin()
   const { toggle } = useSearchBar()
   const [shown, show] = useState(false)
+  const navigate = useNavigate()
   return (
     <span className="relative" onMouseEnter={() => show(true)} onMouseLeave={() => show(false)}>
       <span className="flex items-center">
@@ -72,6 +74,18 @@ export function Menu() {
                 <span className="i-ph:list-plus inline-block" />
                 <span>Add sources</span>
               </li>
+              {enableLogin && loggedIn && (
+                <li
+                  onClick={() => {
+                    navigate({ to: "/saved" })
+                    show(false)
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+                >
+                  <span className="i-ph:bookmark-simple inline-block" />
+                  <span>Saved news</span>
+                </li>
+              )}
               {enableLogin && (loggedIn
                 ? (
                     <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
