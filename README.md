@@ -18,10 +18,41 @@ This project is heavily based on [ourongxing/newsnow](https://github.com/ourongx
 *   **OAuth Integration** 🔒 - Log in seamlessly with **Google** or **GitHub** to sync your preferences.
 *   **Responsive Design** 📱 - Works on all devices and can be installed as a PWA.
 *   **Dark Mode** 🌙 - Support for dark mode.
+*   **Bookmarks** 🔖 - Save articles to read later.
 
 ## Live Version 🌐
 
 Want to see it in action? You can find the production version here: [newsaggr.online](https://newsaggr.online/)
+
+## Data Sources 📡
+
+| Source | Category | Link |
+| :--- | :--- | :--- |
+| Arxiv AI | AI | [Link](https://arxiv.org/list/cs.AI/recent) |
+| BBC | World | [Link](https://www.bbc.com/) |
+| CNN | World | [Link](https://edition.cnn.com/) |
+| Crónica Balear | Mallorca | [Link](https://www.cronicabalear.es/noticias/baleares/) |
+| Diario Mallorca | Mallorca | [Link](https://www.diariodemallorca.es/local/) |
+| El Diario | Spain | [Link](https://www.eldiario.es/politica/) |
+| El Mundo | Spain | [Link](https://www.elmundo.es/espana.html) |
+| El País | Spain | [Link](https://elpais.com/espana/) |
+| Engadget | Tech | [Link](https://www.engadget.com/) |
+| Forbes | Entrepreneurship | [Link](https://www.forbes.com/) |
+| Github | Tech | [Link](https://github.com/) |
+| Ground News | World | [Link](https://ground.news/daily-briefing) |
+| Hacker News | Tech | [Link](https://news.ycombinator.com/) |
+| Nature | Science | [Link](https://www.nature.com/news) |
+| NY Times | World | [Link](https://www.nytimes.com/) |
+| ScienceDaily | Science | [Link](https://www.sciencedaily.com/) |
+| smol.ai | AI | [Link](https://news.smol.ai/) |
+| TechCrunch (AI) | AI | [Link](https://techcrunch.com/category/artificial-intelligence/) |
+| TechCrunch | Tech | [Link](https://techcrunch.com/) |
+| TLDR | Tech | [Link](https://tldr.tech/) |
+| Ultima Hora | Mallorca | [Link](https://www.ultimahora.es/noticias.html) |
+| Wall Street Journal | Finance | [Link](https://www.wsj.com/) |
+| Wired | Tech | [Link](https://www.wired.com/) |
+| Yahoo Finance | Finance | [Link](https://finance.yahoo.com/) |
+| YC Blog | Entrepreneurship | [Link](https://www.ycombinator.com/blog) |
 
 ## Quick Start (Local) 🛠️
 
