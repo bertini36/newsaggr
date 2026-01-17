@@ -133,6 +133,11 @@ export const originSources = {
     home: "https://www.diariodemallorca.es/local/",
     column: "mallorca",
   },
+  cronicabalear: {
+    name: "Crónica Balear",
+    home: "https://www.cronicabalear.es/noticias/baleares/",
+    column: "mallorca",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

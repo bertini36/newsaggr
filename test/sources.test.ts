@@ -26,6 +26,7 @@ import techcrunchAiSource from "../server/sources/techcrunch_ai"
 import tldrSource from "../server/sources/tldr"
 import ultimahoraSource from "../server/sources/ultimahora"
 import diariodemallorcaSource from "../server/sources/diariodemallorca"
+import cronicabalearSource from "../server/sources/cronicabalear"
 
 /**
  * Validates that a NewsItem has all required fields
@@ -83,6 +84,7 @@ describe("source Validation Tests", () => {
   testSource("TLDR", tldrSource as () => Promise<NewsItem[]>)
   testSource("Ultima Hora", ultimahoraSource as () => Promise<NewsItem[]>)
   testSource("Diario Mallorca", diariodemallorcaSource as () => Promise<NewsItem[]>)
+  testSource("Crónica Balear", cronicabalearSource as () => Promise<NewsItem[]>)
 
   // GitHub has sub-sources, test the trending endpoint
   it("gitHub - should return valid news items", async () => {

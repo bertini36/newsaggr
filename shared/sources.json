@@ -142,5 +142,11 @@
     "column": "mallorca",
     "home": "https://www.diariodemallorca.es/local/",
     "interval": 600000
+  },
+  "cronicabalear": {
+    "name": "Crónica Balear",
+    "column": "mallorca",
+    "home": "https://www.cronicabalear.es/noticias/baleares/",
+    "interval": 600000
   }
 }
