@@ -109,7 +109,6 @@ Once set, the included `.github/workflows/test-and-deploy.yml` will handle the r
 ## Roadmap 🗺️
 
 *   [ ] More data sources 📡
-*   [ ] "Read Later" bookmarks 🔖
 *   [ ] AI-powered summaries 🧠 (Maybe?)
 
 ## Contributing 🤝
