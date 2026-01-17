@@ -67,7 +67,7 @@ function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete
         onClick={() => onDelete(bookmark.id)}
         className={$([
           "flex-shrink-0 p-2 rounded-md transition-colors cursor-pointer",
-          "text-neutral-500 dark:text-neutral-400 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20",
+          "text-neutral-500 dark:text-neutral-400 hover:text-red-400 hover:bg-red-400/10 dark:hover:bg-red-400/20",
         ])}
         title="Remove bookmark"
       >
@@ -80,7 +80,7 @@ function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <span className="i-ph:bookmark-simple text-6xl text-neutral-300 dark:text-neutral-600 mb-4" />
+      <span className="i-ph:bookmark-simple text-6xl text-red-400 mb-4" />
       <h3 className="text-xl font-semibold mb-2 text-neutral-600 dark:text-neutral-300">
         No saved news yet
       </h3>
@@ -176,7 +176,7 @@ export function Bookmarks() {
     <div className="max-w-4xl mx-auto px-4">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
-          <span className="i-ph:bookmark-simple-fill text-amber-500" />
+          <span className="i-ph:bookmark-simple-fill text-red-400" />
           Saved News
         </h1>
         {bookmarks.length > 0 && (
