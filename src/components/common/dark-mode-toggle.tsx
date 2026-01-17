@@ -7,7 +7,7 @@ export function DarkModeToggle() {
     <button
       type="button"
       title="Toggle Dark Mode"
-      className="i-ph:moon dark:i-ph:sun text-neutral-400 hover:text-neutral-600 dark:hover:text-white transition-colors cursor-pointer text-xl"
+      className="i-ph:moon dark:i-ph:sun text-neutral-400 hover:text-neutral-600 dark:text-neutral-400 dark:hover:text-white transition-colors cursor-pointer text-xl"
       onClick={() => setIsDark(!isDark)}
     />
   )

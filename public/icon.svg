@@ -1,6 +1,6 @@
 <svg width="153" height="153" viewBox="0 0 153 153" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Open inverted triangle (V shape with gap at bottom) - single path for clean corners -->
-  <path d="M66 115 L15 15 L138 15 L87 115" fill="none" stroke="#E94944" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M66 115 L15 15 L138 15 L87 115" fill="none" stroke="#F87171" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter"/>
   <!-- Circle below the gap -->
-  <circle cx="76.5" cy="138" r="13" fill="#E94944"/>
+  <circle cx="76.5" cy="138" r="13" fill="#F87171"/>
 </svg>
