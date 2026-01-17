@@ -29,30 +29,30 @@ Want to see it in action? You can find the production version here: [newsaggr.on
 | Source | Category | Link |
 | :--- | :--- | :--- |
 | Arxiv AI | AI | [Link](https://arxiv.org/list/cs.AI/recent) |
-| BBC | World | [Link](https://www.bbc.com/) |
-| CNN | World | [Link](https://edition.cnn.com/) |
+| smol.ai | AI | [Link](https://news.smol.ai/) |
+| TechCrunch (AI) | AI | [Link](https://techcrunch.com/category/artificial-intelligence/) |
+| Forbes | Entrepreneurship | [Link](https://www.forbes.com/) |
+| YC Blog | Entrepreneurship | [Link](https://www.ycombinator.com/blog) |
+| Wall Street Journal | Finance | [Link](https://www.wsj.com/) |
+| Yahoo Finance | Finance | [Link](https://finance.yahoo.com/) |
 | Crónica Balear | Mallorca | [Link](https://www.cronicabalear.es/noticias/baleares/) |
 | Diario Mallorca | Mallorca | [Link](https://www.diariodemallorca.es/local/) |
+| Ultima Hora | Mallorca | [Link](https://www.ultimahora.es/noticias.html) |
+| Nature | Science | [Link](https://www.nature.com/news) |
+| ScienceDaily | Science | [Link](https://www.sciencedaily.com/) |
 | El Diario | Spain | [Link](https://www.eldiario.es/politica/) |
 | El Mundo | Spain | [Link](https://www.elmundo.es/espana.html) |
 | El País | Spain | [Link](https://elpais.com/espana/) |
 | Engadget | Tech | [Link](https://www.engadget.com/) |
-| Forbes | Entrepreneurship | [Link](https://www.forbes.com/) |
 | Github | Tech | [Link](https://github.com/) |
-| Ground News | World | [Link](https://ground.news/daily-briefing) |
 | Hacker News | Tech | [Link](https://news.ycombinator.com/) |
-| Nature | Science | [Link](https://www.nature.com/news) |
-| NY Times | World | [Link](https://www.nytimes.com/) |
-| ScienceDaily | Science | [Link](https://www.sciencedaily.com/) |
-| smol.ai | AI | [Link](https://news.smol.ai/) |
-| TechCrunch (AI) | AI | [Link](https://techcrunch.com/category/artificial-intelligence/) |
 | TechCrunch | Tech | [Link](https://techcrunch.com/) |
 | TLDR | Tech | [Link](https://tldr.tech/) |
-| Ultima Hora | Mallorca | [Link](https://www.ultimahora.es/noticias.html) |
-| Wall Street Journal | Finance | [Link](https://www.wsj.com/) |
 | Wired | Tech | [Link](https://www.wired.com/) |
-| Yahoo Finance | Finance | [Link](https://finance.yahoo.com/) |
-| YC Blog | Entrepreneurship | [Link](https://www.ycombinator.com/blog) |
+| BBC | World | [Link](https://www.bbc.com/) |
+| CNN | World | [Link](https://edition.cnn.com/) |
+| Ground News | World | [Link](https://ground.news/daily-briefing) |
+| NY Times | World | [Link](https://www.nytimes.com/) |
 
 ## Quick Start (Local) 🛠️
 
