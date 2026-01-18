@@ -24,12 +24,12 @@ html.dark {
 body {
   background-color: #FBFBFB;
   color: #171717;
-  font-family: 'New York', 'Times New Roman', serif;
+  font-family: 'Roboto Flex', sans-serif;
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
-  font-size: 18px;
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.5;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

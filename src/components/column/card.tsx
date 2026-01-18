@@ -214,7 +214,7 @@ function NewsListTimeLine({ items, sourceId }: { items: NewsItem[], sourceId: So
   }) || []
 
   return (
-    <ol className="border-s border-neutral-400/50 flex flex-col pt-2">
+    <ol className="border-s border-neutral-400/50 flex flex-col pt-2 gap-2">
       {uniqueItems.map(item => (
         <li key={`${item.id}-${item.pubDate || item?.extra?.date || ""}`} className="flex flex-col">
           <span className="flex items-center gap-1 text-neutral-400/50 ml--1px leading-tight">
@@ -230,7 +230,7 @@ function NewsListTimeLine({ items, sourceId }: { items: NewsItem[], sourceId: So
             <a
               className={$(
                 "flex-1 px-1 hover:bg-neutral-400/10 dark:hover:bg-white/5 rounded-md visited:(text-neutral-400/80)",
-                "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px] leading-snug",
+                "cursor-pointer [&_*]:cursor-pointer transition-all text-[16.5px] leading-tight",
               )}
               href={width < 768 ? item.mobileUrl || item.url : item.url}
               title={item.extra?.hover}
