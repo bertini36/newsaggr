@@ -80,9 +80,9 @@ function RootComponent() {
         </header>
         <main className={$([
           "mt-2",
-          "min-h-[calc(100vh-180px)]",
-          "md:(min-h-[calc(100vh-175px)])",
-          "lg:(min-h-[calc(100vh-194px)])",
+          "min-h-[calc(100dvh-180px)]",
+          "md:(min-h-[calc(100dvh-175px)])",
+          "lg:(min-h-[calc(100dvh-194px)])",
           "transition-colors duration-300",
         ])}
         >

@@ -4,7 +4,8 @@
 html,
 body,
 #app {
-  height: 100vh;
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Dynamic viewport height for mobile */
   margin: 0;
   padding: 0;
 }
