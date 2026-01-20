@@ -86,6 +86,18 @@ export function Menu() {
                   <span>Saved news</span>
                 </li>
               )}
+              {enableLogin && loggedIn && (
+                <li
+                  onClick={() => {
+                    navigate({ to: "/request-source" })
+                    show(false)
+                  }}
+                  className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+                >
+                  <span className="i-ph:plus-circle inline-block" />
+                  <span>Request source</span>
+                </li>
+              )}
               {enableLogin && (loggedIn
                 ? (
                     <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">

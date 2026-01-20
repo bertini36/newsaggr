@@ -148,7 +148,7 @@ function LoginPrompt() {
 }
 
 export function Bookmarks() {
-  useTitle("Saved News - NewsAggr")
+  useTitle("Saved news - NewsAggr")
 
   const { loggedIn } = useLogin()
   const { bookmarks, loading, removeBookmark } = useBookmarks()
@@ -177,7 +177,7 @@ export function Bookmarks() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <span className="i-ph:bookmark-simple-fill text-red-400" />
-          Saved News
+          Saved news
         </h1>
         {bookmarks.length > 0 && (
           <span className="text-sm text-neutral-500 dark:text-neutral-400">

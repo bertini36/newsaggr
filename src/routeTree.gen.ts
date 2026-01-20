@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as SavedImport } from './routes/saved'
+import { Route as RequestSourceImport } from './routes/request-source'
 import { Route as IndexImport } from './routes/index'
 import { Route as CColumnImport } from './routes/c.$column'
 
@@ -20,6 +21,12 @@ import { Route as CColumnImport } from './routes/c.$column'
 const SavedRoute = SavedImport.update({
   id: '/saved',
   path: '/saved',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const RequestSourceRoute = RequestSourceImport.update({
+  id: '/request-source',
+  path: '/request-source',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,6 +53,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
+    '/request-source': {
+      id: '/request-source'
+      path: '/request-source'
+      fullPath: '/request-source'
+      preLoaderRoute: typeof RequestSourceImport
+      parentRoute: typeof rootRoute
+    }
     '/saved': {
       id: '/saved'
       path: '/saved'
@@ -67,12 +81,14 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/request-source': typeof RequestSourceRoute
   '/saved': typeof SavedRoute
   '/c/$column': typeof CColumnRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/request-source': typeof RequestSourceRoute
   '/saved': typeof SavedRoute
   '/c/$column': typeof CColumnRoute
 }
@@ -80,27 +96,30 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
+  '/request-source': typeof RequestSourceRoute
   '/saved': typeof SavedRoute
   '/c/$column': typeof CColumnRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/saved' | '/c/$column'
+  fullPaths: '/' | '/request-source' | '/saved' | '/c/$column'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/saved' | '/c/$column'
-  id: '__root__' | '/' | '/saved' | '/c/$column'
+  to: '/' | '/request-source' | '/saved' | '/c/$column'
+  id: '__root__' | '/' | '/request-source' | '/saved' | '/c/$column'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  RequestSourceRoute: typeof RequestSourceRoute
   SavedRoute: typeof SavedRoute
   CColumnRoute: typeof CColumnRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  RequestSourceRoute: RequestSourceRoute,
   SavedRoute: SavedRoute,
   CColumnRoute: CColumnRoute,
 }
@@ -116,12 +135,16 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
+        "/request-source",
         "/saved",
         "/c/$column"
       ]
     },
     "/": {
       "filePath": "index.tsx"
+    },
+    "/request-source": {
+      "filePath": "request-source.tsx"
     },
     "/saved": {
       "filePath": "saved.tsx"
