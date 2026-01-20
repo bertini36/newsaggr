@@ -148,5 +148,11 @@
     "column": "mallorca",
     "home": "https://www.cronicabalear.es/noticias/baleares/",
     "interval": 600000
+  },
+  "reuters": {
+    "name": "Reuters",
+    "column": "world",
+    "home": "https://www.reuters.com/",
+    "interval": 600000
   }
 }

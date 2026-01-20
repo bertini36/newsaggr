@@ -53,6 +53,7 @@ Want to see it in action? You can find the production version here: [newsaggr.on
 | CNN | World | [Link](https://edition.cnn.com/) |
 | Ground News | World | [Link](https://ground.news/daily-briefing) |
 | NY Times | World | [Link](https://www.nytimes.com/) |
+| Reuters | World | [Link](https://www.reuters.com/) |
 
 ## Quick Start (Local) 🛠️
 

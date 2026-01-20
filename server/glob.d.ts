@@ -17,6 +17,7 @@ declare module 'glob:./sources/{*.ts,**/index.ts}' {
   export const hackernews: typeof import('./sources/hackernews')
   export const nature: typeof import('./sources/nature')
   export const nytimes: typeof import('./sources/nytimes')
+  export const reuters: typeof import('./sources/reuters')
   export const sciencedaily: typeof import('./sources/sciencedaily')
   export const techcrunch: typeof import('./sources/techcrunch')
   export const techcrunch_ai: typeof import('./sources/techcrunch_ai')
