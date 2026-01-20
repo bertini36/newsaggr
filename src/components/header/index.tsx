@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router"
+import { Link, useLocation } from "@tanstack/react-router"
 import { useIsFetching } from "@tanstack/react-query"
 import type { SourceID } from "@shared/types"
 import { DarkModeToggle } from "../common/dark-mode-toggle"
@@ -40,6 +40,9 @@ function Refresh() {
 }
 
 export function Header() {
+  const location = useLocation()
+  const isSavedPage = location.pathname === "/saved"
+
   return (
     <>
       <span className="flex justify-self-start">
@@ -60,7 +63,7 @@ export function Header() {
       </span>
       <span className="justify-self-end flex gap-2 items-center text-xl text-primary-600 dark:text-primary">
         <GoTop />
-        <Refresh />
+        {!isSavedPage && <Refresh />}
         <DarkModeToggle />
         <Menu />
       </span>
