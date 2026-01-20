@@ -32,7 +32,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-[calc(100vh-250px)] min-h-500px max-md:h-[calc(100dvh-170px)] max-md:min-h-[calc(100dvh-170px)] p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg shadow-[4px_4px_0px_0px_#e5e5e5] dark:shadow-none dark:bg-github-card",
+        "flex flex-col h-[calc(100vh-250px)] min-h-500px max-md:h-[calc(100dvh-170px)] max-md:min-h-[calc(100dvh-170px)] p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg dark:bg-github-card",
         "transition-opacity-300",
         // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
