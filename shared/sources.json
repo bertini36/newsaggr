@@ -166,5 +166,11 @@
     "column": "spain",
     "home": "https://www.libertaddigital.com/",
     "interval": 600000
+  },
+  "theobjective": {
+    "name": "The Objective",
+    "column": "spain",
+    "home": "https://theobjective.com/",
+    "interval": 600000
   }
 }
