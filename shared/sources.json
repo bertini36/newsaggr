@@ -154,5 +154,11 @@
     "column": "world",
     "home": "https://www.reuters.com/",
     "interval": 600000
+  },
+  "theinformation": {
+    "name": "The Information",
+    "column": "tech",
+    "home": "https://www.theinformation.com/",
+    "interval": 600000
   }
 }
