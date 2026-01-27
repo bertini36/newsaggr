@@ -6,6 +6,7 @@ interface ConfirmModalProps {
   message: string
   confirmText?: string
   cancelText?: string
+  loadingText?: string
   onConfirm: () => void
   onCancel: () => void
   isLoading?: boolean
@@ -17,6 +18,7 @@ export function ConfirmModal({
   message,
   confirmText = "Confirm",
   cancelText = "Cancel",
+  loadingText,
   onConfirm,
   onCancel,
   isLoading = false,
@@ -89,7 +91,14 @@ export function ConfirmModal({
                   "disabled:opacity-50 disabled:cursor-not-allowed",
                 ])}
               >
-                {isLoading ? "..." : confirmText}
+                {isLoading
+                  ? (
+                      <span className="flex items-center gap-2">
+                        <span className="i-ph:circle-dashed animate-spin" />
+                        {loadingText || `${confirmText}...`}
+                      </span>
+                    )
+                  : confirmText}
               </button>
             </div>
           </motion.div>

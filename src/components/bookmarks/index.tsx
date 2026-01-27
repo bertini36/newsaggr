@@ -216,6 +216,7 @@ export function Bookmarks() {
         message="Are you sure you want to remove this bookmark? This action cannot be undone."
         confirmText="Remove"
         cancelText="Cancel"
+        loadingText="Removing..."
         onConfirm={handleDelete}
         onCancel={() => setDeleteTarget(null)}
         isLoading={isDeleting}
