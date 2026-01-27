@@ -1,10 +1,11 @@
 import { Command } from "cmdk"
 import type { SourceID } from "@shared/types"
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import pinyin from "@shared/pinyin.json"
 import { OverlayScrollbar } from "../overlay-scrollbar"
 import { CardWrapper } from "~/components/column/card"
 import { DARK_MODE_INVERT_LOGOS } from "~/utils"
+import { ConfirmModal } from "~/components/common/confirm-modal"
 
 import "./cmdk.css"
 
@@ -105,26 +106,54 @@ function SourceItem({ item, onHover }: {
   onHover: (id: SourceID) => void
 }) {
   const { isFocused, toggleFocus } = useFocusWith(item.id)
+  const [showUnpinConfirm, setShowUnpinConfirm] = useState(false)
+
+  const handleSelect = useCallback(() => {
+    if (isFocused) {
+      // When unpinning, show confirmation modal
+      setShowUnpinConfirm(true)
+    } else {
+      // When pinning, do it immediately
+      toggleFocus()
+    }
+  }, [isFocused, toggleFocus])
+
+  const handleConfirmUnpin = useCallback(() => {
+    toggleFocus()
+    setShowUnpinConfirm(false)
+  }, [toggleFocus])
+
   return (
-    <Command.Item
-      keywords={[item.name, item.title ?? "", item.pinyin]}
-      value={item.id}
-      className="flex justify-between items-center p-2 cursor-pointer [&_*]:cursor-pointer"
-      onSelect={toggleFocus}
-      onMouseEnter={() => onHover(item.id)}
-      title={isFocused ? "Remove from focus" : "Add to Focus"}
-    >
-      <span className="flex gap-2 items-center">
-        <span
-          className={$("w-4 h-4 bg-cover", DARK_MODE_INVERT_LOGOS.includes(item.id.split("-")[0]) && "dark:invert")}
-          style={{
-            backgroundImage: `url(/icons/${item.id.split("-")[0]}.png)`,
-          }}
-        />
-        <span>{item.name}</span>
-        <span className="text-xs text-neutral-400/80 self-end mb-3px">{item.title}</span>
-      </span>
-      <span className={$(isFocused ? "i-ph-star-fill bg-red-400" : "i-ph-star bg-neutral-400")}></span>
-    </Command.Item>
+    <>
+      <Command.Item
+        keywords={[item.name, item.title ?? "", item.pinyin]}
+        value={item.id}
+        className="flex justify-between items-center p-2 cursor-pointer [&_*]:cursor-pointer"
+        onSelect={handleSelect}
+        onMouseEnter={() => onHover(item.id)}
+        title={isFocused ? "Remove from focus" : "Add to Focus"}
+      >
+        <span className="flex gap-2 items-center">
+          <span
+            className={$("w-4 h-4 bg-cover", DARK_MODE_INVERT_LOGOS.includes(item.id.split("-")[0]) && "dark:invert")}
+            style={{
+              backgroundImage: `url(/icons/${item.id.split("-")[0]}.png)`,
+            }}
+          />
+          <span>{item.name}</span>
+          <span className="text-xs text-neutral-400/80 self-end mb-3px">{item.title}</span>
+        </span>
+        <span className={$(isFocused ? "i-ph-star-fill bg-red-400" : "i-ph-star bg-neutral-400")}></span>
+      </Command.Item>
+      <ConfirmModal
+        isOpen={showUnpinConfirm}
+        title="Remove from focus"
+        message={`Are you sure you want to remove "${item.name}" from your focused sources?`}
+        confirmText="Remove"
+        cancelText="Keep"
+        onConfirm={handleConfirmUnpin}
+        onCancel={() => setShowUnpinConfirm(false)}
+      />
+    </>
   )
 }

@@ -4,6 +4,7 @@ import { useInView } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
 import { DARK_MODE_INVERT_LOGOS, safeParseString } from "~/utils"
+import { ConfirmModal } from "~/components/common/confirm-modal"
 
 export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
   id: SourceID
@@ -100,6 +101,22 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
   })
 
   const { isFocused, toggleFocus } = useFocusWith(id)
+  const [showUnpinConfirm, setShowUnpinConfirm] = useState(false)
+
+  const handleStarClick = useCallback(() => {
+    if (isFocused) {
+      // When unpinning, show confirmation modal
+      setShowUnpinConfirm(true)
+    } else {
+      // When pinning, do it immediately
+      toggleFocus()
+    }
+  }, [isFocused, toggleFocus])
+
+  const handleConfirmUnpin = useCallback(() => {
+    toggleFocus()
+    setShowUnpinConfirm(false)
+  }, [toggleFocus])
 
   return (
     <>
@@ -145,7 +162,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           <button
             type="button"
             className={$("btn transition-colors", isFocused ? "i-ph:star-fill bg-red-400 op-100 hover:op-100 hover:i-ph:star hover:bg-neutral-500" : "i-ph:star hover:text-neutral-700 dark:hover:text-white")}
-            onClick={toggleFocus}
+            onClick={handleStarClick}
             title={isFocused ? "Remove from focus" : "Add to Focus"}
           />
           {/* firefox cannot drag a button */}
@@ -168,6 +185,16 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           {!!data?.items?.length && <NewsListTimeLine items={data.items} sourceId={id} />}
         </div>
       </div>
+
+      <ConfirmModal
+        isOpen={showUnpinConfirm}
+        title="Remove from focus"
+        message={`Are you sure you want to remove "${sources[id].name}" from your focused sources?`}
+        confirmText="Remove"
+        cancelText="Keep"
+        onConfirm={handleConfirmUnpin}
+        onCancel={() => setShowUnpinConfirm(false)}
+      />
     </>
   )
 }
