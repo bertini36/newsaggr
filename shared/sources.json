@@ -160,5 +160,11 @@
     "column": "tech",
     "home": "https://www.theinformation.com/",
     "interval": 600000
+  },
+  "libertaddigital": {
+    "name": "Libertad Digital",
+    "column": "spain",
+    "home": "https://www.libertaddigital.com/",
+    "interval": 600000
   }
 }

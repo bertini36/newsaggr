@@ -15,6 +15,7 @@ declare module 'glob:./sources/{*.ts,**/index.ts}' {
   export const github: typeof import('./sources/github')
   export const groundnews: typeof import('./sources/groundnews')
   export const hackernews: typeof import('./sources/hackernews')
+  export const libertaddigital: typeof import('./sources/libertaddigital')
   export const nature: typeof import('./sources/nature')
   export const nytimes: typeof import('./sources/nytimes')
   export const reuters: typeof import('./sources/reuters')
