@@ -43,10 +43,13 @@ Want to see it in action? You can find the production version here: [newsaggr.on
 | El Diario | Spain | [Link](https://www.eldiario.es/politica/) |
 | El Mundo | Spain | [Link](https://www.elmundo.es/espana.html) |
 | El País | Spain | [Link](https://elpais.com/espana/) |
+| Libertad Digital | Spain | [Link](https://www.libertaddigital.com/espana/) |
+| The Objective | Spain | [Link](https://theobjective.com/espana/) |
 | Engadget | Tech | [Link](https://www.engadget.com/) |
 | Github | Tech | [Link](https://github.com/) |
 | Hacker News | Tech | [Link](https://news.ycombinator.com/) |
 | TechCrunch | Tech | [Link](https://techcrunch.com/) |
+| The Information | Tech | [Link](https://www.theinformation.com/) |
 | TLDR | Tech | [Link](https://tldr.tech/) |
 | Wired | Tech | [Link](https://www.wired.com/) |
 | BBC | World | [Link](https://www.bbc.com/) |
