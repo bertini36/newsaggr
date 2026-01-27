@@ -90,7 +90,7 @@ export function Dnd() {
             },
           }}
         >
-          {items.map(id => (
+          {items.map((id, index) => (
             <motion.li
               key={id}
               className={$(isMobile && "flex-shrink-0")}
@@ -110,7 +110,25 @@ export function Dnd() {
                 },
               }}
             >
-              <SortableCardWrapper id={id} />
+              <SortableCardWrapper
+                id={id}
+                index={index}
+                totalItems={items.length}
+                onMoveLeft={() => {
+                  if (index > 0) {
+                    const newItems = [...items]
+                      ;[newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]]
+                    setItems(newItems)
+                  }
+                }}
+                onMoveRight={() => {
+                  if (index < items.length - 1) {
+                    const newItems = [...items]
+                      ;[newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]]
+                    setItems(newItems)
+                  }
+                }}
+              />
             </motion.li>
           ))}
         </motion.ol>
@@ -195,7 +213,14 @@ function CardOverlay({ id }: { id: SourceID }) {
   )
 }
 
-function SortableCardWrapper({ id }: ItemsProps) {
+interface SortableCardWrapperProps extends ItemsProps {
+  index: number
+  totalItems: number
+  onMoveLeft: () => void
+  onMoveRight: () => void
+}
+
+function SortableCardWrapper({ id, index, totalItems, onMoveLeft, onMoveRight }: SortableCardWrapperProps) {
   const {
     isDragging,
     setNodeRef,
@@ -216,6 +241,10 @@ function SortableCardWrapper({ id }: ItemsProps) {
         id={id}
         isDragging={isDragging}
         setHandleRef={setHandleRef}
+        onMoveLeft={onMoveLeft}
+        onMoveRight={onMoveRight}
+        canMoveLeft={index > 0}
+        canMoveRight={index < totalItems - 1}
       />
       {OverlayContainer && createPortal(<CardOverlay id={id} />, OverlayContainer)}
     </>

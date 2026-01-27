@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
 import { useWindowSize } from "react-use"
 import { forwardRef, useImperativeHandle } from "react"
+import { isMobile } from "react-device-detect"
 import { DARK_MODE_INVERT_LOGOS, safeParseString } from "~/utils"
 import { ConfirmModal } from "~/components/common/confirm-modal"
 
@@ -13,6 +14,13 @@ export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   isDragging?: boolean
   setHandleRef?: (ref: HTMLElement | null) => void
+  /**
+   * Mobile reordering callbacks
+   */
+  onMoveLeft?: () => void
+  onMoveRight?: () => void
+  canMoveLeft?: boolean
+  canMoveRight?: boolean
 }
 
 interface NewsCardProps {
@@ -20,8 +28,9 @@ interface NewsCardProps {
   setHandleRef?: (ref: HTMLElement | null) => void
 }
 
-export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, style, ...props }, dndRef) => {
+export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, onMoveLeft, onMoveRight, canMoveLeft, canMoveRight, style, ...props }, dndRef) => {
   const ref = useRef<HTMLDivElement>(null)
+  const lastTapRef = useRef<{ time: number, side: "left" | "right" } | null>(null)
 
   const inView = useInView(ref, {
     once: true,
@@ -29,11 +38,31 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
 
   useImperativeHandle(dndRef, () => ref.current! as HTMLDivElement)
 
+  // Handle double-tap on left/right edges (mobile only)
+  const handleDoubleTap = useCallback((side: "left" | "right") => {
+    if (!isMobile) return
+
+    const now = Date.now()
+    const lastTap = lastTapRef.current
+
+    if (lastTap && lastTap.side === side && now - lastTap.time < 300) {
+      // Double tap detected
+      if (side === "left" && canMoveLeft && onMoveLeft) {
+        onMoveLeft()
+      } else if (side === "right" && canMoveRight && onMoveRight) {
+        onMoveRight()
+      }
+      lastTapRef.current = null
+    } else {
+      lastTapRef.current = { time: now, side }
+    }
+  }, [canMoveLeft, canMoveRight, onMoveLeft, onMoveRight])
+
   return (
     <div
       ref={ref}
       className={$(
-        "flex flex-col h-[calc(100vh-250px)] min-h-500px max-md:h-[calc(100dvh-170px)] max-md:min-h-[calc(100dvh-170px)] p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg dark:bg-github-card",
+        "relative flex flex-col h-[calc(100vh-250px)] min-h-500px max-md:h-[calc(100dvh-170px)] max-md:min-h-[calc(100dvh-170px)] p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg dark:bg-github-card",
         "transition-opacity-300",
         // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
       )}
@@ -43,6 +72,19 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       }}
       {...props}
     >
+      {/* Mobile double-tap zones */}
+      {isMobile && onMoveLeft && onMoveRight && (
+        <>
+          <div
+            className="absolute left-0 top-0 bottom-0 w-12 z-10"
+            onClick={() => handleDoubleTap("left")}
+          />
+          <div
+            className="absolute right-0 top-0 bottom-0 w-12 z-10"
+            onClick={() => handleDoubleTap("right")}
+          />
+        </>
+      )}
       {inView && <NewsCard key={id} id={id} setHandleRef={setHandleRef} />}
     </div>
   )
