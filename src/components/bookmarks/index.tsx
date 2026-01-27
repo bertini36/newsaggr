@@ -54,7 +54,7 @@ function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete
           target="_blank"
           rel="noopener noreferrer"
           className={$([
-            "block text-base leading-snug cursor-pointer",
+            "block text-base leading-snug cursor-pointer visited:(text-neutral-400/80)",
           ])}
         >
           {bookmark.title}
