@@ -28,7 +28,7 @@ export function FontSelector() {
     >
       <span className="i-ph:text-aa inline-block" />
       <span>Font</span>
-      <div onClick={handleToggle} className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
+      <div className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
         <span className="text-sm truncate max-w-20">{currentFont?.name || "Roboto Flex"}</span>
         <span className={$("i-ph:caret-down inline-block transition-transform text-xs", expanded && "rotate-180")} />
       </div>
