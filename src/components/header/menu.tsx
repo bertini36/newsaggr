@@ -62,7 +62,7 @@ export function Menu() {
           <motion.div
             id="dropdown-menu"
             className={$([
-              "w-200px",
+              "w-260px sm:w-200px",
               "bg-white dark:bg-github-card border border-neutral-300 dark:border-github-border rounded-lg shadow-lg dark:shadow-none",
               "text-neutral-800 dark:text-white",
             ])}
@@ -79,7 +79,7 @@ export function Menu() {
                   toggle(true)
                   show(false)
                 }}
-                className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+                className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
               >
                 <span className="i-ph:list-plus inline-block" />
                 <span>Add sources</span>
@@ -90,7 +90,7 @@ export function Menu() {
                     navigate({ to: "/saved" })
                     show(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+                  className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
                 >
                   <span className="i-ph:bookmark-simple inline-block" />
                   <span>Saved news</span>
@@ -105,7 +105,7 @@ export function Menu() {
                     navigate({ to: "/request-source" })
                     show(false)
                   }}
-                  className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+                  className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
                 >
                   <span className="i-ph:plus-circle inline-block" />
                   <span>Request source</span>
@@ -113,7 +113,7 @@ export function Menu() {
               )}
               {enableLogin && (loggedIn
                 ? (
-                    <li onClick={logout} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
+                    <li onClick={logout} className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
                       <span className="i-ph:sign-out inline-block" />
                       <span>Logout</span>
                     </li>
@@ -121,13 +121,13 @@ export function Menu() {
                 : (
                     <>
                       {providers.google && (
-                        <li onClick={loginWithGoogle} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
+                        <li onClick={loginWithGoogle} className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
                           <span className="i-ph:google-logo inline-block" />
                           <span>Login with Google</span>
                         </li>
                       )}
                       {providers.github && (
-                        <li onClick={loginWithGithub} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
+                        <li onClick={loginWithGithub} className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white">
                           <span className="i-ph:github-logo inline-block" />
                           <span>Login with Github</span>
                         </li>
@@ -135,7 +135,7 @@ export function Menu() {
                     </>
                   ))}
               {/* <ThemeToggle /> */}
-              <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors [&_*]:cursor-pointer text-neutral-800 dark:text-white">
+              <li onClick={() => window.open(Homepage)} className="flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors [&_*]:cursor-pointer text-neutral-800 dark:text-white">
                 <span className="i-ph:github-logo inline-block" />
                 <span>Star on Github </span>
               </li>

@@ -24,7 +24,7 @@ export function FontSelector() {
       onClick={handleToggle}
       onMouseDown={e => e.stopPropagation()}
       onTouchStart={e => e.stopPropagation()}
-      className="relative flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+      className="relative flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
     >
       <span className="i-ph:text-aa inline-block" />
       <span>Font</span>
@@ -44,7 +44,7 @@ export function FontSelector() {
               key={font.id}
               onClick={e => handleSelectFont(e, font.id)}
               className={$([
-                "px-3 py-2 cursor-pointer rounded-md transition-colors text-sm",
+                "px-3 py-2.5 cursor-pointer rounded-md transition-colors text-sm",
                 fontId === font.id
                   ? "bg-neutral-200 dark:bg-white/20 text-neutral-900 dark:text-white"
                   : "hover:bg-neutral-100 dark:hover:bg-white/10 text-neutral-700 dark:text-neutral-300",
