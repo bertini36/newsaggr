@@ -62,7 +62,7 @@ export function Menu() {
           <motion.div
             id="dropdown-menu"
             className={$([
-              "w-260px sm:w-200px",
+              "w-200px",
               "bg-white dark:bg-github-card border border-neutral-300 dark:border-github-border rounded-lg shadow-lg dark:shadow-none",
               "text-neutral-800 dark:text-white",
             ])}

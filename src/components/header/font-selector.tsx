@@ -24,11 +24,11 @@ export function FontSelector() {
       onClick={handleToggle}
       onMouseDown={e => e.stopPropagation()}
       onTouchStart={e => e.stopPropagation()}
-      className="relative flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
+      className="relative flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white select-none"
     >
       <span className="i-ph:text-aa inline-block" />
       <span>Font</span>
-      <div className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
+      <div onClick={handleToggle} className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
         <span className="text-sm truncate max-w-20">{currentFont?.name || "Roboto Flex"}</span>
         <span className={$("i-ph:caret-down inline-block transition-transform text-xs", expanded && "rotate-180")} />
       </div>
