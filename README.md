@@ -19,6 +19,7 @@ This project is heavily based on [ourongxing/newsnow](https://github.com/ourongx
 *   **Responsive Design** 📱 - Works on all devices and can be installed as a PWA.
 *   **Dark Mode** 🌙 - Support for dark mode.
 *   **Bookmarks** 🔖 - Save articles to read later.
+*   **Font Selection** ✒️ - Customize your reading experience with multiple font choices.
 
 ## Live Version 🌐
 

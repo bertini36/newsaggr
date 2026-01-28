@@ -22,6 +22,8 @@ export function FontSelector() {
   return (
     <li
       onClick={handleToggle}
+      onMouseDown={e => e.stopPropagation()}
+      onTouchStart={e => e.stopPropagation()}
       className="relative flex items-center gap-2 px-4 py-2 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white"
     >
       <span className="i-ph:text-aa inline-block" />
@@ -33,6 +35,8 @@ export function FontSelector() {
       {expanded && (
         <div
           onClick={e => e.stopPropagation()}
+          onMouseDown={e => e.stopPropagation()}
+          onTouchStart={e => e.stopPropagation()}
           className="absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-y-auto py-1 px-2 bg-white dark:bg-github-card border border-neutral-200 dark:border-github-border rounded-lg shadow-lg"
         >
           {fonts.map(font => (

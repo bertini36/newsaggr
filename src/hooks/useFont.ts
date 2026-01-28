@@ -16,6 +16,7 @@ export function useFont() {
   const setFont = useCallback((id: string) => {
     setMetadata(prev => ({
       ...prev,
+      action: "manual",
       updatedTime: Date.now(),
       preferences: {
         ...prev.preferences,
