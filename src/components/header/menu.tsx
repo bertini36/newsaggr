@@ -1,3 +1,4 @@
+import { useClickAway } from "react-use"
 import { motion } from "framer-motion"
 import { useNavigate } from "@tanstack/react-router"
 import { FontSelector } from "./font-selector"
@@ -20,14 +21,21 @@ export function Menu() {
   const { toggle } = useSearchBar()
   const [shown, show] = useState(false)
   const navigate = useNavigate()
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useClickAway(ref, () => {
+    show(false)
+  })
+
   return (
-    <span className="relative" onMouseEnter={() => show(true)} onMouseLeave={() => show(false)}>
+    <span ref={ref} className="relative">
       <span className="flex items-center">
         {
           enableLogin && loggedIn && userInfo.avatar
             ? (
                 <button
                   type="button"
+                  onClick={() => show(!shown)}
                   className="h-6 w-6 rounded-full bg-cover"
                   style={
                     {
@@ -40,6 +48,7 @@ export function Menu() {
             : (
                 <button
                   type="button"
+                  onClick={() => show(!shown)}
                   className={$(
                     "i-ph:dots-three-circle text-2xl transition-colors cursor-pointer",
                     shown ? "text-neutral-600 dark:text-white" : "text-neutral-400 hover:text-neutral-600 dark:hover:text-white",
