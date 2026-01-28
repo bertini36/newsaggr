@@ -28,6 +28,18 @@ export default defineSource(async () => {
     if (!href || !href.includes("libertaddigital.com")) return
     if (href.includes("/autor/") || href.includes("/colabora/") || href.includes("/club/")) return
 
+    // Skip links from the top bar navigation (header, nav elements)
+    const isInHeader = linkElement.closest("header, nav, .nav, .menu, .navigation, .topbar, .top-bar").length > 0
+    if (isInHeader) return
+
+    // Skip links from "Es noticia" section
+    const isEsNoticia = linkElement.closest("[class*='noticia'], [id*='noticia'], [class*='es-noticia'], [id*='es-noticia']").length > 0
+      || linkElement.closest("section, div").filter((_, el) => {
+        const heading = $(el).find("h1, h2, h3, h4, .title, .heading").first().text().toLowerCase()
+        return heading.includes("es noticia")
+      }).length > 0
+    if (isEsNoticia) return
+
     // Extract date from URL pattern: /YYYY-MM-DD/
     const dateMatch = href.match(/\/(\d{4})-(\d{2})-(\d{2})\//)
     if (!dateMatch) return // Skip links without dates (not news articles)
