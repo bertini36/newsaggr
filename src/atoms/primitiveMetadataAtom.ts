@@ -52,6 +52,7 @@ export function preprocessMetadata(target: PrimitiveMetadata) {
     },
     action: target.action,
     updatedTime: target.updatedTime,
+    preferences: target.preferences,
   } as PrimitiveMetadata
 }
 

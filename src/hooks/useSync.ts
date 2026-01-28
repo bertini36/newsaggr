@@ -14,6 +14,7 @@ async function uploadMetadata(metadata: PrimitiveMetadata) {
     },
     body: {
       data: metadata.data,
+      preferences: metadata.preferences,
       updatedTime: metadata.updatedTime,
     },
   })
@@ -22,7 +23,7 @@ async function uploadMetadata(metadata: PrimitiveMetadata) {
 async function downloadMetadata(): Promise<PrimitiveMetadata | undefined> {
   const jwt = safeParseString(localStorage.getItem("jwt"))
   if (!jwt) return
-  const { data, updatedTime } = await myFetch("/me/sync", {
+  const { data, preferences, updatedTime } = await myFetch("/me/sync", {
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
@@ -32,6 +33,7 @@ async function downloadMetadata(): Promise<PrimitiveMetadata | undefined> {
     return {
       action: "sync",
       data,
+      preferences,
       updatedTime,
     }
   }
