@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
 import { useNavigate } from "@tanstack/react-router"
+import { FontSelector } from "./font-selector"
 import { useSearchBar } from "~/hooks/useSearch"
 
 // function ThemeToggle() {
@@ -85,6 +86,9 @@ export function Menu() {
                   <span className="i-ph:bookmark-simple inline-block" />
                   <span>Saved news</span>
                 </li>
+              )}
+              {enableLogin && loggedIn && (
+                <FontSelector />
               )}
               {enableLogin && loggedIn && (
                 <li

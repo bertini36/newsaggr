@@ -27,10 +27,15 @@ export type AllSourceID = {
 export type ColumnID = keyof typeof columns
 export type Metadata = Record<ColumnID, Column>
 
+export interface UserPreferences {
+  fontId?: string
+}
+
 export interface PrimitiveMetadata {
   updatedTime: number
   data: Record<FixedColumnID, SourceID[]>
   action: "init" | "manual" | "sync"
+  preferences?: UserPreferences
 }
 
 export type FixedColumnID = (typeof fixedColumnIds)[number]

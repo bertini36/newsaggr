@@ -25,7 +25,7 @@ html.dark {
 body {
   background-color: #FBFBFB;
   color: #171717;
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: var(--reading-font, 'Roboto Flex', sans-serif);
   -moz-user-select: none;
   -webkit-user-select: none;
   user-select: none;
