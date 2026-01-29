@@ -313,7 +313,7 @@ function NewsListTimeLine({ items, sourceId }: { items: NewsItem[], sourceId: So
                 type="button"
                 onClick={() => toggleBookmark(item, sourceId)}
                 className={$(
-                  "flex-shrink-0 text-sm transition-colors cursor-pointer mt-0.5",
+                  "relative flex-shrink-0 text-sm transition-colors cursor-pointer mt-0.5 z-20",
                   isBookmarked(item.id)
                     ? "i-ph:bookmark-simple-fill text-red-400"
                     : "i-ph:bookmark-simple text-neutral-400 hover:text-neutral-600 dark:hover:text-white",
