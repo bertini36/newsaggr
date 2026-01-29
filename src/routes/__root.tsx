@@ -69,7 +69,7 @@ function RootComponent() {
           className={$([
             "grid items-center py-4 px-5",
             "lg:(py-6)",
-            "sticky top-0 z-10",
+            "sticky top-0 z-50",
             "bg-[#FBFBFB] dark:bg-github-main transition-colors duration-300",
           ])}
           style={{
