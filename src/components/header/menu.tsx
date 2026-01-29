@@ -58,7 +58,7 @@ export function Menu() {
         }
       </span>
       {shown && (
-        <div className="absolute right-0 z-99 bg-transparent pt-4 top-4">
+        <div className="absolute right-0 z-999 bg-transparent pt-4 top-4">
           <motion.div
             id="dropdown-menu"
             className={$([
