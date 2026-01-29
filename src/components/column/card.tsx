@@ -72,15 +72,15 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       }}
       {...props}
     >
-      {/* Mobile double-tap zones */}
+      {/* Mobile double-tap zones - only in header area to avoid blocking bookmark buttons */}
       {isMobile && onMoveLeft && onMoveRight && (
         <>
           <div
-            className="absolute left-0 top-0 bottom-0 w-12 z-10"
+            className="absolute left-0 top-0 h-12 w-12 z-10"
             onClick={() => handleDoubleTap("left")}
           />
           <div
-            className="absolute right-0 top-0 bottom-0 w-12 z-10"
+            className="absolute right-0 top-0 h-12 w-12 z-10"
             onClick={() => handleDoubleTap("right")}
           />
         </>
