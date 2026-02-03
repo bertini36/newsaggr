@@ -124,3 +124,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## License 📄
 
 [MIT](./LICENSE) © bertini36
+
+---
+
+<p align="center">
+  Build with love from Mallorca 🌴
+</p>
