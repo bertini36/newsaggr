@@ -158,6 +158,11 @@ export const originSources = {
     home: "https://theobjective.com/",
     column: "spain",
   },
+  blogosphere: {
+    name: "Blogosphere",
+    home: "https://text.blogosphere.app/",
+    column: "blog",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {

@@ -30,6 +30,9 @@ export const columns = {
   mallorca: {
     zh: "Mallorca",
   },
+  blog: {
+    zh: "Blog",
+  },
 } as const
 
 export const fixedColumnIds = ["focus"] as const satisfies Partial<ColumnID>[]

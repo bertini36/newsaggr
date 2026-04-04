@@ -30,6 +30,7 @@ import reutersSource from "../server/sources/reuters"
 import theinformationSource from "../server/sources/theinformation"
 import libertaddigitalSource from "../server/sources/libertaddigital"
 import theobjectiveSource from "../server/sources/theobjective"
+import blogosphereSource from "../server/sources/blogosphere"
 
 /**
  * Validates that a NewsItem has all required fields
@@ -91,6 +92,7 @@ describe("source Validation Tests", () => {
   testSource("The Information", theinformationSource as () => Promise<NewsItem[]>)
   testSource("Libertad Digital", libertaddigitalSource as () => Promise<NewsItem[]>)
   testSource("The Objective", theobjectiveSource as () => Promise<NewsItem[]>)
+  testSource("Blogosphere", blogosphereSource as () => Promise<NewsItem[]>)
 
   // GitHub has sub-sources, test the trending endpoint
   it("gitHub - should return valid news items", async () => {
