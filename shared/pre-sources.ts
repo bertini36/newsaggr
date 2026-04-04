@@ -163,6 +163,11 @@ export const originSources = {
     home: "https://text.blogosphere.app/",
     column: "blog",
   },
+  alphaxiv: {
+    name: "AlphaXiv",
+    home: "https://www.alphaxiv.org/",
+    column: "ai",
+  },
 } as const satisfies Record<string, OriginSource>
 
 export function genSources() {
