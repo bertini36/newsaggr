@@ -2,26 +2,25 @@ import type { NewsItem } from "@shared/types"
 import { rss2json } from "../utils/rss2json"
 
 export default defineSource(async () => {
-  // Using Google News RSS to get Reuters news since reuters.com blocks direct access
-  // This RSS feed returns news articles from Reuters via Google News indexing
-  const rssUrl = "https://news.google.com/rss/search?q=site:reuters.com&hl=en-US&gl=US&ceid=US:en"
+  // Reuters blocks direct access and Google News RSS is blocked from Cloudflare's
+  // datacenter egress, so we use Bing News, which serves Reuters articles reliably.
+  const rssUrl = "https://www.bing.com/news/search?q=site%3Areuters.com&format=rss&setlang=en-US&cc=US"
   const data = await rss2json(rssUrl)
 
   if (!data?.items.length) {
     throw new Error("Cannot fetch Reuters RSS data")
   }
 
-  // Map items to news format
-  // Google News links redirect to Reuters, title includes " - Reuters" suffix
+  // Bing wraps article links in a redirect; the real reuters.com URL sits in the "url" param.
   const news: NewsItem[] = data.items
     .map((item) => {
-      // Clean up the title by removing " - Reuters" suffix
-      const title = (item.title || "").replace(/\s*-\s*Reuters\s*$/i, "").trim()
+      const link = item.link || ""
+      const realUrl = new URL(link).searchParams.get("url") || link
 
       return {
-        title,
-        url: item.link || "",
-        id: item.id || item.link || "",
+        title: (item.title || "").trim(),
+        url: realUrl,
+        id: realUrl,
         pubDate: item.created,
       }
     })
@@ -31,7 +30,6 @@ export default defineSource(async () => {
     throw new Error("Cannot fetch Reuters data from RSS feed")
   }
 
-  // Sort by pubDate (newest first)
   news.sort((a, b) => {
     if (!a.pubDate && !b.pubDate) return 0
     if (!a.pubDate) return 1
