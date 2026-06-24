@@ -1,37 +1,50 @@
 import type { NewsItem } from "@shared/types"
 import { rss2json } from "../utils/rss2json"
 
+// The Information's own Atom feed is the cleanest source but its bot protection
+// rejects some server clients; Bing News is the fallback. Google News is unusable
+// because it is blocked from Cloudflare's datacenter egress.
+const bingUrl = "https://www.bing.com/news/search?q=site%3Atheinformation.com&format=rss&setlang=en-US&cc=US"
+
+async function fromNativeFeed(): Promise<NewsItem[]> {
+  const data = await rss2json("https://www.theinformation.com/feed")
+  return (data?.items ?? []).map(item => ({
+    title: (item.title || "").trim(),
+    url: item.link || "",
+    id: item.link || "",
+    pubDate: item.created,
+  }))
+}
+
+async function fromBing(): Promise<NewsItem[]> {
+  const data = await rss2json(bingUrl)
+  return (data?.items ?? []).map((item) => {
+    const link = item.link || ""
+    // Bing wraps links in a redirect; the real article URL sits in the "url" param.
+    let url = link
+    try {
+      url = new URL(link).searchParams.get("url") || link
+    } catch {
+      // Keep the raw link if it is not a parseable URL.
+    }
+    return { title: (item.title || "").trim(), url, id: url, pubDate: item.created }
+  })
+}
+
 export default defineSource(async () => {
-  // Using Google News RSS to get The Information news since theinformation.com blocks direct access
-  // This RSS feed returns news articles from The Information via Google News indexing
-  const rssUrl = "https://news.google.com/rss/search?q=site:theinformation.com&hl=en-US&gl=US&ceid=US:en"
-  const data = await rss2json(rssUrl)
-
-  if (!data?.items.length) {
-    throw new Error("Cannot fetch The Information RSS data")
+  let news: NewsItem[] = []
+  try {
+    news = await fromNativeFeed()
+  } catch {
+    // The native feed blocked us; fall through to Bing.
   }
+  if (!news.length) news = await fromBing()
 
-  // Map items to news format
-  // Google News links redirect to The Information, title may include " - The Information" suffix
-  const news: NewsItem[] = data.items
-    .map((item) => {
-      // Clean up the title by removing " - The Information" suffix
-      const title = (item.title || "").replace(/\s*-\s*The Information\s*$/i, "").trim()
-
-      return {
-        title,
-        url: item.link || "",
-        id: item.id || item.link || "",
-        pubDate: item.created,
-      }
-    })
-    .filter(item => item.title && item.url)
-
+  news = news.filter(item => item.title && item.url)
   if (news.length === 0) {
-    throw new Error("Cannot fetch The Information data from RSS feed")
+    throw new Error("Cannot fetch The Information data")
   }
 
-  // Sort by pubDate (newest first)
   news.sort((a, b) => {
     if (!a.pubDate && !b.pubDate) return 0
     if (!a.pubDate) return 1
