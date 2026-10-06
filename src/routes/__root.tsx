@@ -10,7 +10,6 @@ import { GlobalOverlayScrollbar } from "~/components/common/overlay-scrollbar"
 import { Footer } from "~/components/footer"
 import { Toast } from "~/components/common/toast"
 import { SearchBar } from "~/components/common/search-bar"
-import { GoogleAnalytics } from "~/components/common/google-analytics"
 
 import { darkModeAtom } from "~/atoms/theme"
 
@@ -55,7 +54,6 @@ function RootComponent() {
 
   return (
     <>
-      <GoogleAnalytics />
       <GlobalOverlayScrollbar
         className={$([
           !isMobile && "px-4",
