@@ -23,7 +23,7 @@ This project is heavily based on [ourongxing/newsnow](https://github.com/ourongx
 
 ## Live Version 🌐
 
-Want to see it in action? You can find the production version here: [newsaggr.online](https://newsaggr.online/)
+Want to see it in action? You can find the production version here: [newsaggr.pages.dev](https://newsaggr.pages.dev/)
 
 ## Data Sources 📡
 
