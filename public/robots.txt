@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://newsaggr.online/sitemap.xml
+Sitemap: https://newsaggr.pages.dev/sitemap.xml
