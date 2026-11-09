@@ -103,11 +103,6 @@ button {
   user-select: none;
 }
 
-#dropdown-menu li {
-  --at-apply: rounded-md flex items-center p-1 gap-1 cursor-pointer text-neutral-800 dark:text-white [&_*]:cursor-pointer;
-}
-
-
 .grabbing * {
   cursor: grabbing;
 }

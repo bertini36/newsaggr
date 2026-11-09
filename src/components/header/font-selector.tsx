@@ -6,63 +6,48 @@ export function FontSelector() {
 
   const currentFont = fonts.find(f => f.id === fontId)
 
-  const handleToggle = (e: React.MouseEvent) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setExpanded(prev => !prev)
-  }
-
-  const handleSelectFont = (e: React.MouseEvent, id: string) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setFont(id)
-    setExpanded(false)
-  }
-
   return (
-    <li
-      onClick={handleToggle}
-      onMouseDown={e => e.stopPropagation()}
-      onTouchStart={e => e.stopPropagation()}
-      className="relative flex items-center gap-2 px-4 py-3 cursor-pointer hover:bg-neutral-100 dark:hover:bg-white/10 rounded-md transition-colors text-neutral-800 dark:text-white select-none"
-    >
-      <span className="i-ph:text-aa inline-block" />
-      <span>Font</span>
-      <div className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
-        <span className="text-sm truncate max-w-20">{currentFont?.name || "Roboto Flex"}</span>
-        <span className={$("i-ph:caret-down inline-block transition-transform text-xs", expanded && "rotate-180")} />
-      </div>
+    <li>
+      <button
+        type="button"
+        aria-expanded={expanded}
+        onClick={() => setExpanded(prev => !prev)}
+        className="flex w-full items-center gap-3 px-4 min-h-12 rounded-md text-left cursor-pointer text-neutral-800 dark:text-white hover:bg-neutral-100 dark:hover:bg-white/10 active:bg-neutral-500/15 transition-colors"
+      >
+        <span className="i-ph:text-aa text-lg" />
+        <span>Font</span>
+        <span className="flex items-center gap-1 ml-auto text-neutral-500 dark:text-neutral-400">
+          <span className="text-sm truncate max-w-28">{currentFont?.name || "Roboto Flex"}</span>
+          <span className={$("i-ph:caret-down text-xs transition-transform", expanded && "rotate-180")} />
+        </span>
+      </button>
       {expanded && (
-        <div
-          onClick={e => e.stopPropagation()}
-          onMouseDown={e => e.stopPropagation()}
-          onTouchStart={e => e.stopPropagation()}
-          className="absolute left-0 right-0 top-full z-1000 mt-1 max-h-60 overflow-y-auto py-1 px-2 bg-white dark:bg-github-card border border-neutral-200 dark:border-github-border rounded-lg shadow-lg"
-        >
+        <ul className="mt-1 mb-1 max-h-60 overflow-y-auto overscroll-contain rounded-lg border border-neutral-200 dark:border-github-border p-1">
           {fonts.map(font => (
-            <div
-              key={font.id}
-              onClick={e => handleSelectFont(e, font.id)}
-              className={$([
-                "px-3 py-2.5 cursor-pointer rounded-md transition-colors text-sm",
-                fontId === font.id
-                  ? "bg-neutral-200 dark:bg-white/20 text-neutral-900 dark:text-white"
-                  : "hover:bg-neutral-100 dark:hover:bg-white/10 text-neutral-700 dark:text-neutral-300",
-              ])}
-              style={{ fontFamily: font.family }}
-            >
-              <div className="flex items-center justify-between">
-                <span>{font.name}</span>
-                {fontId === font.id && (
-                  <span className="i-ph:check text-green-600 dark:text-green-400" />
-                )}
-              </div>
-              <span className="text-xs text-neutral-500 dark:text-neutral-400 capitalize">
-                {font.category}
-              </span>
-            </div>
+            <li key={font.id}>
+              <button
+                type="button"
+                onClick={() => {
+                  setFont(font.id)
+                  setExpanded(false)
+                }}
+                className={$([
+                  "flex w-full items-center justify-between gap-2 px-3 min-h-11 rounded-md text-left text-sm cursor-pointer transition-colors",
+                  fontId === font.id
+                    ? "bg-neutral-200 dark:bg-white/20 text-neutral-900 dark:text-white"
+                    : "hover:bg-neutral-100 dark:hover:bg-white/10 text-neutral-700 dark:text-neutral-300",
+                ])}
+                style={{ fontFamily: font.family }}
+              >
+                <span className="flex flex-col">
+                  <span>{font.name}</span>
+                  <span className="text-xs text-neutral-500 dark:text-neutral-400 capitalize">{font.category}</span>
+                </span>
+                {fontId === font.id && <span className="i-ph:check text-green-600 dark:text-green-400" />}
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </li>
   )
