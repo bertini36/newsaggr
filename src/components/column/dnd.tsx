@@ -8,12 +8,12 @@ import { useThrottleFn } from "ahooks"
 import { useAutoAnimate } from "@formkit/auto-animate/react"
 import { motion } from "framer-motion"
 import { useWindowSize } from "react-use"
-import { isMobile } from "react-device-detect"
 import { DndContext } from "../common/dnd"
 import { useSortable } from "../common/dnd/useSortable"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import type { ItemsProps } from "./card"
 import { CardWrapper } from "./card"
+import { SourcePager } from "./source-pager"
 import { useSearchBar } from "~/hooks/useSearch"
 import { currentSourcesAtom } from "~/atoms"
 import { DARK_MODE_INVERT_LOGOS } from "~/utils"
@@ -32,6 +32,20 @@ export function Dnd() {
 
   const { toggle } = useSearchBar()
 
+  const isPhone = useIsPhone()
+  const pagerRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
+
+  const syncActiveIndex = useCallback(() => {
+    const el = pagerRef.current
+    if (el) setActiveIndex(getPageIndex(el.scrollLeft, el.clientWidth, items.length))
+  }, [items.length])
+
+  const scrollToPage = useCallback((index: number) => {
+    const el = pagerRef.current
+    el?.scrollTo({ left: index * el.clientWidth, behavior: "smooth" })
+  }, [])
+
   if (!items.length) {
     return (
       <div className="flex flex-col items-center justify-center p-8 mt-16">
@@ -42,102 +56,103 @@ export function Dnd() {
             <p>
               Your news feed is currently empty.
             </p>
-            <p className="flex items-center justify-center gap-1 flex-wrap">
-              <span
-                className="flex items-center gap-1 font-semibold text-primary-600 dark:text-primary cursor-pointer hover:underline"
-                onClick={() => toggle(true)}
-              >
-                <span className="i-ph:list-plus" />
-                Add sources
-              </span>
-              to get started, or click the
-              <span className="i-ph:dots-three-circle text-xl text-neutral-700 dark:text-neutral-300" />
-              menu in the navbar.
-            </p>
+            <button
+              type="button"
+              onClick={() => toggle(true)}
+              className="mt-2 inline-flex items-center justify-center gap-2 self-center h-12 px-6 rounded-full font-semibold cursor-pointer bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 active:opacity-80 transition-opacity"
+            >
+              <span className="i-ph:list-plus text-lg" />
+              Add sources
+            </button>
           </div>
         </div>
       </div>
     )
   }
 
-  return (
-    <DndWrapper items={items} setItems={setItems} isSingleColumn={isMobile}>
-      <OverlayScrollbar defer className="overflow-x-auto">
-        <motion.ol
-          className={isMobile
-            ? "flex px-4 gap-6 pb-4 scroll-smooth after:content-[''] after:w-1 after:flex-shrink-0"
-            : "grid w-full gap-6 p-2"}
-          ref={parent}
-          style={isMobile
-            ? {
-              // Horizontal scrolling layout
-              }
-            : {
-                gridTemplateColumns: `repeat(auto-fill, minmax(${minWidth}px, 1fr))`,
-              }}
-          initial="hidden"
-          animate="visible"
+  const list = (
+    <motion.ol
+      className={isPhone ? "flex" : "grid w-full gap-6 p-2"}
+      ref={parent}
+      style={isPhone
+        ? undefined
+        : {
+            gridTemplateColumns: `repeat(auto-fill, minmax(${minWidth}px, 1fr))`,
+          }}
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: {
+          opacity: 0,
+        },
+        visible: {
+          opacity: 1,
+          transition: {
+            delayChildren: 0.1,
+            staggerChildren: 0.1,
+          },
+        },
+      }}
+    >
+      {items.map((id, index) => (
+        <motion.li
+          key={id}
+          className={$(isPhone && "w-full shrink-0 snap-start snap-always")}
+          transition={{
+            type: "tween",
+            duration: AnimationDuration / 1000,
+          }}
           variants={{
             hidden: {
+              y: 20,
               opacity: 0,
             },
             visible: {
+              y: 0,
               opacity: 1,
-              transition: {
-                delayChildren: 0.1,
-                staggerChildren: 0.1,
-              },
             },
           }}
         >
-          {items.map((id, index) => (
-            <motion.li
-              key={id}
-              className={$(isMobile && "flex-shrink-0")}
-              style={isMobile ? { width: `${width - 32 > WIDTH ? WIDTH : width - 32}px` } : undefined}
-              transition={{
-                type: "tween",
-                duration: AnimationDuration / 1000,
-              }}
-              variants={{
-                hidden: {
-                  y: 20,
-                  opacity: 0,
-                },
-                visible: {
-                  y: 0,
-                  opacity: 1,
-                },
-              }}
-            >
-              <SortableCardWrapper
-                id={id}
-                index={index}
-                totalItems={items.length}
-                onMoveLeft={() => {
-                  if (index > 0) {
-                    const newItems = [...items]
+          <SortableCardWrapper
+            id={id}
+            index={index}
+            totalItems={items.length}
+            onMoveLeft={() => {
+              if (index > 0) {
+                const newItems = [...items]
                       ;[newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]]
-                    setItems(newItems)
-                  }
-                }}
-                onMoveRight={() => {
-                  if (index < items.length - 1) {
-                    const newItems = [...items]
+                setItems(newItems)
+              }
+            }}
+            onMoveRight={() => {
+              if (index < items.length - 1) {
+                const newItems = [...items]
                       ;[newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]]
-                    setItems(newItems)
-                  }
-                }}
-              />
-            </motion.li>
-          ))}
-        </motion.ol>
-      </OverlayScrollbar>
-      {isMobile && (
-        <div className="flex justify-center">
-          <span className="text-sm text-gray-500 text-center">Swipe to see more</span>
-        </div>
-      )}
+                setItems(newItems)
+              }
+            }}
+          />
+        </motion.li>
+      ))}
+    </motion.ol>
+  )
+
+  return (
+    <DndWrapper items={items} setItems={setItems} isSingleColumn={isPhone}>
+      {isPhone
+        ? (
+            <>
+              <div
+                ref={pagerRef}
+                onScroll={syncActiveIndex}
+                className="overflow-x-auto snap-x snap-mandatory overscroll-x-contain scrollbar-hidden"
+              >
+                {list}
+              </div>
+              <SourcePager items={items} activeIndex={Math.min(activeIndex, items.length - 1)} onSelect={scrollToPage} />
+            </>
+          )
+        : <OverlayScrollbar defer className="overflow-x-auto">{list}</OverlayScrollbar>}
     </DndWrapper>
   )
 }

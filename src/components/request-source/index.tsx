@@ -21,7 +21,7 @@ function LoginPrompt() {
             type="button"
             onClick={loginWithGoogle}
             className={$([
-              "flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors",
+              "flex items-center gap-2 px-5 min-h-11 rounded-md cursor-pointer transition-colors",
               "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
               "hover:bg-neutral-700 dark:hover:bg-neutral-200",
             ])}
@@ -35,7 +35,7 @@ function LoginPrompt() {
             type="button"
             onClick={loginWithGithub}
             className={$([
-              "flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors",
+              "flex items-center gap-2 px-5 min-h-11 rounded-md cursor-pointer transition-colors",
               "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
               "hover:bg-neutral-700 dark:hover:bg-neutral-200",
             ])}
@@ -137,7 +137,7 @@ export function RequestSource() {
 
       <div
         className={$([
-          "p-6 rounded-lg",
+          "p-4 md:p-6 rounded-lg",
           "bg-white dark:bg-github-card",
           "border border-neutral-200 dark:border-github-border",
         ])}
@@ -159,7 +159,7 @@ export function RequestSource() {
               onChange={e => setSourceName(e.target.value)}
               placeholder="e.g. TechCrunch, El País..."
               className={$([
-                "px-4 py-2 rounded-md",
+                "px-4 py-3 rounded-md",
                 "bg-neutral-50 dark:bg-neutral-800",
                 "border border-neutral-200 dark:border-neutral-700",
                 "text-neutral-900 dark:text-white",
@@ -182,7 +182,7 @@ export function RequestSource() {
               onChange={e => setCategory(e.target.value)}
               placeholder="Select or type a category..."
               className={$([
-                "px-4 py-2 rounded-md",
+                "px-4 py-3 rounded-md",
                 "bg-neutral-50 dark:bg-neutral-800",
                 "border border-neutral-200 dark:border-neutral-700",
                 "text-neutral-900 dark:text-white",
@@ -209,7 +209,7 @@ export function RequestSource() {
               onChange={e => setUrl(e.target.value)}
               placeholder="https://example.com/news"
               className={$([
-                "px-4 py-2 rounded-md",
+                "px-4 py-3 rounded-md",
                 "bg-neutral-50 dark:bg-neutral-800",
                 "border border-neutral-200 dark:border-neutral-700",
                 "text-neutral-900 dark:text-white",
@@ -232,7 +232,7 @@ export function RequestSource() {
               type="submit"
               disabled={isSubmitting}
               className={$([
-                "flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors",
+                "flex-1 flex items-center justify-center gap-2 px-4 min-h-12 rounded-md cursor-pointer transition-colors",
                 "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
                 "hover:bg-neutral-700 dark:hover:bg-neutral-200",
                 "disabled:opacity-50 disabled:cursor-not-allowed",
@@ -255,7 +255,7 @@ export function RequestSource() {
             <Link
               to="/"
               className={$([
-                "px-4 py-2 rounded-md cursor-pointer transition-colors",
+                "inline-flex items-center px-5 min-h-12 rounded-md cursor-pointer transition-colors",
                 "bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-300",
                 "hover:bg-neutral-200 dark:hover:bg-neutral-700",
               ])}

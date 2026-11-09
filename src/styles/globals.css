@@ -1,6 +1,11 @@
 @import url(@unocss/reset/tailwind.css);
 @import url(overlayscrollbars/overlayscrollbars.css);
 
+:root {
+  --header-h: 3rem;
+  --tabbar-h: 3.5rem;
+}
+
 html,
 body,
 #app {
@@ -8,6 +13,21 @@ body,
   height: 100dvh; /* Dynamic viewport height for mobile */
   margin: 0;
   padding: 0;
+}
+
+/* One source fills the screen between the header and the source bar */
+.phone-card-h {
+  height: calc(100dvh - var(--header-h) - var(--tabbar-h) - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+}
+
+html,
+body {
+  /* Stops a stray flick from pulling the installed app into a full reload */
+  overscroll-behavior: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 @font-face {
@@ -82,11 +102,6 @@ button {
   cursor: default;
   user-select: none;
 }
-
-#dropdown-menu li {
-  --at-apply: rounded-md flex items-center p-1 gap-1 cursor-pointer text-neutral-800 dark:text-white [&_*]:cursor-pointer;
-}
-
 
 .grabbing * {
   cursor: grabbing;

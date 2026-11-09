@@ -8,10 +8,23 @@ const pwaOption: Partial<VitePWAOptions> = {
   manifest: {
     name: "NewsAggr",
     short_name: "NewsAggr",
+    description: "Real-time news aggregator bringing you the latest headlines from top sources",
     lang: "en",
     dir: "ltr",
+    id: "/",
+    start_url: "/",
+    scope: "/",
+    display: "standalone",
+    categories: ["news"],
     theme_color: "#0d1117",
     background_color: "#0d1117",
+    shortcuts: [
+      {
+        name: "Saved news",
+        url: "/saved",
+        icons: [{ src: "pwa-192x192.png", sizes: "192x192", type: "image/png" }],
+      },
+    ],
     icons: [
       // Light mode icons (default)
       {

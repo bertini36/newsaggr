@@ -34,6 +34,7 @@ export default defineConfig({
     "color-base": "color-neutral-800 dark:color-github-text",
     "bg-base": "bg-zinc-200 dark:bg-github-main",
     "btn": "op50 hover:op85 cursor-pointer transition-all",
+    "icon-btn": "inline-flex items-center justify-center shrink-0 size-11 rounded-full text-xl text-neutral-500 hover:text-neutral-800 dark:text-neutral-400 dark:hover:text-white active:bg-neutral-500/15 transition-colors cursor-pointer",
   },
   safelist: [
     ...["orange", ...new Set(Object.values(sources).map(k => k.name))].map(k =>
