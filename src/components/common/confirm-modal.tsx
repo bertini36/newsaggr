@@ -71,7 +71,7 @@ export function ConfirmModal({
                 onClick={onCancel}
                 disabled={isLoading}
                 className={$([
-                  "px-4 py-2 rounded-md transition-colors cursor-pointer",
+                  "px-5 min-h-11 rounded-md transition-colors cursor-pointer",
                   "bg-neutral-100 hover:bg-neutral-200",
                   "dark:bg-white/10 dark:hover:bg-white/20",
                   "text-neutral-700 dark:text-neutral-300",
@@ -85,7 +85,7 @@ export function ConfirmModal({
                 onClick={onConfirm}
                 disabled={isLoading}
                 className={$([
-                  "px-4 py-2 rounded-md transition-colors cursor-pointer",
+                  "px-5 min-h-11 rounded-md transition-colors cursor-pointer",
                   "bg-red-400 hover:bg-red-500",
                   "text-white",
                   "disabled:opacity-50 disabled:cursor-not-allowed",
