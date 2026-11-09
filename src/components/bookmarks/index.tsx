@@ -1,23 +1,27 @@
-import { useTitle, useWindowSize } from "react-use"
+import { useTitle } from "react-use"
 import { Link } from "@tanstack/react-router"
 import type { BookmarkItem } from "~/atoms/bookmarks"
 import { ConfirmModal } from "~/components/common/confirm-modal"
 import { DARK_MODE_INVERT_LOGOS } from "~/utils"
 
 function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete: (id: number) => void }) {
-  const { width } = useWindowSize()
+  const isPhone = useIsPhone()
   const sourceInfo = sources[bookmark.source_id]
   const relativeTime = useRelativeTime(bookmark.pub_date || bookmark.created)
 
   return (
     <div
-      className={$([
-        "flex items-start gap-3 p-4 rounded-lg",
-        "bg-white dark:bg-github-card",
-        "border border-neutral-200 dark:border-github-border",
-        "shadow-sm dark:shadow-none",
-        "transition-all hover:shadow-md dark:hover:border-neutral-600",
-      ])}
+      className={$(
+        "flex items-start gap-3 p-4",
+        isPhone
+          ? "border-b border-neutral-200 dark:border-white/10"
+          : [
+              "rounded-lg bg-white dark:bg-github-card",
+              "border border-neutral-200 dark:border-github-border",
+              "shadow-sm dark:shadow-none",
+              "transition-all hover:shadow-md dark:hover:border-neutral-600",
+            ],
+      )}
     >
       {/* Source icon */}
       <a
@@ -45,12 +49,12 @@ function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete
               {sourceInfo.title}
             </span>
           )}
-          <span className="text-xs text-neutral-400">
+          <span className="text-xs text-neutral-500 dark:text-neutral-400">
             {relativeTime}
           </span>
         </div>
         <a
-          href={width < 768 ? bookmark.mobile_url || bookmark.url : bookmark.url}
+          href={isPhone ? bookmark.mobile_url || bookmark.url : bookmark.url}
           target="_blank"
           rel="noopener noreferrer"
           className={$([
@@ -65,13 +69,11 @@ function BookmarkCard({ bookmark, onDelete }: { bookmark: BookmarkItem, onDelete
       <button
         type="button"
         onClick={() => onDelete(bookmark.id)}
-        className={$([
-          "flex-shrink-0 p-2 rounded-md transition-colors cursor-pointer",
-          "text-neutral-500 dark:text-neutral-400 hover:text-red-400 hover:bg-red-400/10 dark:hover:bg-red-400/20",
-        ])}
+        className="icon-btn -my-1 -mr-2 hover:text-red-400! hover:bg-red-400/10 dark:hover:bg-red-400/20"
         title="Remove bookmark"
+        aria-label="Remove bookmark"
       >
-        <span className="i-ph:trash text-xl block cursor-pointer" />
+        <span className="i-ph:trash" />
       </button>
     </div>
   )
@@ -90,7 +92,7 @@ function EmptyState() {
       <Link
         to="/"
         className={$([
-          "px-4 py-2 rounded-md cursor-pointer transition-colors",
+          "inline-flex items-center px-5 min-h-11 rounded-md cursor-pointer transition-colors",
           "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
           "hover:bg-neutral-700 dark:hover:bg-neutral-200",
         ])}
@@ -119,7 +121,7 @@ function LoginPrompt() {
             type="button"
             onClick={loginWithGoogle}
             className={$([
-              "flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors",
+              "flex items-center gap-2 px-5 min-h-11 rounded-md cursor-pointer transition-colors",
               "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
               "hover:bg-neutral-700 dark:hover:bg-neutral-200",
             ])}
@@ -133,7 +135,7 @@ function LoginPrompt() {
             type="button"
             onClick={loginWithGithub}
             className={$([
-              "flex items-center gap-2 px-4 py-2 rounded-md cursor-pointer transition-colors",
+              "flex items-center gap-2 px-5 min-h-11 rounded-md cursor-pointer transition-colors",
               "bg-neutral-900 dark:bg-white text-white dark:text-neutral-900",
               "hover:bg-neutral-700 dark:hover:bg-neutral-200",
             ])}
@@ -173,8 +175,8 @@ export function Bookmarks() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4">
-      <div className="flex items-center justify-between mb-6">
+    <div className="max-w-4xl mx-auto md:px-4">
+      <div className="flex items-center justify-between px-4 md:px-0 mb-3 md:mb-6">
         <h1 className="text-2xl font-bold flex items-center gap-2">
           <span className="i-ph:bookmark-simple-fill text-red-400" />
           Saved news
@@ -199,7 +201,7 @@ export function Bookmarks() {
               <EmptyState />
             )
           : (
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col md:gap-3">
                 {bookmarks.map(bookmark => (
                   <BookmarkCard
                     key={bookmark.id}

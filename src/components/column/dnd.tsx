@@ -56,18 +56,14 @@ export function Dnd() {
             <p>
               Your news feed is currently empty.
             </p>
-            <p className="flex items-center justify-center gap-1 flex-wrap">
-              <span
-                className="flex items-center gap-1 font-semibold text-primary-600 dark:text-primary cursor-pointer hover:underline"
-                onClick={() => toggle(true)}
-              >
-                <span className="i-ph:list-plus" />
-                Add sources
-              </span>
-              to get started, or click the
-              <span className="i-ph:dots-three-circle text-xl text-neutral-700 dark:text-neutral-300" />
-              menu in the navbar.
-            </p>
+            <button
+              type="button"
+              onClick={() => toggle(true)}
+              className="mt-2 inline-flex items-center justify-center gap-2 self-center h-12 px-6 rounded-full font-semibold cursor-pointer bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 active:opacity-80 transition-opacity"
+            >
+              <span className="i-ph:list-plus text-lg" />
+              Add sources
+            </button>
           </div>
         </div>
       </div>
