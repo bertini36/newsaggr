@@ -38,6 +38,29 @@
     transform: translate(round(-50%, 1px), round(-50%, 1px));
 }
 
+@media (max-width: 767px) {
+    /* The source picker takes the whole screen on phones */
+    [cmdk-dialog] {
+        inset: 0;
+        width: 100vw;
+        max-width: none;
+        height: 100dvh;
+        border: 0;
+        transform: none;
+        padding-top: env(safe-area-inset-top);
+    }
+
+    [cmdk-input] {
+        padding-right: 4rem;
+    }
+
+    [cmdk-list] {
+        max-height: none;
+        height: calc(100dvh - 5rem - env(safe-area-inset-top));
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
 [cmdk-dialog] {
     transition: opacity;
     transform-origin: center center;

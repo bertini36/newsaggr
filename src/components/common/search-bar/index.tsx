@@ -72,11 +72,21 @@ export function SearchBar() {
         }
       }}
     >
-      <Command.Input
-        ref={inputRef}
-        autoFocus
-        placeholder="Search what you want"
-      />
+      <div className="relative">
+        <Command.Input
+          ref={inputRef}
+          autoFocus
+          placeholder="Search what you want"
+        />
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={() => toggle(false)}
+          className="icon-btn absolute right-2 top-1/2 -translate-y-1/2 md:hidden"
+        >
+          <span className="i-ph:x" />
+        </button>
+      </div>
       <div className="md:flex">
         <OverlayScrollbar defer className="overflow-y-auto md:min-w-275px border-r border-[#d4d4d4] dark:border-github-border">
           <Command.List>
@@ -128,7 +138,7 @@ function SourceItem({ item, onHover }: {
       <Command.Item
         keywords={[item.name, item.title ?? "", item.pinyin]}
         value={item.id}
-        className="flex justify-between items-center p-2 cursor-pointer [&_*]:cursor-pointer"
+        className="flex justify-between items-center p-2 min-h-12 md:min-h-0 cursor-pointer [&_*]:cursor-pointer"
         onSelect={handleSelect}
         onMouseEnter={() => onHover(item.id)}
         title={isFocused ? "Remove from focus" : "Add to Focus"}
