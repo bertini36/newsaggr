@@ -2,7 +2,6 @@ import type { NewsItem, SourceID, SourceResponse } from "@shared/types"
 import { useQuery } from "@tanstack/react-query"
 import { useInView } from "framer-motion"
 import { forwardRef, useImperativeHandle } from "react"
-import { isMobile } from "react-device-detect"
 import { DARK_MODE_INVERT_LOGOS, safeParseString } from "~/utils"
 import { ConfirmModal } from "~/components/common/confirm-modal"
 
@@ -29,6 +28,7 @@ interface NewsCardProps {
 
 export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, onMoveLeft, onMoveRight, canMoveLeft, canMoveRight, style, ...props }, dndRef) => {
   const ref = useRef<HTMLDivElement>(null)
+  const isPhone = useIsPhone()
   const lastTapRef = useRef<{ time: number, side: "left" | "right" } | null>(null)
 
   const inView = useInView(ref, {
@@ -39,7 +39,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
 
   // Handle double-tap on left/right edges (mobile only)
   const handleDoubleTap = useCallback((side: "left" | "right") => {
-    if (!isMobile) return
+    if (!isPhone) return
 
     const now = Date.now()
     const lastTap = lastTapRef.current
@@ -55,15 +55,16 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
     } else {
       lastTapRef.current = { time: now, side }
     }
-  }, [canMoveLeft, canMoveRight, onMoveLeft, onMoveRight])
+  }, [isPhone, canMoveLeft, canMoveRight, onMoveLeft, onMoveRight])
 
   return (
     <div
       ref={ref}
       className={$(
-        "relative flex flex-col h-[calc(100vh-250px)] min-h-500px max-md:h-[calc(100dvh-170px)] max-md:min-h-[calc(100dvh-170px)] p-4 cursor-default border border-neutral-200 dark:border-github-border rounded-lg dark:bg-github-card",
-        "transition-opacity-300",
-        // `bg-white dark:bg-neutral-800`, // Removed background for minimal style
+        "relative flex flex-col cursor-default transition-opacity-300",
+        isPhone
+          ? "phone-card-h px-3"
+          : "h-[calc(100vh-250px)] min-h-500px p-4 border border-neutral-200 dark:border-github-border rounded-lg dark:bg-github-card",
       )}
       style={{
         transformOrigin: "50% 50%",
@@ -72,7 +73,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       {...props}
     >
       {/* Mobile double-tap zones - only in header area to avoid blocking bookmark buttons */}
-      {isMobile && onMoveLeft && onMoveRight && (
+      {isPhone && onMoveLeft && onMoveRight && (
         <>
           <div
             className="absolute left-0 top-0 h-12 w-12 z-10"

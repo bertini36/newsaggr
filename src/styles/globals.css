@@ -3,6 +3,7 @@
 
 :root {
   --header-h: 3rem;
+  --tabbar-h: 3.5rem;
 }
 
 html,
@@ -12,6 +13,11 @@ body,
   height: 100dvh; /* Dynamic viewport height for mobile */
   margin: 0;
   padding: 0;
+}
+
+/* One source fills the screen between the header and the source bar */
+.phone-card-h {
+  height: calc(100dvh - var(--header-h) - var(--tabbar-h) - env(safe-area-inset-top) - env(safe-area-inset-bottom));
 }
 
 html,
