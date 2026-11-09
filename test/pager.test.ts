@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest"
-import { getPageIndex } from "../src/utils/pager"
+import { getPageIndex } from "../shared/pager"
 
 describe("getPageIndex", () => {
   it("returns 0 at the start", () => {
