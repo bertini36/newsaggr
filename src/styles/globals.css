@@ -1,6 +1,10 @@
 @import url(@unocss/reset/tailwind.css);
 @import url(overlayscrollbars/overlayscrollbars.css);
 
+:root {
+  --header-h: 3rem;
+}
+
 html,
 body,
 #app {

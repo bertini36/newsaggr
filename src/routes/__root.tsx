@@ -4,7 +4,6 @@ import { Outlet, createRootRouteWithContext } from "@tanstack/react-router"
 import { TanStackRouterDevtools } from "@tanstack/router-devtools"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import type { QueryClient } from "@tanstack/react-query"
-import { isMobile } from "react-device-detect"
 import { Header } from "~/components/header"
 import { GlobalOverlayScrollbar } from "~/components/common/overlay-scrollbar"
 import { Footer } from "~/components/footer"
@@ -57,7 +56,6 @@ function RootComponent() {
     <>
       <GlobalOverlayScrollbar
         className={$([
-          !isMobile && "px-4",
           "h-full overflow-x-auto",
           "md:(px-10)",
           "lg:(px-24)",
@@ -66,7 +64,9 @@ function RootComponent() {
       >
         <header
           className={$([
-            "grid items-center py-4 px-5",
+            "grid items-center px-3 pt-[env(safe-area-inset-top)]",
+            "h-[calc(var(--header-h)+env(safe-area-inset-top))]",
+            "md:(h-auto py-4 px-5)",
             "lg:(py-6)",
             "sticky top-0 z-50",
             "bg-[#FBFBFB] dark:bg-github-main transition-colors duration-300",
@@ -78,9 +78,7 @@ function RootComponent() {
           <Header />
         </header>
         <main className={$([
-          "mt-2",
-          "min-h-[calc(100dvh-180px)]",
-          "md:(min-h-[calc(100dvh-175px)])",
+          "md:(mt-2 min-h-[calc(100dvh-175px)])",
           "lg:(min-h-[calc(100dvh-194px)])",
           "transition-colors duration-300",
         ])}

@@ -29,36 +29,31 @@ export function Menu() {
 
   return (
     <span ref={ref} className="relative">
-      <span className="flex items-center">
+      <button
+        type="button"
+        title="Menu"
+        aria-label="Menu"
+        aria-expanded={shown}
+        onClick={() => show(!shown)}
+        className={$("icon-btn", shown && "text-neutral-800 dark:text-white")}
+      >
         {
           enableLogin && loggedIn && userInfo.avatar
             ? (
-                <button
-                  type="button"
-                  onClick={() => show(!shown)}
-                  className="h-6 w-6 rounded-full bg-cover"
+                <span
+                  className="h-7 w-7 rounded-full bg-cover"
                   style={
                     {
-                      backgroundImage: `url(${userInfo.type === "github" ? `${userInfo.avatar}&s=24` : userInfo.avatar})`,
+                      backgroundImage: `url(${userInfo.type === "github" ? `${userInfo.avatar}&s=56` : userInfo.avatar})`,
                     }
                   }
-                >
-                </button>
-              )
-            : (
-                <button
-                  type="button"
-                  onClick={() => show(!shown)}
-                  className={$(
-                    "i-ph:dots-three-circle text-2xl transition-colors cursor-pointer",
-                    shown ? "text-neutral-600 dark:text-white" : "text-neutral-400 hover:text-neutral-600 dark:hover:text-white",
-                  )}
                 />
               )
+            : <span className="i-ph:dots-three-circle text-2xl" />
         }
-      </span>
+      </button>
       {shown && (
-        <div className="absolute right-0 z-999 bg-transparent pt-4 top-4">
+        <div className="absolute right-0 z-999 bg-transparent pt-1 top-full">
           <motion.div
             id="dropdown-menu"
             className={$([
