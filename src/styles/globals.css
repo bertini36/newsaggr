@@ -10,6 +10,16 @@ body,
   padding: 0;
 }
 
+html,
+body {
+  /* Stops a stray flick from pulling the installed app into a full reload */
+  overscroll-behavior: none;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 @font-face {
   font-family: 'New York';
   src: url("/NewYork.ttf") format('truetype');

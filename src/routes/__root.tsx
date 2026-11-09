@@ -41,6 +41,7 @@ function RootComponent() {
     } else {
       root.classList.remove("dark")
     }
+    document.querySelector("meta[name=theme-color]")?.setAttribute("content", isDark ? "#0d1117" : "#fbfbfb")
   }, [isDark])
 
   useEffect(() => {

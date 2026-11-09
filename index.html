@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, interactive-widget=resizes-content" />
   <!-- SEO Meta Tags -->
   <meta name="description"
     content="NewsAggr - Real-time news aggregator bringing you the latest headlines from top sources with an elegant reading experience" />
@@ -37,8 +37,13 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap"
     rel="stylesheet">
+  <!-- Optional reading fonts load without blocking the first paint -->
   <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&family=Lora:wght@400;700&family=Inter:wght@400;600&family=PT+Serif:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,700&family=IBM+Plex+Sans:wght@400;600&family=Crimson+Text:wght@400;700&family=Work+Sans:wght@400;600&display=swap"
-    rel="stylesheet">
+    rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Source+Sans+3:wght@400;600&family=Lora:wght@400;700&family=Inter:wght@400;600&family=PT+Serif:wght@400;700&family=Literata:opsz,wght@7..72,400;7..72,700&family=IBM+Plex+Sans:wght@400;600&family=Crimson+Text:wght@400;700&family=Work+Sans:wght@400;600&display=swap"
+      rel="stylesheet">
+  </noscript>
   <link rel="preload" href="/Baloo2-Bold.subset.ttf" as="font" type="font/ttf" crossorigin>
   <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 
@@ -54,6 +59,16 @@
   </script>
 
 
+
+  <script>
+    // Resolve the theme before first paint so a light-mode user never sees a dark flash
+    try {
+      const saved = localStorage.getItem("darkMode")
+      const dark = saved === null ? matchMedia("(prefers-color-scheme: dark)").matches : JSON.parse(saved)
+      document.documentElement.classList.toggle("dark", dark)
+      document.querySelector('meta[name="theme-color"]').setAttribute("content", dark ? "#0d1117" : "#fbfbfb")
+    } catch { }
+  </script>
 
   <script>
     const query = new URLSearchParams(window.location.search)
