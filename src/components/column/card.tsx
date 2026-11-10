@@ -12,13 +12,6 @@ export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   isDragging?: boolean
   setHandleRef?: (ref: HTMLElement | null) => void
-  /**
-   * Mobile reordering callbacks
-   */
-  onMoveLeft?: () => void
-  onMoveRight?: () => void
-  canMoveLeft?: boolean
-  canMoveRight?: boolean
 }
 
 interface NewsCardProps {
@@ -26,36 +19,15 @@ interface NewsCardProps {
   setHandleRef?: (ref: HTMLElement | null) => void
 }
 
-export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, onMoveLeft, onMoveRight, canMoveLeft, canMoveRight, style, ...props }, dndRef) => {
+export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, style, ...props }, dndRef) => {
   const ref = useRef<HTMLDivElement>(null)
   const isPhone = useIsPhone()
-  const lastTapRef = useRef<{ time: number, side: "left" | "right" } | null>(null)
 
   const inView = useInView(ref, {
     once: true,
   })
 
   useImperativeHandle(dndRef, () => ref.current! as HTMLDivElement)
-
-  // Handle double-tap on left/right edges (mobile only)
-  const handleDoubleTap = useCallback((side: "left" | "right") => {
-    if (!isPhone) return
-
-    const now = Date.now()
-    const lastTap = lastTapRef.current
-
-    if (lastTap && lastTap.side === side && now - lastTap.time < 300) {
-      // Double tap detected
-      if (side === "left" && canMoveLeft && onMoveLeft) {
-        onMoveLeft()
-      } else if (side === "right" && canMoveRight && onMoveRight) {
-        onMoveRight()
-      }
-      lastTapRef.current = null
-    } else {
-      lastTapRef.current = { time: now, side }
-    }
-  }, [isPhone, canMoveLeft, canMoveRight, onMoveLeft, onMoveRight])
 
   return (
     <div
@@ -72,43 +44,34 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       }}
       {...props}
     >
-      {/* Mobile double-tap zones - only in header area to avoid blocking bookmark buttons */}
-      {isPhone && onMoveLeft && onMoveRight && (
-        <>
-          <div
-            className="absolute left-0 top-0 h-12 w-12 z-10"
-            onClick={() => handleDoubleTap("left")}
-          />
-          <div
-            className="absolute right-0 top-0 h-12 w-12 z-10"
-            onClick={() => handleDoubleTap("right")}
-          />
-        </>
-      )}
-      {inView && <NewsCard key={id} id={id} setHandleRef={setHandleRef} />}
+      {inView && <NewsCard key={id} id={id} setHandleRef={isPhone ? undefined : setHandleRef} />}
     </div>
   )
 })
 
 function NewsCard({ id, setHandleRef }: NewsCardProps) {
-  const { refresh } = useRefetch()
+  const { retry } = useRefetch()
   const { data, isFetching, isError } = useQuery({
     queryKey: ["source", id],
     queryFn: async ({ queryKey }) => {
       const id = queryKey[1] as SourceID
+      const mode = refetchSources.get(id)
       let url = `/s?id=${id}`
       const headers: Record<string, any> = {}
-      if (refetchSources.has(id)) {
+      if (mode === "latest") {
         url = `/s?id=${id}&latest`
         const jwt = safeParseString(localStorage.getItem("jwt"))
         if (jwt) headers.Authorization = `Bearer ${jwt}`
-        refetchSources.delete(id)
-      } else if (cacheSources.has(id)) {
+      } else if (!mode && cacheSources.has(id)) {
         // wait animation
         await delay(200)
         return cacheSources.get(id)
       }
 
+      // Clear the mode before awaiting: a refetch that cancels this run must not fetch twice
+      refetchSources.delete(id)
+      // Counts failed requests too, so a broken source is not retried every minute
+      lastRequestedAt.set(id, Date.now())
       const response: SourceResponse = await myFetch(url, {
         headers,
       })
@@ -187,7 +150,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
               {sources[id]?.title && <span className="shrink-0 text-xs bg-neutral-500/15 px-1.5 rounded text-neutral-600 dark:text-neutral-300">{sources[id].title}</span>}
             </span>
             <span className="flex items-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-              <span className="truncate"><UpdatedTime isError={isError} updatedTime={data?.updatedTime} /></span>
+              <span className="truncate"><UpdatedTime isError={isError} isFetching={isFetching} updatedTime={data?.updatedTime} /></span>
               {sources[id].column && (
                 <span className="shrink-0 text-[11px] uppercase tracking-wider bg-neutral-500/15 px-1.5 py-0.5 rounded font-medium">
                   {metadata[sources[id].column!].name}
@@ -197,15 +160,6 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           </span>
         </div>
         <div className="flex shrink-0 items-center">
-          <button
-            type="button"
-            className="icon-btn"
-            title="Refresh"
-            aria-label={`Refresh ${sources[id].name}`}
-            onClick={() => refresh(id)}
-          >
-            <span className={$("i-ph:arrow-counter-clockwise", isFetching && "animate-spin i-ph:circle-dashed")} />
-          </button>
           <button
             type="button"
             className={$("icon-btn", isFocused && "text-red-400! dark:text-red-400!")}
@@ -220,7 +174,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className="icon-btn max-md:w-12 cursor-grab"
+              className="icon-btn cursor-grab"
             >
               <span className="i-ph:dots-six-vertical" />
             </div>
@@ -229,11 +183,10 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
       </div>
 
       <div className="h-full pb-4 overflow-y-auto overscroll-contain bg-transparent md:(px-2 pb-2)">
-        <div className={$("transition-opacity-500", isFetching && !!data?.items?.length && "op-50")}>
-          {!!data?.items?.length && <NewsList items={data.items} sourceId={id} />}
-          {!data?.items?.length && isError && <ErrorState name={sources[id].name} onRetry={() => refresh(id)} />}
-          {!data && !isError && <ListSkeleton />}
-        </div>
+        {isError && !!data?.items?.length && <StaleNotice onRetry={() => retry(id)} />}
+        {!!data?.items?.length && <NewsList items={data.items} sourceId={id} />}
+        {!data?.items?.length && isError && <ErrorState name={sources[id].name} onRetry={() => retry(id)} />}
+        {!data && !isError && <ListSkeleton />}
       </div>
 
       <ConfirmModal
@@ -249,8 +202,9 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
   )
 }
 
-function UpdatedTime({ isError, updatedTime }: { updatedTime: any, isError: boolean }) {
+function UpdatedTime({ isError, isFetching, updatedTime }: { updatedTime: any, isError: boolean, isFetching: boolean }) {
   const relativeTime = useRelativeTime(updatedTime ?? "")
+  if (relativeTime && isFetching) return "Updating..."
   if (relativeTime) return `Updated ${relativeTime}`
   if (isError) return "Failed to load"
   return "Loading..."
@@ -302,6 +256,22 @@ function ListSkeleton() {
         </li>
       ))}
     </ol>
+  )
+}
+
+function StaleNotice({ onRetry }: { onRetry: () => void }) {
+  return (
+    <div role="status" className="flex items-center gap-2 min-h-11 text-xs text-neutral-600 dark:text-neutral-300 border-b border-neutral-200 dark:border-white/10">
+      <span className="i-ph:wifi-slash shrink-0 text-base" />
+      <span className="flex-1">{`Couldn't refresh. Showing the last copy.`}</span>
+      <button
+        type="button"
+        onClick={onRetry}
+        className="h-11 px-3 text-sm font-semibold cursor-pointer text-neutral-900 dark:text-white active:opacity-80"
+      >
+        Retry
+      </button>
+    </div>
   )
 }
 

@@ -1,10 +1,11 @@
 import type { PropsWithChildren } from "react"
 import { useClickAway } from "react-use"
 import { AnimatePresence, motion } from "framer-motion"
-import { useNavigate } from "@tanstack/react-router"
+import { useLocation, useNavigate } from "@tanstack/react-router"
 import { FontSelector } from "./font-selector"
 import { Footer } from "~/components/footer"
 import { useSearchBar } from "~/hooks/useSearch"
+import { currentSourcesAtom, reorderSheetAtom } from "~/atoms"
 
 interface MenuItemProps {
   icon: string
@@ -32,6 +33,10 @@ export function Menu() {
   const [shown, show] = useState(false)
   const navigate = useNavigate()
   const isPhone = useIsPhone()
+  const { pathname } = useLocation()
+  const isColumnPage = pathname === "/" || pathname.startsWith("/c/")
+  const hasSources = useAtomValue(currentSourcesAtom).length > 0
+  const setReorderOpen = useSetAtom(reorderSheetAtom)
   const ref = useRef<HTMLSpanElement>(null)
 
   useClickAway(ref, () => {
@@ -49,6 +54,17 @@ export function Menu() {
       >
         Add sources
       </MenuItem>
+      {isPhone && isColumnPage && hasSources && (
+        <MenuItem
+          icon="i-ph:arrows-down-up"
+          onClick={() => {
+            setReorderOpen(true)
+            show(false)
+          }}
+        >
+          Reorder sources
+        </MenuItem>
+      )}
       {enableLogin && loggedIn && (
         <MenuItem
           icon="i-ph:bookmark-simple"
@@ -72,6 +88,7 @@ export function Menu() {
           Request source
         </MenuItem>
       )}
+      <MenuItem icon="i-ph:star" onClick={() => window.open(Homepage)}>Star on Github</MenuItem>
       {enableLogin && (loggedIn
         ? <MenuItem icon="i-ph:sign-out" onClick={logout}>Logout</MenuItem>
         : (
@@ -80,7 +97,6 @@ export function Menu() {
               {providers.github && <MenuItem icon="i-ph:github-logo" onClick={loginWithGithub}>Login with Github</MenuItem>}
             </>
           ))}
-      <MenuItem icon="i-ph:github-logo" onClick={() => window.open(Homepage)}>Star on Github</MenuItem>
     </ol>
   )
 

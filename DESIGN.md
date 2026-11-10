@@ -77,7 +77,7 @@ The browser `theme-color` follows the theme (#FBFBFB or #0D1117) so the status b
 Phones (below 768px, `useIsPhone`):
 - Header 48px plus the top safe area. Logo, wordmark, refresh, theme, menu.
 - One source per screen, horizontal scroll snapping (`snap-mandatory`, `snap-always`), full width.
-- Source bar fixed at the bottom, 56px plus the bottom safe area. It lists every source logo, names the active one and jumps on tap.
+- Source bar fixed at the bottom, 56px plus the bottom safe area. It lists every source logo, names the active one and jumps on tap. A reorder button sits at its right end.
 - No footer; version, license and author live in the menu sheet.
 - Card height comes from `.phone-card-h`; change `--header-h` and `--tabbar-h` in `globals.css` together with it.
 
@@ -91,7 +91,9 @@ From 768px: sticky header with padding, card grid (`minmax(350px, 1fr)`), footer
 - The source picker is full screen on phones with a close button.
 - Toasts sit just under the header on phones, top centre on desktop, and always have a dismiss button.
 - Overscroll is off on `html` and `body` so a stray flick cannot reload the installed app.
-- Reordering on phones is a double tap on the top-left or top-right corner of a card; the drag handle is also there.
+- Reordering on phones opens a bottom sheet from the source bar button or the menu. Each row has a 44px drag handle; the handle also takes the arrow keys. The order is saved when the sheet closes. Desktop reorders by dragging the card handle.
+- Sources refresh by themselves: when the app returns to the foreground, when the network comes back, and every minute while visible, once the last request is older than 10 minutes. The card subtitle reads "Updating..." meanwhile and the stories stay in place. There is no refresh button on a card; the header button forces the latest data for every source and needs a login.
+- The menu lists Star on Github before the login or logout row, which always comes last.
 
 ## Components
 
@@ -99,6 +101,7 @@ From 768px: sticky header with padding, card grid (`minmax(350px, 1fr)`), footer
 - **Story row:** title, then meta; 12px vertical padding; 44px bookmark button when logged in.
 - **Skeleton:** eight pulsing rows while a source first loads.
 - **Error state:** wifi-slash icon, one sentence, a Try again button.
+- **Stale notice:** one 44px row above the stories when a refresh failed: wifi-slash icon, "Couldn't refresh. Showing the last copy." and a Retry button. It only shows after a failure; a healthy card has no refresh chrome.
 - **Primary button:** ink fill (white in dark), pill shape on phones for single actions such as Add sources.
 - **Source bar item:** 24px logo; the active one gets a tinted pill with the name.
 

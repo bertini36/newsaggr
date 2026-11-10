@@ -19,13 +19,22 @@ export function useRefetch() {
       })
     } else {
       refetchSources.clear()
-      sources.forEach(id => refetchSources.add(id))
+      sources.forEach(id => refetchSources.set(id, "latest"))
       updateQuery(...sources)
     }
   }, [loggedIn, toaster, login, enableLogin, updateQuery])
 
+  /**
+   * ask the server again for one source, whether or not the reader is logged in
+   */
+  const retry = useCallback((id: SourceID) => {
+    refetchSources.set(id, "server")
+    updateQuery(id)
+  }, [updateQuery])
+
   return {
     refresh,
+    retry,
     refetchSources,
   }
 }

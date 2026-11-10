@@ -38,6 +38,7 @@ export function useEntireQuery(items: SourceID[]) {
           if (!cacheSources.has(id) || cacheSources.get(id)!.updatedTime < v.updatedTime) {
             s.push(id)
             cacheSources.set(id, v)
+            lastRequestedAt.set(id, Date.now())
           }
         })
         // update now
