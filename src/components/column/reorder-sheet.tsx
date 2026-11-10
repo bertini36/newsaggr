@@ -1,7 +1,8 @@
 import type { PointerEvent } from "react"
 import type { SourceID } from "@shared/types"
 import { reorder } from "@atlaskit/pragmatic-drag-and-drop/reorder"
-import { AnimatePresence, Reorder, motion, useDragControls } from "framer-motion"
+import { createPortal } from "react-dom"
+import { AnimatePresence, Reorder, motion, useDragControls, useIsPresent } from "framer-motion"
 import { currentSourcesAtom, reorderSheetAtom } from "~/atoms"
 import { useSearchBar } from "~/hooks/useSearch"
 import { DARK_MODE_INVERT_LOGOS } from "~/utils"
@@ -14,16 +15,30 @@ export function ReorderSheet() {
 function Sheet() {
   const setOpen = useSetAtom(reorderSheetAtom)
   const [items, setItems] = useAtom(currentSourcesAtom)
-  const [order, setOrder] = useState(items)
   const { toggle } = useSearchBar()
+  const isPresent = useIsPresent()
+  const doneRef = useRef<HTMLButtonElement>(null)
 
-  // The sheet can unmount without Done (rotation, route change); the atom must not stay open
+  const done = useCallback(() => setOpen(false), [setOpen])
+
+  // Every move is saved at once, so rotating the phone or leaving the page mid-drag loses nothing
   useEffect(() => () => setOpen(false), [setOpen])
 
-  const done = useCallback(() => {
-    if (order.some((id, index) => id !== items[index])) setItems(order)
-    setOpen(false)
-  }, [order, items, setItems, setOpen])
+  useEffect(() => {
+    const opener = document.activeElement as HTMLElement | null
+    doneRef.current?.focus()
+    return () => opener?.focus()
+  }, [])
+
+  // Keeps Tab and screen readers inside the sheet while it is open
+  useEffect(() => {
+    const app = document.getElementById("app")
+    if (!app || !isPresent) return
+    app.inert = true
+    return () => {
+      app.inert = false
+    }
+  }, [isPresent])
 
   useEffect(() => {
     const closeOnEscape = (e: KeyboardEvent) => {
@@ -33,7 +48,7 @@ function Sheet() {
     return () => document.removeEventListener("keydown", closeOnEscape)
   }, [done])
 
-  return (
+  return createPortal(
     <>
       <motion.div
         className="fixed inset-0 z-998 bg-black/50"
@@ -59,6 +74,7 @@ function Sheet() {
             <p className="text-xs text-neutral-500 dark:text-neutral-400">Hold the handle and drag to reorder</p>
           </div>
           <button
+            ref={doneRef}
             type="button"
             onClick={done}
             className="inline-flex h-11 items-center px-5 rounded-full font-semibold cursor-pointer bg-neutral-900 text-white dark:bg-white dark:text-neutral-900 active:opacity-80 transition-opacity"
@@ -67,12 +83,12 @@ function Sheet() {
           </button>
         </div>
         <motion.div layoutScroll className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
-          <Reorder.Group as="ol" axis="y" values={order} onReorder={setOrder}>
-            {order.map((id, index) => (
+          <Reorder.Group as="ol" axis="y" values={items} onReorder={setItems}>
+            {items.map((id, index) => (
               <SourceRow
                 key={id}
                 id={id}
-                onMove={step => setOrder(reorder({ list: order, startIndex: index, finishIndex: index + step }))}
+                onMove={step => setItems(reorder({ list: items, startIndex: index, finishIndex: index + step }))}
               />
             ))}
           </Reorder.Group>
@@ -89,7 +105,8 @@ function Sheet() {
           Add sources
         </button>
       </motion.div>
-    </>
+    </>,
+    document.body,
   )
 }
 
