@@ -12,13 +12,6 @@ export interface ItemsProps extends React.HTMLAttributes<HTMLDivElement> {
    */
   isDragging?: boolean
   setHandleRef?: (ref: HTMLElement | null) => void
-  /**
-   * Mobile reordering callbacks
-   */
-  onMoveLeft?: () => void
-  onMoveRight?: () => void
-  canMoveLeft?: boolean
-  canMoveRight?: boolean
 }
 
 interface NewsCardProps {
@@ -26,36 +19,15 @@ interface NewsCardProps {
   setHandleRef?: (ref: HTMLElement | null) => void
 }
 
-export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, onMoveLeft, onMoveRight, canMoveLeft, canMoveRight, style, ...props }, dndRef) => {
+export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging, setHandleRef, style, ...props }, dndRef) => {
   const ref = useRef<HTMLDivElement>(null)
   const isPhone = useIsPhone()
-  const lastTapRef = useRef<{ time: number, side: "left" | "right" } | null>(null)
 
   const inView = useInView(ref, {
     once: true,
   })
 
   useImperativeHandle(dndRef, () => ref.current! as HTMLDivElement)
-
-  // Handle double-tap on left/right edges (mobile only)
-  const handleDoubleTap = useCallback((side: "left" | "right") => {
-    if (!isPhone) return
-
-    const now = Date.now()
-    const lastTap = lastTapRef.current
-
-    if (lastTap && lastTap.side === side && now - lastTap.time < 300) {
-      // Double tap detected
-      if (side === "left" && canMoveLeft && onMoveLeft) {
-        onMoveLeft()
-      } else if (side === "right" && canMoveRight && onMoveRight) {
-        onMoveRight()
-      }
-      lastTapRef.current = null
-    } else {
-      lastTapRef.current = { time: now, side }
-    }
-  }, [isPhone, canMoveLeft, canMoveRight, onMoveLeft, onMoveRight])
 
   return (
     <div
@@ -72,20 +44,7 @@ export const CardWrapper = forwardRef<HTMLElement, ItemsProps>(({ id, isDragging
       }}
       {...props}
     >
-      {/* Mobile double-tap zones - only in header area to avoid blocking bookmark buttons */}
-      {isPhone && onMoveLeft && onMoveRight && (
-        <>
-          <div
-            className="absolute left-0 top-0 h-12 w-12 z-10"
-            onClick={() => handleDoubleTap("left")}
-          />
-          <div
-            className="absolute right-0 top-0 h-12 w-12 z-10"
-            onClick={() => handleDoubleTap("right")}
-          />
-        </>
-      )}
-      {inView && <NewsCard key={id} id={id} setHandleRef={setHandleRef} />}
+      {inView && <NewsCard key={id} id={id} setHandleRef={isPhone ? undefined : setHandleRef} />}
     </div>
   )
 })
@@ -220,7 +179,7 @@ function NewsCard({ id, setHandleRef }: NewsCardProps) {
           {setHandleRef && (
             <div
               ref={setHandleRef}
-              className="icon-btn max-md:w-12 cursor-grab"
+              className="icon-btn cursor-grab"
             >
               <span className="i-ph:dots-six-vertical" />
             </div>

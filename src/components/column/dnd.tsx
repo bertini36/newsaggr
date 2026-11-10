@@ -13,9 +13,10 @@ import { useSortable } from "../common/dnd/useSortable"
 import { OverlayScrollbar } from "../common/overlay-scrollbar"
 import type { ItemsProps } from "./card"
 import { CardWrapper } from "./card"
+import { ReorderSheet } from "./reorder-sheet"
 import { SourcePager } from "./source-pager"
 import { useSearchBar } from "~/hooks/useSearch"
-import { currentSourcesAtom } from "~/atoms"
+import { currentSourcesAtom, reorderSheetAtom } from "~/atoms"
 import { DARK_MODE_INVERT_LOGOS } from "~/utils"
 
 const AnimationDuration = 200
@@ -33,6 +34,7 @@ export function Dnd() {
   const { toggle } = useSearchBar()
 
   const isPhone = useIsPhone()
+  const openReorderSheet = useSetAtom(reorderSheetAtom)
   const pagerRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
 
@@ -94,7 +96,7 @@ export function Dnd() {
         },
       }}
     >
-      {items.map((id, index) => (
+      {items.map(id => (
         <motion.li
           key={id}
           className={$(isPhone && "w-full shrink-0 snap-start snap-always")}
@@ -113,54 +115,43 @@ export function Dnd() {
             },
           }}
         >
-          <SortableCardWrapper
-            id={id}
-            index={index}
-            totalItems={items.length}
-            onMoveLeft={() => {
-              if (index > 0) {
-                const newItems = [...items]
-                      ;[newItems[index - 1], newItems[index]] = [newItems[index], newItems[index - 1]]
-                setItems(newItems)
-              }
-            }}
-            onMoveRight={() => {
-              if (index < items.length - 1) {
-                const newItems = [...items]
-                      ;[newItems[index], newItems[index + 1]] = [newItems[index + 1], newItems[index]]
-                setItems(newItems)
-              }
-            }}
-          />
+          {isPhone ? <CardWrapper id={id} /> : <SortableCardWrapper id={id} />}
         </motion.li>
       ))}
     </motion.ol>
   )
 
+  if (isPhone) {
+    return (
+      <>
+        <div
+          ref={pagerRef}
+          onScroll={syncActiveIndex}
+          className="overflow-x-auto snap-x snap-mandatory overscroll-x-contain scrollbar-hidden"
+        >
+          {list}
+        </div>
+        <SourcePager
+          items={items}
+          activeIndex={Math.min(activeIndex, items.length - 1)}
+          onSelect={scrollToPage}
+          onEdit={() => openReorderSheet(true)}
+        />
+        <ReorderSheet />
+      </>
+    )
+  }
+
   return (
-    <DndWrapper items={items} setItems={setItems} isSingleColumn={isPhone}>
-      {isPhone
-        ? (
-            <>
-              <div
-                ref={pagerRef}
-                onScroll={syncActiveIndex}
-                className="overflow-x-auto snap-x snap-mandatory overscroll-x-contain scrollbar-hidden"
-              >
-                {list}
-              </div>
-              <SourcePager items={items} activeIndex={Math.min(activeIndex, items.length - 1)} onSelect={scrollToPage} />
-            </>
-          )
-        : <OverlayScrollbar defer className="overflow-x-auto">{list}</OverlayScrollbar>}
+    <DndWrapper items={items} setItems={setItems}>
+      <OverlayScrollbar defer className="overflow-x-auto">{list}</OverlayScrollbar>
     </DndWrapper>
   )
 }
 
-function DndWrapper({ items, setItems, isSingleColumn, children }: PropsWithChildren<{
+function DndWrapper({ items, setItems, children }: PropsWithChildren<{
   items: SourceID[]
   setItems: (items: SourceID[]) => void
-  isSingleColumn: boolean
 }>) {
   const onDropTargetChange = useCallback(({ location, source }: BaseEventPayload<ElementDragType>) => {
     const traget = location.current.dropTargets[0]
@@ -174,10 +165,10 @@ function DndWrapper({ items, setItems, isSingleColumn, children }: PropsWithChil
       startIndex: fromIndex,
       indexOfTarget: toIndex,
       closestEdgeOfTarget,
-      axis: isSingleColumn ? "horizontal" : "vertical",
+      axis: "vertical",
     })
     setItems(update)
-  }, [items, setItems, isSingleColumn])
+  }, [items, setItems])
   // Avoid animation interference
   const { run } = useThrottleFn(onDropTargetChange, {
     leading: true,
@@ -228,14 +219,7 @@ function CardOverlay({ id }: { id: SourceID }) {
   )
 }
 
-interface SortableCardWrapperProps extends ItemsProps {
-  index: number
-  totalItems: number
-  onMoveLeft: () => void
-  onMoveRight: () => void
-}
-
-function SortableCardWrapper({ id, index, totalItems, onMoveLeft, onMoveRight }: SortableCardWrapperProps) {
+function SortableCardWrapper({ id }: ItemsProps) {
   const {
     isDragging,
     setNodeRef,
@@ -256,10 +240,6 @@ function SortableCardWrapper({ id, index, totalItems, onMoveLeft, onMoveRight }:
         id={id}
         isDragging={isDragging}
         setHandleRef={setHandleRef}
-        onMoveLeft={onMoveLeft}
-        onMoveRight={onMoveRight}
-        canMoveLeft={index > 0}
-        canMoveRight={index < totalItems - 1}
       />
       {OverlayContainer && createPortal(<CardOverlay id={id} />, OverlayContainer)}
     </>
