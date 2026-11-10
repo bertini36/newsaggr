@@ -26,48 +26,10 @@ const pwaOption: Partial<VitePWAOptions> = {
       },
     ],
     icons: [
-      // Light mode icons (default)
-      {
-        src: "pwa-192x192.png",
-        sizes: "192x192",
-        type: "image/png",
-      },
-      {
-        src: "pwa-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-      },
-      {
-        src: "pwa-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "pwa-512x512.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable",
-      },
-      // Dark mode icons
-      {
-        src: "pwa-192x192-dark.png",
-        sizes: "192x192",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "pwa-512x512-dark.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "any",
-      },
-      {
-        src: "pwa-512x512-dark.png",
-        sizes: "512x512",
-        type: "image/png",
-        purpose: "maskable",
-      },
+      { src: "pwa-192x192.png", sizes: "192x192", type: "image/png", purpose: "any" },
+      { src: "pwa-512x512.png", sizes: "512x512", type: "image/png", purpose: "any" },
+      { src: "pwa-maskable-192x192.png", sizes: "192x192", type: "image/png", purpose: "maskable" },
+      { src: "pwa-maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
     ],
   },
   registerType: "autoUpdate",
