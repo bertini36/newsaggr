@@ -72,6 +72,7 @@ export function Menu() {
           Request source
         </MenuItem>
       )}
+      <MenuItem icon="i-ph:star" onClick={() => window.open(Homepage)}>Star on Github</MenuItem>
       {enableLogin && (loggedIn
         ? <MenuItem icon="i-ph:sign-out" onClick={logout}>Logout</MenuItem>
         : (
@@ -80,7 +81,6 @@ export function Menu() {
               {providers.github && <MenuItem icon="i-ph:github-logo" onClick={loginWithGithub}>Login with Github</MenuItem>}
             </>
           ))}
-      <MenuItem icon="i-ph:github-logo" onClick={() => window.open(Homepage)}>Star on Github</MenuItem>
     </ol>
   )
 
