@@ -25,6 +25,7 @@ export function Dnd() {
   const [items, setItems] = useAtom(currentSourcesAtom)
   const [parent] = useAutoAnimate({ duration: AnimationDuration })
   useEntireQuery(items)
+  useAutoRefresh(items)
   const { width } = useWindowSize()
   const minWidth = useMemo(() => {
     // double padding = 32
