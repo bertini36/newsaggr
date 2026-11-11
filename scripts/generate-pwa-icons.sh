@@ -10,7 +10,7 @@ render() {
   local scale=$1 size=$2 output=$3
   rsvg-convert -w "$size" -h "$size" -o "$output" <<SVG
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#0d1117"/>
+  <rect width="512" height="512" fill="#ffffff"/>
   <g transform="translate(256 256) scale($scale) translate(-76.5 -79)" fill="#F87171">
     <path d="M66 115 L15 15 L138 15 L87 115" fill="none" stroke="#F87171" stroke-width="16" stroke-linecap="square" stroke-linejoin="miter"/>
     <circle cx="76.5" cy="138" r="13"/>
