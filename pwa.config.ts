@@ -17,7 +17,7 @@ const pwaOption: Partial<VitePWAOptions> = {
     display: "standalone",
     categories: ["news"],
     theme_color: "#0d1117",
-    background_color: "#0d1117",
+    background_color: "#ffffff",
     shortcuts: [
       {
         name: "Saved news",
